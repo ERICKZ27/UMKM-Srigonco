@@ -6,11 +6,13 @@
     <title>Desa Srigonco UMKM</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom styles for better aesthetics and responsiveness */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light blue-gray background, similar to Sidita */
+            font-family: 'Poppins', sans-serif; /* Changed font to Poppins */
+            background-color: #f8fafc; /* Light blue-gray background */
             color: #333;
             line-height: 1.6;
             /* Subtle background pattern */
@@ -207,10 +209,11 @@
             background-size: cover;
         }
 
-        /* Card hover effect with border */
+        /* Card hover effect with border and deeper shadow */
         .card-hover-effect:hover {
             border-color: #0d9488; /* teal-600 */
             border-width: 2px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
         }
 
         /* Button gradient effect */
@@ -380,52 +383,65 @@
                 transform: scale(1);
             }
         }
+
+        /* Custom text shadow utilities */
+        .text-shadow-sm {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+        .text-shadow-md {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .text-shadow-lg {
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        /* New: Repeating pulse animation for text */
+        @keyframes pulse-text {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.01); /* Subtle enlarge */
+                opacity: 0.95; /* Subtle fade */
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .animate-pulse-text {
+            animation: pulse-text 2s infinite ease-in-out; /* 2 seconds duration, infinite, ease-in-out */
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="bg-white shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0">
+    <header class="bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0">
         <div class="flex items-center">
-            <!-- Logo SVG - Representing mountains, rice fields, and a craft element -->
-            <svg class="h-10 w-10 mr-3" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2zM10 14H8v-2h2v2zm4 0h-2v-2h2v2zM12 6.828L17.172 12H6.828L12 6.828z" fill="url(#gradient-logo-new)"/>
-                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2zM10 14H8v-2h2v2zm4 0h-2v-2h2v2z" fill="url(#gradient-logo-new-dark)"/>
-                <defs>
-                    <linearGradient id="gradient-logo-new" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#34d399" />
-                        <stop offset="100%" stop-color="#0d9488" />
-                    </linearGradient>
-                    <linearGradient id="gradient-logo-new-dark" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#0f766e" />
-                        <stop offset="100%" stop-color="#0d9488" />
-                    </linearGradient>
-                </defs>
-                <circle cx="12" cy="12" r="2" fill="#facc15"/> <!-- Small circle for craft/sun element -->
-            </svg>
-            <span class="text-xl font-bold text-teal-700">Desa Srigonco UMKM</span>
+            <!-- Logo Image - Replaced SVG with IMG tag pointing to IMG/Logo.png -->
+            <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-14 w-14 mr-4 rounded-full shadow-md border border-gray-200" onerror="this.onerror=null;this.src='https://placehold.co/56x56/ADD8E6/000000?text=Logo';" />
+            <span class="text-3xl md:text-4xl font-extrabold text-white text-shadow-lg">UMKM SRIGONCO</span>
         </div>
         <nav class="hidden md:flex space-x-8">
-            <button id="nav-home" onclick="navigateTo('home')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group relative" aria-label="Beranda">
+            <button id="nav-home" onclick="navigateTo('home')" class="text-teal-100 hover:text-white text-lg font-semibold transition duration-300 group relative" aria-label="Beranda">
                 Beranda
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </button>
-            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group relative" aria-label="Produk UMKM">
+            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-teal-100 hover:text-white text-lg font-semibold transition duration-300 group relative" aria-label="Produk UMKM">
                 Produk UMKM
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </button>
-            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group relative" aria-label="Galeri Foto">
+            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-teal-100 hover:text-white text-lg font-semibold transition duration-300 group relative" aria-label="Galeri Foto">
                 Galeri
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </button>
         </nav>
         <div class="flex items-center space-x-4">
-            <!-- Search Icon - Kept for potential future use or general site search -->
-            <button class="text-gray-700 hover:text-teal-600 focus:outline-none hidden md:block" aria-label="Cari">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </button>
+            <!-- Search Icon Removed -->
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-700 hover:text-teal-600 focus:outline-none" aria-label="Buka menu mobile">
+                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none" aria-label="Buka menu mobile">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -591,197 +607,12 @@
         let loadedGalleryCount = itemsPerPage;
 
         // --- Data ---
-        // Updated products data based on the provided PDF content, with prices and addresses
-        const products = [
-            {
-                id: 1,
-                name: 'Fadin Snack',
-                description: 'Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Snack',
-                details: 'Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
-                whatsapp: '6281336531898',
-                category: 'Makanan Kering',
-                rating: 4.5,
-                stock: 'Berdasarkan Pesanan',
-                keywords: ['snack', 'makanan kering', 'fadin', 'camilan'],
-                address: 'Dusun Sumberjambe RT 35'
-            },
-            {
-                id: 2,
-                name: 'Fadin Gallery Kerajinan',
-                description: 'Berbagai kerajinan tangan dari Fadin Gallery. Dibuat dengan detail dan kualitas.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Gallery',
-                details: 'Produk kerajinan. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
-                whatsapp: '6281336531898',
-                category: 'Kerajinan',
-                rating: 4.7,
-                stock: 'Berdasarkan Pesanan',
-                keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan'],
-                address: 'Dusun Sumberjambe RT 35'
-            },
-            {
-                id: 3,
-                name: 'SALAD BUAH Vani Wijayanti',
-                description: 'Salad buah segar, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Salad+Buah',
-                details: 'Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari.',
-                whatsapp: '6282143167792',
-                category: 'Makanan Basah',
-                rating: 4.8,
-                stock: 'Tersedia Setiap Hari',
-                keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar'],
-                address: 'Sumberjambe RT 40 RW 06'
-            },
-            {
-                id: 4,
-                name: 'Pretty Donat',
-                description: 'Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Pretty+Donat',
-                details: 'Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan.',
-                whatsapp: '6282245943031',
-                category: 'Makanan Kering',
-                rating: 4.6,
-                stock: 'Tersedia / Berdasarkan Pesanan',
-                keywords: ['donat', 'pretty', 'roti', 'manis'],
-                address: 'Srigonco Watu Sigar RT 2'
-            },
-            {
-                id: 5,
-                name: 'Aneka Kue Dwi Purwati',
-                description: 'Berbagai macam kue kering dan basah, cocok untuk acara atau camilan. Dibuat sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Aneka+Kue',
-                details: 'Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO).',
-                whatsapp: '6281217205508',
-                category: 'Makanan',
-                rating: 4.7,
-                stock: 'Berdasarkan Pesanan',
-                keywords: ['kue', 'kue kering', 'kue basah', 'camilan'],
-                address: 'Watusigar RT 24/04, Desa Srigonco'
-            },
-            {
-                id: 6,
-                name: 'Makanan dan Aneka Minuman Muhamad Akbar',
-                description: 'Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Makanan+Minuman',
-                details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari.',
-                whatsapp: '6285815365961',
-                category: 'Makanan & Minuman',
-                rating: 4.3,
-                stock: 'Tersedia Setiap Hari',
-                keywords: ['makanan', 'minuman', 'snack', 'segar'],
-                address: 'Srigonco RT 15'
-            },
-            {
-                id: 7,
-                name: 'Sosis Bakar & Corndog Khusnul Khatimah',
-                description: 'Sosis bakar dan corndog lezat, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Sosis+Corndog',
-                details: 'Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
-                whatsapp: '6282232158608',
-                category: 'Makanan Basah',
-                rating: 4.4,
-                stock: 'Berdasarkan Pesanan',
-                keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basah'],
-                address: 'Dusun Sumberjambe RT 36'
-            },
-            {
-                id: 8,
-                name: 'Keripik Pangsit & Cireng Dewi Irawati',
-                description: 'Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pangsit',
-                details: 'Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan.',
-                whatsapp: '6281216659745',
-                category: 'Makanan Kering',
-                rating: 4.6,
-                stock: 'Tersedia / Berdasarkan Pesanan',
-                keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih'],
-                address: 'Desa Srigonco, Dusun Sumberjambe'
-            },
-            {
-                id: 9,
-                name: 'Snack & Minuman Silvia Puji Rahayu',
-                description: 'Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Snack+Minuman',
-                details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
-                whatsapp: '6281246787759',
-                category: 'Makanan & Minuman',
-                rating: 4.5,
-                stock: 'Berdasarkan Pesanan',
-                keywords: ['snack', 'minuman', 'camilan', 'segar'],
-                address: 'Dsn. Sumber Jambe, RT/RW tidak spesifik'
-            },
-            {
-                id: 10,
-                name: 'Minuman Alvia',
-                description: 'Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Minuman',
-                details: 'Produk minuman. Pemasaran dalam desa. Produksi setiap hari.',
-                whatsapp: '6285649796149',
-                category: 'Minuman',
-                rating: 4.2,
-                stock: 'Tersedia Setiap Hari',
-                keywords: ['minuman', 'segar', 'olahan'],
-                address: 'Sumberjambe RT 32'
-            },
-            {
-                id: 11,
-                name: 'Batik Tulis Lilis Setyowati',
-                description: 'Kain batik tulis asli dengan motif khas dari Lilis Setyowati. Cocok untuk pakaian atau koleksi.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Batik+Tulis',
-                details: 'Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari.',
-                whatsapp: '6281336809484',
-                category: 'Kerajinan',
-                rating: 4.9,
-                stock: 'Tersedia Setiap Hari',
-                keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional'],
-                address: 'Dusun Watusigar RT 2/RW tidak spesifik'
-            },
-            {
-                id: 12,
-                name: 'Stick Pepaya Pipit Meilandari',
-                description: 'Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Stick+Pepaya',
-                details: 'Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari.',
-                whatsapp: '6285746346389',
-                category: 'Makanan Kering',
-                rating: 4.3,
-                stock: 'Tersedia Setiap Hari',
-                keywords: ['stick', 'pepaya', 'makanan kering', 'camilan'],
-                address: 'RT 11 RW 2 Krajan Srigonco'
-            },
-            {
-                id: 13,
-                name: 'Keripik Pisang & Aneka Es Siti Nur Aini',
-                description: 'Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan.',
-                image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pisang+Es',
-                details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan.',
-                whatsapp: '6281231135846',
-                category: 'Makanan & Minuman',
-                rating: 4.5,
-                stock: 'Tersedia / Berdasarkan Pesanan',
-                keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman'],
-                address: 'Sukorame RT 24 RW 04'
-            }
-        ];
-        // Dynamically generate product categories from the new products array
-        const productCategories = ['Semua', ...new Set(products.map(p => p.category))];
-
-        const galleryImages = [
-            { id: 1, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Pemandangan+Sawah', title: 'Pemandangan Sawah Hijau', category: 'Pemandangan Alam' },
-            { id: 2, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Panen+Padi', title: 'Aktivitas Panen Padi', category: 'Aktivitas Desa' },
-            { id: 3, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Sungai+Jernih', title: 'Sungai Jernih di Pedesaan', category: 'Pemandangan Alam' },
-            { id: 4, src: 'https://placehold.co/800x600/D1FAE5/10B981?text=UMKM+Kerajinan', title: 'Proses Pembuatan Kerajinan', category: 'Produk UMKM' },
-            { id: 5, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Festival+Desa', title: 'Suasana Festival Desa', category: 'Aktivitas Desa' },
-            { id: 6, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Warga+Berinteraksi', title: 'Interaksi Warga Desa', category: 'Aktivitas Desa' },
-            { id: 7, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Produk+Madu', title: 'Produk Madu Hutan', category: 'Produk UMKM' },
-            { id: 8, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Produk+Kopi', title: 'Produk Kopi Robusta', category: 'Produk UMKM' },
-            { id: 9, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Bukit+Hijau', title: 'Pemandangan Bukit Hijau', category: 'Pemandangan Alam' },
-            { id: 10, src: 'https://placehold.co/800x600/D1FAE5/10B981?text=Olahan+Makanan', title: 'Produk Olahan Makanan', category: 'Produk UMKM' },
-            { id: 11, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Pertanian+Modern', title: 'Inovasi Pertanian', category: 'Aktivitas Desa' },
-            { id: 12, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Lingkungan+Desa', title: 'Lingkungan Desa Bersih', category: 'Pemandangan Alam' },
-        ];
-        const galleryCategories = ['Semua', ...new Set(galleryImages.map(img => img.category))];
-
+        // Moved data definitions inside DOMContentLoaded to ensure they are fully parsed before use.
+        let products = [];
+        let productCategories = [];
+        let galleryImages = [];
+        let galleryCategories = [];
+        let testimonials = []; // New testimonials data
 
         // --- Helper Functions ---
 
@@ -1056,44 +887,31 @@
         function renderHomePage() {
             const carouselItems = [
                 {
-                    image: 'https://placehold.co/1920x800/2a6f97/ffffff?text=Desa+Srigonco+Asri',
+                    image: 'IMG/banner1.jpg',
                     caption: 'Selamat Datang di Desa Srigonco',
                     subtitle: 'Jelajahi keindahan alam dan kekayaan budaya kami.'
                 },
                 {
-                    image: 'https://placehold.co/1920x800/0d9488/ffffff?text=Produk+UMKM+Lokal',
+                    image: 'IMG/banner2.jpg',
                     caption: 'Dukung Produk Unggulan UMKM Desa Srigonco',
                     subtitle: 'Kualitas terbaik dari tangan-tangan terampil.'
                 },
                 {
-                    image: 'https://placehold.co/1920x800/1e40af/ffffff?text=Keindahan+Alam+Srigonco', // New image/caption for visual variety
+                    image: 'IMG/banner3.jpg',
                     caption: 'Pesona Alam Desa Srigonco',
                     subtitle: 'Nikmati ketenangan dan keasrian pedesaan.'
                 }
             ].map((item, index) => `
-                <div class="carousel-item ${index === 0 ? 'active' : ''} relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden parallax-bg" style="background-image: url('${item.image}')">
+                <div class="carousel-item ${index === 0 ? 'active' : ''} relative h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden parallax-bg" style="background-image: url('${item.image}')">
                     <div class="hero-overlay absolute inset-0 flex flex-col items-center justify-center text-white p-4 text-center">
-                        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal" data-aos="fade-up">${item.caption}</h1>
-                        <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
+                        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal text-shadow-lg animate-pulse-text" data-aos="fade-up">${item.caption}</h1>
+                        <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100 animate-pulse-text" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
                         <button onclick="navigateTo('umkm')" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 text-reveal delay-200" data-aos="fade-up" data-aos-delay="200" aria-label="Jelajahi Sekarang">
                             Jelajahi Sekarang
                         </button>
                     </div>
                 </div>
             `).join('');
-
-            const statistics = [
-                { label: 'Jumlah Penduduk', value: 5200, icon: '<svg class="w-16 h-16 text-teal-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>' },
-                { label: 'Jumlah UMKM', value: products.length, icon: '<svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 10h-4V6c0-1.1-.9-2-2-2s-2 .9-2 2v4H6c-1.1 0-2 .9-2 2s.9 2 2 2h4v4c0 1.1.9 2 2 2s2-.9 2-2v-4h4c1.1 0 2-.9 2-2s-.9-2-2-2z"/></svg>' },
-                { label: 'Pengunjung Website (per bulan)', value: 1500, icon: '<svg class="w-16 h-16 text-yellow-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>' },
-            ].map((stat, index) => `
-                <div class="bg-white rounded-lg shadow-md p-6 text-center transform transition duration-300 hover:scale-105 animate-fadeInUp" data-aos="fade-up" data-aos-delay="${index * 150}">
-                    ${stat.icon}
-                    <div class="text-5xl font-bold text-gray-800 mb-2" data-target="${stat.value}">0</div>
-                    <p class="text-xl font-semibold text-gray-600">${stat.label}</p>
-                </div>
-            `).join('');
-
 
             return `
                 <!-- Hero Section -->
@@ -1112,13 +930,13 @@
                 <div class="container mx-auto px-4 py-8">
                     <!-- About Srigonco & UMKM Section -->
                     <section class="bg-white rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                             <div class="order-2 md:order-1">
-                                <p class="text-gray-700 text-lg leading-relaxed mb-4" data-aos="fade-up" data-aos-delay="100">
+                                <p class="text-gray-700 text-lg leading-relaxed mb-4 animate-pulse-text" data-aos="fade-up" data-aos-delay="100">
                                     Desa Srigonco, di Kecamatan Bantur, Kabupaten Malang, Jawa Timur, adalah rumah bagi UMKM inovatif yang berakar pada kekayaan alam dan budaya lokal. Kami bangga menghadirkan produk-produk berkualitas tinggi yang dibuat dengan dedikasi oleh masyarakat Srigonco.
                                 </p>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-6" data-aos="fade-up" data-aos-delay="200">
+                                <p class="text-gray-700 text-lg leading-relaxed mb-6 animate-pulse-text" data-aos="fade-up" data-aos-delay="200">
                                     Setiap produk UMKM di sini tidak hanya mencerminkan keterampilan dan kreativitas, tetapi juga semangat gotong royong dan komitmen kami untuk memajukan ekonomi desa. Dengan berbelanja di sini, Anda tidak hanya mendapatkan produk unik, tetapi juga turut serta dalam mendukung keberlanjutan dan kesejahteraan komunitas kami.
                                 </p>
                                 <button onclick="navigateTo('umkm')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Jelajahi Produk Kami">
@@ -1126,14 +944,32 @@
                                 </button>
                             </div>
                             <div class="order-1 md:order-2">
-                                <img src="https://placehold.co/600x400/34D399/065F46?text=UMKM+Srigonco" alt="UMKM Desa Srigonco" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/34D399/065F46?text=UMKM+Desa+Srigonco';" data-aos="fade-left" />
+                                <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/34D399/065F46?text=Logo+Desa+Srigonco+UMKM';" data-aos="fade-left" />
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Our Mission Section - New Section -->
+                    <section class="py-12 bg-blue-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Misi Kami</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div class="order-1">
+                                <img src="https://placehold.co/600x400/93c5fd/1e40af?text=Misi+Kami" alt="Misi Kami" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Misi+Kami';" data-aos="fade-right" />
+                            </div>
+                            <div class="order-2">
+                                <p class="text-gray-700 text-lg leading-relaxed mb-4 animate-pulse-text" data-aos="fade-up" data-aos-delay="100">
+                                    Misi kami adalah memberdayakan masyarakat Desa Srigonco melalui pengembangan UMKM yang berkelanjutan. Kami berupaya menciptakan peluang ekonomi, meningkatkan kesejahteraan, dan melestarikan kearifan lokal melalui produk-produk unggulan.
+                                </p>
+                                <p class="text-gray-700 text-lg leading-relaxed mb-6 animate-pulse-text" data-aos="fade-up" data-aos-delay="200">
+                                    Kami berkomitmen untuk inovasi, kualitas, dan integritas dalam setiap aspek bisnis kami, memastikan bahwa setiap produk yang Anda beli tidak hanya memuaskan tetapi juga memiliki dampak positif bagi komunitas kami.
+                                </p>
                             </div>
                         </div>
                     </section>
 
                     <!-- Why Choose Us Section -->
                     <section class="py-12 bg-blue-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                             <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="100">
                                 <svg class="w-16 h-16 text-teal-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -1153,21 +989,20 @@
                         </div>
                     </section>
 
-                    <!-- Srigonco in Numbers Section -->
-                    <section class="py-12 bg-teal-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Srigonco dalam Angka</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            ${statistics}
-                        </div>
-                    </section>
-
                     <!-- Featured UMKM Products Section - Grid layout -->
                     <section class="py-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Produk Unggulan UMKM</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Produk Unggulan UMKM</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${products.slice(0, 3).map((product, index) => `
                                 <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
-                                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover product-image-thumbnail cursor-pointer" data-image-src="${product.image}" data-image-caption="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/ADD8E6/000000?text=${encodeURIComponent(product.name)}';" />
+                                    <img
+                                        src="${product.image}"
+                                        alt="${product.name}"
+                                        class="w-full h-48 object-cover cursor-pointer product-image-thumbnail"
+                                        data-image-src="${product.image}"
+                                        data-image-caption="${product.name}"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/ADD8E6/000000?text=${encodeURIComponent(product.name)}';"
+                                    />
                                     <div class="p-5">
                                         <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">${product.name}</h3>
                                         <div class="flex items-center mb-2">
@@ -1193,7 +1028,7 @@
 
                     <!-- Featured Gallery Section -->
                     <section class="py-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Jelajahi Galeri Kami</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Jelajahi Galeri Kami</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${galleryImages.slice(0, 3).map((img, index) => `
                                 <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
@@ -1218,18 +1053,33 @@
                         </div>
                     </section>
 
+                    <!-- Testimonials Section - New Section -->
+                    <section class="py-12 bg-teal-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            ${testimonials.map((testimonial, index) => `
+                                <div class="bg-white rounded-lg shadow-md p-6 text-center transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-teal-500" onerror="this.onerror=null;this.src='https://placehold.co/80x80/ADD8E6/000000?text=Avatar';" />
+                                    <p class="text-gray-700 italic mb-4 line-clamp-4">"${testimonial.quote}"</p>
+                                    <p class="font-semibold text-gray-800">${testimonial.name}</p>
+                                    <p class="text-sm text-gray-500">${testimonial.title}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
                     <!-- Quick Contact Section -->
                     <section class="py-12 bg-teal-600 text-white rounded-lg shadow-lg p-8 animate-fadeIn text-center" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-reveal" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
-                        <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
+                        <p class="text-lg mb-8 max-w-2xl mx-auto animate-pulse-text" data-aos="fade-up" data-aos-delay="100">
                             Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui WhatsApp untuk respons cepat atau gunakan chatbot kami!
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
                             <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-teal-700 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
                                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z" />
-                                </svg>
-                                Chat via WhatsApp
+                                        </svg>
+                                        Chat via WhatsApp
                             </a>
                             <a href="mailto:info.srigonco@example.com" class="inline-flex items-center text-white border border-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:bg-white hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75" data-aos="fade-up" data-aos-delay="300" aria-label="Kirim Email">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 13h9A2 2 0 0021 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
@@ -1303,7 +1153,7 @@
             return `
                 <div class="container mx-auto px-4 py-12">
                     <div class="bg-white rounded-lg shadow-lg p-8 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4">Produk Unggulan UMKM Desa Srigonco</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4 text-shadow-md">Produk Unggulan UMKM Desa Srigonco</h2>
                         <p class="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto font-semibold">
                             "Jelajahi Kekayaan Lokal: Kualitas Terbaik dari Hati Desa Srigonco."
                         </p>
@@ -1438,7 +1288,7 @@
                     class="gallery-category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
                     ${selectedGalleryCategory === category ? 'bg-teal-600 text-white shadow-md btn-gradient-hover' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
                     data-category="${category}"
-                    aria-label="Filter galeri berdasarkan ${category}"
+                    aria-label="Filter kategori ${category}"
                 >
                     ${category}
                 </button>
@@ -1470,7 +1320,7 @@
             return `
                 <div class="container mx-auto px-4 py-12">
                     <div class="bg-white rounded-lg shadow-lg p-8 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10">Galeri Foto Desa Srigonco</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-shadow-md">Galeri Foto Desa Srigonco</h2>
                         <p class="text-lg text-gray-700 text-center mb-12 max-w-2xl mx-auto">
                             Jelajahi keindahan dan aktivitas di Desa Srigonco melalui koleksi foto kami. Dari pemandangan alam hingga kegiatan masyarakat dan UMKM.
                         </p>
@@ -1531,7 +1381,7 @@
             const downloadButton = document.getElementById('download-image-button');
 
             modalImage.src = event.target.dataset.imageSrc;
-            modalCaption.textContent = event.target.dataset.imageCaption;
+            modalCaption.textContent = event.target.dataset.imageCaption; // Corrected to imageCaption
             downloadButton.href = event.target.dataset.imageSrc; // Set download link
             downloadButton.download = event.target.dataset.imageCaption.replace(/\s/g, '_') + '.jpg'; // Set filename
 
@@ -1829,11 +1679,11 @@
 
                 if (desktopButton) {
                     if (link.page === currentPage) {
-                        desktopButton.classList.add('text-teal-600', 'font-bold');
-                        desktopButton.classList.remove('text-gray-700');
+                        desktopButton.classList.add('text-white', 'font-bold');
+                        desktopButton.classList.remove('text-teal-100');
                     } else {
-                        desktopButton.classList.remove('text-teal-600', 'font-bold');
-                        desktopButton.classList.add('text-gray-700');
+                        desktopButton.classList.remove('text-white', 'font-bold');
+                        desktopButton.classList.add('text-teal-100');
                     }
                 }
                 if (mobileButton) {
@@ -1872,12 +1722,6 @@
                         entry.target.classList.add('animate-fadeInUp');
                         entry.target.style.animationDelay = `${delay}ms`;
                     }
-
-                    // For number counters
-                    if (entry.target.dataset.target) {
-                        animateNumber(entry.target, parseInt(entry.target.dataset.target));
-                    }
-
                     observer.unobserve(entry.target); // Stop observing once animated
                 }
             });
@@ -1893,26 +1737,6 @@
                 observer.observe(element);
             });
         }
-
-        // Function to animate numbers
-        function animateNumber(element, targetValue) {
-            let start = 0;
-            const duration = 1500; // milliseconds
-            const startTime = performance.now();
-
-            function updateNumber(currentTime) {
-                const elapsedTime = currentTime - startTime;
-                const progress = Math.min(elapsedTime / duration, 1);
-                const currentValue = Math.floor(progress * targetValue);
-                element.textContent = currentValue.toLocaleString('id-ID'); // Format with locale
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateNumber);
-                }
-            }
-            requestAnimationFrame(updateNumber);
-        }
-
 
         // --- Chatbot Logic ---
         let chatHistory = []; // Stores chat messages for context
@@ -1966,18 +1790,36 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
             try {
-                // Improved prompt for the chatbot
-                const prompt = `Anda adalah chatbot untuk website UMKM Desa Srigonco. Tugas Anda adalah memberikan informasi produk UMKM yang tersedia.
-                Data produk yang Anda miliki: ${JSON.stringify(products)}.
+                // Updated prompt for the chatbot
+                const prompt = `Anda adalah chatbot untuk website UMKM Desa Srigonco. Anda memiliki informasi tentang produk UMKM dan juga tentang Desa Srigonco secara umum.
 
-                Saat menjawab, perhatikan hal-hal berikut:
-                - Jika pengguna menanyakan tentang produk tertentu (misalnya "apa itu Fadin Snack?", "detail Batik Tulis?"), berikan informasi lengkap yang relevan dari data produk (nama, deskripsi, kategori, stok, dan alamat penjual).
-                - Jika pengguna menanyakan tentang kategori produk (misalnya "produk makanan kering apa saja?", "kerajinan yang tersedia?"), sebutkan produk-produk dalam kategori tersebut.
-                - Jika pengguna menanyakan ketersediaan stok atau alamat, berikan informasi tersebut jika ada.
-                - Jika Anda tidak menemukan produk yang relevan dalam data, katakan bahwa produk tersebut tidak ditemukan dan tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi via WhatsApp.
-                - Jaga nada bicara tetap ramah, membantu, dan profesional.
-                - Jangan berikan informasi yang tidak ada dalam data produk yang Anda miliki.
-                - Jika pertanyaan sangat umum atau di luar lingkup produk, berikan jawaban umum yang ramah dan tawarkan bantuan terkait produk.
+                Data produk UMKM yang Anda miliki: ${JSON.stringify(products)}.
+
+                Informasi umum tentang Desa Srigonco:
+                -   **Lokasi:** Desa Srigonco terletak di Kecamatan Bantur, Kabupaten Malang, Jawa Timur.
+                -   **Fokus:** Desa ini berfokus pada pengembangan UMKM lokal yang inovatif, memanfaatkan kekayaan alam dan budaya setempat.
+                -   **Tujuan:** Membangun desa mandiri dan sejahtera melalui potensi UMKM.
+                -   **Keindahan Alam:** Desa Srigonco memiliki pemandangan alam yang asri dan tenang, seperti sawah hijau dan sungai jernih.
+                -   **Budaya:** Masyarakat Srigonco menjunjung tinggi semangat gotong royong dan kreativitas dalam menghasilkan produk.
+
+                Saat menjawab pertanyaan pengguna, mohon ikuti instruksi berikut:
+                1.  **Jika pengguna menanyakan tentang produk tertentu** (misalnya "apa itu Fadin Snack?", "detail Batik Tulis?", "berapa stok Pretty Donat?", "alamat penjual Keripik Pangsit?"):
+                    * Cari produk yang relevan dalam data \`products\`.
+                    * Berikan informasi lengkap yang relevan dari data produk (nama, deskripsi, kategori, stok, dan alamat penjual).
+                    * Sertakan nomor WhatsApp penjual dalam format yang siap diklik (misalnya: "Anda bisa menghubungi penjual di WhatsApp: wa.me/6281234567890").
+                    * Jika relevan, sarankan produk lain yang serupa atau dalam kategori yang sama.
+                2.  **Jika pengguna menanyakan tentang kategori produk** (misalnya "produk makanan kering apa saja?", "kerajinan yang tersedia?"):
+                    * Sebutkan nama-nama produk yang termasuk dalam kategori tersebut dari data \`products\`.
+                    * Jika ada banyak, sebutkan beberapa contoh dan tawarkan untuk melihat semua di halaman UMKM.
+                3.  **Jika pengguna menanyakan tentang Desa Srigonco secara umum** (misalnya "di mana Desa Srigonco?", "apa fokus desa ini?", "bagaimana budaya di Srigonco?", "apa saja keindahan alam di Srigonco?"):
+                    * Berikan informasi yang relevan dari "Informasi umum tentang Desa Srigonco" di atas.
+                    * Jaga jawaban tetap ringkas dan informatif.
+                4.  **Jika Anda tidak menemukan produk atau informasi yang relevan** dalam data Anda:
+                    * Katakan dengan sopan bahwa produk/informasi tersebut tidak ditemukan.
+                    * Tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi admin website melalui WhatsApp umum (misalnya: "Anda bisa menghubungi admin kami di WhatsApp: wa.me/6281234567890 untuk bantuan lebih lanjut.").
+                5.  **Jaga nada bicara** tetap ramah, membantu, dan profesional.
+                6.  **Jangan berikan informasi yang tidak ada dalam data produk atau informasi umum desa** yang Anda miliki.
+                7.  **Jika pertanyaan sangat umum atau di luar lingkup produk dan informasi desa** (misalnya "apa kabar?", "cuaca hari ini?"), berikan jawaban umum yang ramah dan tawarkan bantuan terkait produk UMKM atau informasi Desa Srigonco.
 
                 Pertanyaan pengguna: ${userMessage}`;
 
@@ -2003,6 +1845,8 @@
                     result.candidates[0].content && result.candidates[0].content.parts &&
                     result.candidates[0].content.parts.length > 0) {
                     botResponseText = result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error('Unexpected response structure from Gemini API:', result);
                 }
 
                 // Remove typing indicator
@@ -2052,6 +1896,219 @@
 
         // Initial render when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
+            // Define products and gallery data here, inside DOMContentLoaded
+            products = [
+                {
+                    id: 1,
+                    name: 'Fadin Snack',
+                    description: 'Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Snack',
+                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    whatsapp: '6281336531898',
+                    category: 'Makanan Kering',
+                    rating: 4.5,
+                    stock: 'Berdasarkan Pesanan',
+                    keywords: ['snack', 'makanan kering', 'fadin', 'camilan'],
+                    address: 'Dusun Sumberjambe RT 35'
+                },
+                {
+                    id: 2,
+                    name: 'Fadin Gallery Kerajinan',
+                    description: 'Berbagai kerajinan tangan dari Fadin Gallery. Dibuat dengan detail dan kualitas.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Gallery',
+                    details: 'Produk kerajinan. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    whatsapp: '6281336531898',
+                    category: 'Kerajinan',
+                    rating: 4.7,
+                    stock: 'Berdasarkan Pesanan',
+                    keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan'],
+                    address: 'Dusun Sumberjambe RT 35'
+                },
+                {
+                    id: 3,
+                    name: 'SALAD BUAH Vani Wijayanti',
+                    description: 'Salad buah segar, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Salad+Buah',
+                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari.',
+                    whatsapp: '6282143167792',
+                    category: 'Makanan Basah',
+                    rating: 4.8,
+                    stock: 'Tersedia Setiap Hari',
+                    keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar'],
+                    address: 'Sumberjambe RT 40 RW 06'
+                },
+                {
+                    id: 4,
+                    name: 'Pretty Donat',
+                    description: 'Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Pretty+Donat',
+                    details: 'Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan.',
+                    whatsapp: '6282245943031',
+                    category: 'Makanan Kering',
+                    rating: 4.6,
+                    stock: 'Tersedia / Berdasarkan Pesanan',
+                    keywords: ['donat', 'pretty', 'roti', 'manis'],
+                    address: 'Srigonco Watu Sigar RT 2'
+                },
+                {
+                    id: 5,
+                    name: 'Aneka Kue Dwi Purwati',
+                    description: 'Berbagai macam kue kering dan basah, cocok untuk acara atau camilan. Dibuat sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Aneka+Kue',
+                    details: 'Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO).',
+                    whatsapp: '6281217205508',
+                    category: 'Makanan',
+                    rating: 4.7,
+                    stock: 'Berdasarkan Pesanan',
+                    keywords: ['kue', 'kue kering', 'kue basah', 'camilan'],
+                    address: 'Watusigar RT 24/04, Desa Srigonco'
+                },
+                {
+                    id: 6,
+                    name: 'Makanan dan Aneka Minuman Muhamad Akbar',
+                    description: 'Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Makanan+Minuman',
+                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari.',
+                    whatsapp: '6285815365961',
+                    category: 'Makanan & Minuman',
+                    rating: 4.3,
+                    stock: 'Tersedia Setiap Hari',
+                    keywords: ['makanan', 'minuman', 'snack', 'segar'],
+                    address: 'Srigonco RT 15'
+                },
+                {
+                    id: 7,
+                    name: 'Sosis Bakar & Corndog Khusnul Khatimah',
+                    description: 'Sosis bakar dan corndog lezat, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Sosis+Corndog',
+                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    whatsapp: '6282232158608',
+                    category: 'Makanan Basah',
+                    rating: 4.4,
+                    stock: 'Berdasarkan Pesanan',
+                    keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basar'],
+                    address: 'Dusun Sumberjambe RT 36'
+                },
+                {
+                    id: 8,
+                    name: 'Keripik Pangsit & Cireng Dewi Irawati',
+                    description: 'Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pangsit',
+                    details: 'Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan.',
+                    whatsapp: '6281216659745',
+                    category: 'Makanan Kering',
+                    rating: 4.6,
+                    stock: 'Tersedia / Berdasarkan Pesanan',
+                    keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih'],
+                    address: 'Desa Srigonco, Dusun Sumberjambe'
+                },
+                {
+                    id: 9,
+                    name: 'Snack & Minuman Silvia Puji Rahayu',
+                    description: 'Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Snack+Minuman',
+                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    whatsapp: '6281246787759',
+                    category: 'Makanan & Minuman',
+                    rating: 4.5,
+                    stock: 'Berdasarkan Pesanan',
+                    keywords: ['snack', 'minuman', 'camilan', 'segar'],
+                    address: 'Dsn. Sumber Jambe, RT/RW tidak spesifik'
+                },
+                {
+                    id: 10,
+                    name: 'Minuman Alvia',
+                    description: 'Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Minuman',
+                    details: 'Produk minuman. Pemasaran dalam desa. Produksi setiap hari.',
+                    whatsapp: '6285649796149',
+                    category: 'Minuman',
+                    rating: 4.2,
+                    stock: 'Tersedia Setiap Hari',
+                    keywords: ['minuman', 'segar', 'olahan'],
+                    address: 'Sumberjambe RT 32'
+                },
+                {
+                    id: 11,
+                    name: 'Batik Tulis Lilis Setyowati',
+                    description: 'Kain batik tulis asli dengan motif khas dari Lilis Setyowati. Cocok untuk pakaian atau koleksi.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Batik+Tulis',
+                    details: 'Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari.',
+                    whatsapp: '6281336809484',
+                    category: 'Kerajinan',
+                    rating: 4.9,
+                    stock: 'Tersedia Setiap Hari',
+                    keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional'],
+                    address: 'Dusun Watusigar RT 2/RW tidak spesifik'
+                },
+                {
+                    id: 12,
+                    name: 'Stick Pepaya Pipit Meilandari',
+                    description: 'Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Stick+Pepaya',
+                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari.',
+                    whatsapp: '6285746346389',
+                    category: 'Makanan Kering',
+                    rating: 4.3,
+                    stock: 'Tersedia Setiap Hari',
+                    keywords: ['stick', 'pepaya', 'makanan kering', 'camilan'],
+                    address: 'RT 11 RW 2 Krajan Srigonco'
+                },
+                {
+                    id: 13,
+                    name: 'Keripik Pisang & Aneka Es Siti Nur Aini',
+                    description: 'Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan.',
+                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pisang+Es',
+                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan.',
+                    whatsapp: '6281231135846',
+                    category: 'Makanan & Minuman',
+                    rating: 4.5,
+                    stock: 'Tersedia / Berdasarkan Pesanan',
+                    keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman'],
+                    address: 'Sukorame RT 24 RW 04'
+                }
+            ];
+            // Dynamically generate product categories from the new products array
+            productCategories = ['Semua', ...new Set(products.map(p => p.category))];
+
+            galleryImages = [
+                { id: 1, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Pemandangan+Sawah', title: 'Pemandangan Sawah Hijau', category: 'Pemandangan Alam' },
+                { id: 2, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Panen+Padi', title: 'Aktivitas Panen Padi', category: 'Aktivitas Desa' },
+                { id: 3, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Sungai+Jernih', title: 'Sungai Jernih di Pedesaan', category: 'Pemandangan Alam' },
+                { id: 4, src: 'https://placehold.co/800x600/D1FAE5/10B981?text=UMKM+Kerajinan', title: 'Proses Pembuatan Kerajinan', category: 'Produk UMKM' },
+                { id: 5, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Festival+Desa', title: 'Suasana Festival Desa', category: 'Aktivitas Desa' },
+                { id: 6, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Warga+Berinteraksi', title: 'Interaksi Warga Desa', category: 'Aktivitas Desa' },
+                { id: 7, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Produk+Madu', title: 'Produk Madu Hutan', category: 'Produk UMKM' },
+                { id: 8, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Produk+Kopi', title: 'Produk Kopi Robusta', category: 'Produk UMKM' },
+                { id: 9, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Bukit+Hijau', title: 'Pemandangan Bukit Hijau', category: 'Pemandangan Alam' },
+                { id: 10, src: 'https://placehold.co/800x600/D1FAE5/10B981?text=Olahan+Makanan', title: 'Produk Olahan Makanan', category: 'Produk UMKM' },
+                { id: 11, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Pertanian+Modern', title: 'Inovasi Pertanian', category: 'Aktivitas Desa' },
+                { id: 12, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Lingkungan+Desa', title: 'Lingkungan Desa Bersih', category: 'Pemandangan Alam' },
+            ];
+            galleryCategories = ['Semua', ...new Set(galleryImages.map(img => img.category))];
+
+            testimonials = [
+                {
+                    name: 'Budi Santoso',
+                    title: 'Pengusaha Kuliner',
+                    quote: 'Produk UMKM Desa Srigonco sangat berkualitas dan autentik. Saya sangat merekomendasikannya!',
+                    avatar: 'https://placehold.co/80x80/ADD8E6/000000?text=BS'
+                },
+                {
+                    name: 'Siti Aminah',
+                    title: 'Pecinta Kerajinan',
+                    quote: 'Kerajinan batiknya indah sekali, detailnya luar biasa. Bangga bisa mendukung produk lokal.',
+                    avatar: 'https://placehold.co/80x80/ADD8E6/000000?text=SA'
+                },
+                {
+                    name: 'Joko Susilo',
+                    title: 'Wisatawan',
+                    quote: 'Desa Srigonco asri dan produk makanannya lezat. Pengalaman belanja yang menyenangkan!',
+                    avatar: 'https://placehold.co/80x80/ADD8E6/000000?text=JS'
+                }
+            ];
+
+
             // Set current year in footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
