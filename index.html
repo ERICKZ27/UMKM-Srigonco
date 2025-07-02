@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desa Srigonco & UMKM</title>
+    <title>Desa Srigonco UMKM</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -13,6 +13,8 @@
             background-color: #f8fafc; /* Light blue-gray background, similar to Sidita */
             color: #333;
             line-height: 1.6;
+            /* Subtle background pattern */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e2e8f0' fill-opacity='0.4'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23e2e8f0'/%3E%3C/g%3E%3C/svg%3E");
         }
         /* Ensure main content has padding to avoid being hidden by fixed header */
         main {
@@ -21,6 +23,12 @@
         /* Smooth scroll for anchor links */
         html {
             scroll-behavior: smooth;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .line-clamp-3 {
             display: -webkit-box;
@@ -61,9 +69,14 @@
         /* Carousel specific styles */
         .carousel-item {
             display: none;
+            transition: opacity 0.6s ease-in-out; /* Smooth fade transition */
         }
         .carousel-item.active {
             display: block;
+            opacity: 1;
+        }
+        .carousel-item:not(.active) {
+            opacity: 0;
         }
         /* Loading spinner */
         .spinner {
@@ -80,15 +93,22 @@
         /* Star rating hover effect */
         .rating-star {
             color: #d1d5db; /* gray-300 */
-            transition: color 0.15s ease-in-out;
+            transition: color 0.15s ease-in-out, transform 0.1s ease-in-out;
         }
         .rating-star.filled {
             color: #facc15; /* yellow-400 */
         }
+        .rating-star:hover {
+            transform: scale(1.1);
+        }
 
         /* Custom styles for hero section overlay */
         .hero-overlay {
-            background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+            backdrop-filter: blur(2px); /* Subtle blur effect */
+        }
+        .hero-overlay h1, .hero-overlay p {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6); /* Text shadow for better readability */
         }
 
         /* Animations */
@@ -123,7 +143,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-8px);
             }
         }
         .animate-bounce-once:hover {
@@ -167,13 +187,13 @@
         }
         .custom-modal-content {
             background-color: white;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
-            padding: 2rem; /* p-8 */
-            max-width: 24rem; /* max-w-sm */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+            padding: 2.5rem; /* p-10 */
+            max-width: 28rem; /* max-w-md */
             margin: auto;
             text-align: center;
-            transform: scale(0.9);
+            transform: scale(0.8);
             transition: transform 0.3s ease-in-out;
         }
         .custom-modal-backdrop.open .custom-modal-content {
@@ -187,42 +207,217 @@
             background-size: cover;
         }
 
-        /* Testimonial Carousel specific styles */
-        .testimonial-carousel-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
+        /* Card hover effect with border */
+        .card-hover-effect:hover {
+            border-color: #0d9488; /* teal-600 */
+            border-width: 2px;
         }
-        .testimonial-carousel-item {
-            flex: 0 0 100%; /* Each item takes full width of its container */
-            max-width: 100%;
+
+        /* Button gradient effect */
+        .btn-gradient-hover {
+            background-image: linear-gradient(to right, #0d9488, #14b8a6); /* teal-600 to teal-500 */
+            transition: all 0.3s ease;
+        }
+        .btn-gradient-hover:hover {
+            background-image: linear-gradient(to right, #14b8a6, #0d9488);
+            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);
+        }
+
+        /* Chatbot specific styles */
+        #chatbot-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+        #chatbot-button:hover {
+            transform: scale(1.1);
+            background-color: #0f766e; /* darker teal */
+        }
+
+        #chatbot-container {
+            position: fixed;
+            bottom: 90px; /* Above the button */
+            right: 24px;
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 100;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #chatbot-container.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #chatbot-header {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            padding: 16px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #chatbot-messages {
+            flex-grow: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background-color: #f0fdfa; /* teal-50 */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message-bubble {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            line-height: 1.4;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .user-message {
+            background-color: #14b8a6; /* teal-500 */
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-message {
+            background-color: #e0f2f7; /* light blue */
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        #chatbot-input-container {
+            display: flex;
+            padding: 16px;
+            border-top: 1px solid #e2e8f0; /* gray-200 */
+        }
+        #chatbot-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #cbd5e1; /* gray-300 */
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+        #chatbot-send-button {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #chatbot-send-button:hover {
+            background-color: #0f766e; /* darker teal */
+        }
+        /* Responsive adjustments for chatbot */
+        @media (max-width: 768px) {
+            #chatbot-container {
+                width: 90%;
+                height: 80%;
+                bottom: 16px;
+                right: 5%;
+                left: 5%;
+                max-width: unset; /* Remove max-width for mobile */
+            }
+            #chatbot-button {
+                bottom: 16px;
+                right: 16px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Typing indicator animation */
+        .typing-indicator span {
+            display: inline-block;
+            animation: bounce-dot 1.4s infinite ease-in-out;
+            animation-fill-mode: both;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        @keyframes bounce-dot {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="bg-white shadow-md py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-10 top-0">
+    <header class="bg-white shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0">
         <div class="flex items-center">
             <!-- Logo SVG - Representing mountains, rice fields, and a craft element -->
-            <svg class="h-10 w-10 mr-3 text-teal-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2zM10 14H8v-2h2v2zm4 0h-2v-2h2v2zM12 6.828L17.172 12H6.828L12 6.828z" fill="#0d9488"/>
-                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2zM10 14H8v-2h2v2zm4 0h-2v-2h2v2z" fill="#0f766e"/>
-                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2z" fill="url(#gradient-logo)"/>
+            <svg class="h-10 w-10 mr-3" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2zM10 14H8v-2h2v2zm4 0h-2v-2h2v2zM12 6.828L17.172 12H6.828L12 6.828z" fill="url(#gradient-logo-new)"/>
+                <path d="M12 2L2 12h2v8h6v-6h4v6h6v-8h2L12 2zM10 14H8v-2h2v2zm4 0h-2v-2h2v2z" fill="url(#gradient-logo-new-dark)"/>
                 <defs>
-                    <linearGradient id="gradient-logo" x1="0" y1="0" x2="0" y2="1">
+                    <linearGradient id="gradient-logo-new" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stop-color="#34d399" />
+                        <stop offset="100%" stop-color="#0d9488" />
+                    </linearGradient>
+                    <linearGradient id="gradient-logo-new-dark" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#0f766e" />
                         <stop offset="100%" stop-color="#0d9488" />
                     </linearGradient>
                 </defs>
                 <circle cx="12" cy="12" r="2" fill="#facc15"/> <!-- Small circle for craft/sun element -->
             </svg>
-            <span class="text-xl font-bold text-teal-700">Desa Srigonco</span>
+            <span class="text-xl font-bold text-teal-700">Desa Srigonco UMKM</span>
         </div>
         <nav class="hidden md:flex space-x-8">
-            <button id="nav-home" onclick="navigateTo('home')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group" aria-label="Beranda">Beranda<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-teal-600"></span></button>
-            <button id="nav-desa" onclick="navigateTo('desa')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group" aria-label="Profil Desa">Profil<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-teal-600"></span></button>
-            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group" aria-label="Produk UMKM">Produk UMKM<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-teal-600"></span></button>
-            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group" aria-label="Galeri Foto">Galeri<span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-teal-600"></span></button>
+            <button id="nav-home" onclick="navigateTo('home')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group relative" aria-label="Beranda">
+                Beranda
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </button>
+            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group relative" aria-label="Produk UMKM">
+                Produk UMKM
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </button>
+            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-gray-700 hover:text-teal-600 font-medium transition duration-300 group relative" aria-label="Galeri Foto">
+                Galeri
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </button>
         </nav>
         <div class="flex items-center space-x-4">
             <!-- Search Icon - Kept for potential future use or general site search -->
@@ -240,14 +435,13 @@
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-gray-800 bg-opacity-95 z-20 flex flex-col items-center justify-center space-y-6 hidden">
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-gray-800 bg-opacity-95 z-30 flex flex-col items-center justify-center space-y-6 hidden">
         <button id="close-mobile-menu" class="absolute top-6 right-6 text-white hover:text-gray-300 focus:outline-none" aria-label="Tutup menu mobile">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
         <button id="mobile-nav-home" onclick="navigateTo('home')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Beranda">Beranda</button>
-        <button id="mobile-nav-desa" onclick="navigateTo('desa')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Profil Desa">Profil</button>
         <button id="mobile-nav-umkm" onclick="navigateTo('umkm')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button>
         <button id="mobile-nav-galeri" onclick="navigateTo('galeri')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Galeri Foto">Galeri</button>
     </div>
@@ -290,10 +484,10 @@
                 </div>
                 <div>
                     <h3 id="quick-view-name" class="text-2xl font-bold text-gray-900 mb-2"></h3>
-                    <p id="quick-view-price" class="text-teal-700 font-bold text-xl mb-3"></p>
                     <div id="quick-view-rating" class="flex items-center mb-3 text-lg"></div>
                     <p id="quick-view-description" class="text-gray-700 text-sm mb-4 line-clamp-4"></p>
                     <p id="quick-view-stock" class="text-gray-700 font-semibold text-sm mb-4"></p>
+                    <p id="quick-view-address" class="text-gray-700 text-sm mb-4"></p>
                     <div class="flex flex-col gap-3">
                         <a id="quick-view-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Beli via WhatsApp">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z" />
@@ -316,11 +510,38 @@
         </svg>
     </button>
 
+    <!-- Chatbot Button -->
+    <button id="chatbot-button" aria-label="Buka Chatbot">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+    </button>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+        <div id="chatbot-header">
+            <h3 class="text-lg font-semibold">Chatbot UMKM Srigonco</h3>
+            <button id="close-chatbot-button" class="text-white hover:text-gray-200" aria-label="Tutup Chatbot">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="chatbot-messages">
+            <!-- Chat messages will appear here -->
+            <div class="message-bubble bot-message">Halo! Saya chatbot UMKM Desa Srigonco. Ada yang bisa saya bantu?</div>
+        </div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Ketik pesan Anda..." aria-label="Ketik pesan Anda">
+            <button id="chatbot-send-button" aria-label="Kirim Pesan">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 px-4 md:px-8 text-center mt-auto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <h3 class="text-xl font-bold mb-4 text-teal-400">Desa Srigonco</h3>
+                <h3 class="text-xl font-bold mb-4 text-teal-400">Desa Srigonco UMKM</h3>
                 <p class="text-gray-400">
                     Membangun desa mandiri dan sejahtera melalui potensi alam dan UMKM lokal.
                 </p>
@@ -329,7 +550,6 @@
                 <h3 class="text-xl font-bold mb-4 text-teal-400">Tautan Cepat</h3>
                 <ul class="space-y-2">
                     <li><button onclick="navigateTo('home')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Beranda">Beranda</button></li>
-                    <li><button onclick="navigateTo('desa')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Profil Desa">Profil</button></li>
                     <li><button onclick="navigateTo('umkm')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
                     <li><button onclick="navigateTo('galeri')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Galeri Foto">Galeri</button></li>
                 </ul>
@@ -362,8 +582,6 @@
         let showBackToTop = false;
         let currentCarouselIndex = 0; // For hero carousel
         let carouselInterval;
-        let currentTestimonialIndex = 0; // For testimonial carousel
-        let testimonialInterval;
         let showLoading = false;
         let currentProductRating = 0; // For interactive rating
 
@@ -373,231 +591,180 @@
         let loadedGalleryCount = itemsPerPage;
 
         // --- Data ---
-        // Updated products data based on the provided PDF content
+        // Updated products data based on the provided PDF content, with prices and addresses
         const products = [
             {
                 id: 1,
                 name: 'Fadin Snack',
                 description: 'Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Snack',
-                price: 15000,
-                priceText: 'Mulai Rp 15.000',
                 details: 'Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
                 whatsapp: '6281336531898',
                 category: 'Makanan Kering',
                 rating: 4.5,
                 stock: 'Berdasarkan Pesanan',
-                keywords: ['snack', 'makanan kering', 'fadin', 'camilan']
+                keywords: ['snack', 'makanan kering', 'fadin', 'camilan'],
+                address: 'Dusun Sumberjambe RT 35'
             },
             {
                 id: 2,
                 name: 'Fadin Gallery Kerajinan',
                 description: 'Berbagai kerajinan tangan dari Fadin Gallery. Dibuat dengan detail dan kualitas.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Gallery',
-                price: 50000,
-                priceText: 'Mulai Rp 50.000',
                 details: 'Produk kerajinan. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
                 whatsapp: '6281336531898',
                 category: 'Kerajinan',
                 rating: 4.7,
                 stock: 'Berdasarkan Pesanan',
-                keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan']
+                keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan'],
+                address: 'Dusun Sumberjambe RT 35'
             },
             {
                 id: 3,
                 name: 'SALAD BUAH Vani Wijayanti',
                 description: 'Salad buah segar, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Salad+Buah',
-                price: 20000,
-                priceText: 'Rp 20.000',
                 details: 'Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari.',
                 whatsapp: '6282143167792',
                 category: 'Makanan Basah',
                 rating: 4.8,
                 stock: 'Tersedia Setiap Hari',
-                keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar']
+                keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar'],
+                address: 'Sumberjambe RT 40 RW 06'
             },
             {
                 id: 4,
                 name: 'Pretty Donat',
                 description: 'Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Pretty+Donat',
-                price: 10000,
-                priceText: 'Mulai Rp 10.000',
                 details: 'Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan.',
                 whatsapp: '6282245943031',
                 category: 'Makanan Kering',
                 rating: 4.6,
                 stock: 'Tersedia / Berdasarkan Pesanan',
-                keywords: ['donat', 'pretty', 'roti', 'manis']
+                keywords: ['donat', 'pretty', 'roti', 'manis'],
+                address: 'Srigonco Watu Sigar RT 2'
             },
             {
                 id: 5,
                 name: 'Aneka Kue Dwi Purwati',
                 description: 'Berbagai macam kue kering dan basah, cocok untuk acara atau camilan. Dibuat sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Aneka+Kue',
-                price: 35000,
-                priceText: 'Mulai Rp 35.000',
                 details: 'Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO).',
                 whatsapp: '6281217205508',
                 category: 'Makanan',
                 rating: 4.7,
                 stock: 'Berdasarkan Pesanan',
-                keywords: ['kue', 'kue kering', 'kue basah', 'camilan']
+                keywords: ['kue', 'kue kering', 'kue basah', 'camilan'],
+                address: 'Watusigar RT 24/04, Desa Srigonco'
             },
             {
                 id: 6,
-                name: 'Makanan dan Aneka Minuman Akbar',
+                name: 'Makanan dan Aneka Minuman Muhamad Akbar',
                 description: 'Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Makanan+Minuman',
-                price: 12000,
-                priceText: 'Mulai Rp 12.000',
                 details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari.',
                 whatsapp: '6285815365961',
                 category: 'Makanan & Minuman',
                 rating: 4.3,
                 stock: 'Tersedia Setiap Hari',
-                keywords: ['makanan', 'minuman', 'snack', 'segar']
+                keywords: ['makanan', 'minuman', 'snack', 'segar'],
+                address: 'Srigonco RT 15'
             },
             {
                 id: 7,
-                name: 'Sosis Bakar & Corndog Khusnul',
+                name: 'Sosis Bakar & Corndog Khusnul Khatimah',
                 description: 'Sosis bakar dan corndog lezat, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Sosis+Corndog',
-                price: 10000,
-                priceText: 'Mulai Rp 10.000',
                 details: 'Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
                 whatsapp: '6282232158608',
                 category: 'Makanan Basah',
                 rating: 4.4,
                 stock: 'Berdasarkan Pesanan',
-                keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basah']
+                keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basah'],
+                address: 'Dusun Sumberjambe RT 36'
             },
             {
                 id: 8,
-                name: 'Keripik Pangsit & Cireng Dewi',
+                name: 'Keripik Pangsit & Cireng Dewi Irawati',
                 description: 'Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pangsit',
-                price: 15000,
-                priceText: 'Mulai Rp 15.000',
                 details: 'Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan.',
                 whatsapp: '6281216659745',
                 category: 'Makanan Kering',
                 rating: 4.6,
                 stock: 'Tersedia / Berdasarkan Pesanan',
-                keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih']
+                keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih'],
+                address: 'Desa Srigonco, Dusun Sumberjambe'
             },
             {
                 id: 9,
-                name: 'Snack & Minuman Silvia',
+                name: 'Snack & Minuman Silvia Puji Rahayu',
                 description: 'Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Snack+Minuman',
-                price: 18000,
-                priceText: 'Mulai Rp 18.000',
                 details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
                 whatsapp: '6281246787759',
                 category: 'Makanan & Minuman',
                 rating: 4.5,
                 stock: 'Berdasarkan Pesanan',
-                keywords: ['snack', 'minuman', 'camilan', 'segar']
+                keywords: ['snack', 'minuman', 'camilan', 'segar'],
+                address: 'Dsn. Sumber Jambe, RT/RW tidak spesifik'
             },
             {
                 id: 10,
                 name: 'Minuman Alvia',
                 description: 'Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Minuman',
-                price: 8000,
-                priceText: 'Mulai Rp 8.000',
                 details: 'Produk minuman. Pemasaran dalam desa. Produksi setiap hari.',
                 whatsapp: '6285649796149',
                 category: 'Minuman',
                 rating: 4.2,
                 stock: 'Tersedia Setiap Hari',
-                keywords: ['minuman', 'segar', 'olahan']
+                keywords: ['minuman', 'segar', 'olahan'],
+                address: 'Sumberjambe RT 32'
             },
             {
                 id: 11,
                 name: 'Batik Tulis Lilis Setyowati',
                 description: 'Kain batik tulis asli dengan motif khas dari Lilis Setyowati. Cocok untuk pakaian atau koleksi.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Batik+Tulis',
-                price: 250000,
-                priceText: 'Mulai Rp 250.000',
                 details: 'Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari.',
                 whatsapp: '6281336809484',
                 category: 'Kerajinan',
                 rating: 4.9,
                 stock: 'Tersedia Setiap Hari',
-                keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional']
+                keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional'],
+                address: 'Dusun Watusigar RT 2/RW tidak spesifik'
             },
             {
                 id: 12,
                 name: 'Stick Pepaya Pipit Meilandari',
                 description: 'Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Stick+Pepaya',
-                price: 12000,
-                priceText: 'Rp 12.000',
                 details: 'Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari.',
                 whatsapp: '6285746346389',
                 category: 'Makanan Kering',
                 rating: 4.3,
                 stock: 'Tersedia Setiap Hari',
-                keywords: ['stick', 'pepaya', 'makanan kering', 'camilan']
+                keywords: ['stick', 'pepaya', 'makanan kering', 'camilan'],
+                address: 'RT 11 RW 2 Krajan Srigonco'
             },
             {
                 id: 13,
                 name: 'Keripik Pisang & Aneka Es Siti Nur Aini',
                 description: 'Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan.',
                 image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pisang+Es',
-                price: 10000,
-                priceText: 'Mulai Rp 10.000',
                 details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan.',
                 whatsapp: '6281231135846',
                 category: 'Makanan & Minuman',
                 rating: 4.5,
                 stock: 'Tersedia / Berdasarkan Pesanan',
-                keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman']
+                keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman'],
+                address: 'Sukorame RT 24 RW 04'
             }
         ];
         // Dynamically generate product categories from the new products array
         const productCategories = ['Semua', ...new Set(products.map(p => p.category))];
-
-        const testimonials = [
-            {
-                id: 1,
-                name: 'Budi Santoso',
-                text: 'Produk Keripik Tempe dari Srigonco sangat renyah dan gurih, bikin ketagihan! Kualitasnya terjamin.',
-                product: 'Keripik Tempe Renyah',
-                rating: 5
-            },
-            {
-                id: 2,
-                name: 'Siti Aminah',
-                text: 'Madu Hutan Srigonco benar-benar murni dan rasanya enak. Sangat direkomendasikan untuk kesehatan.',
-                product: 'Madu Hutan Srigonco',
-                rating: 5
-            },
-            {
-                id: 3,
-                name: 'Joko Susilo',
-                text: 'Kerajinan anyaman bambunya unik dan artistik. Cocok banget buat hiasan di rumah.',
-                product: 'Anyaman Bambu Kreatif',
-                rating: 4
-            },
-            {
-                id: 4,
-                name: 'Mariawati',
-                text: 'Kopi Robusta Srigonco punya aroma yang kuat dan rasa yang mantap, cocok buat pecinta kopi sejati!',
-                product: 'Kopi Robusta Srigonco',
-                rating: 4.8
-            },
-            {
-                id: 5,
-                name: 'Agus Salim',
-                text: 'Gula Aren Organiknya manis alami dan sehat. Saya selalu pakai untuk minuman dan masakan.',
-                product: 'Gula Aren Organik',
-                rating: 4.7
-            }
-        ];
 
         const galleryImages = [
             { id: 1, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Pemandangan+Sawah', title: 'Pemandangan Sawah Hijau', category: 'Pemandangan Alam' },
@@ -701,9 +868,6 @@
             if (carouselInterval) {
                 clearInterval(carouselInterval);
             }
-            if (testimonialInterval) {
-                clearInterval(testimonialInterval);
-            }
 
             switch (currentPage) {
                 case 'home':
@@ -714,9 +878,6 @@
                     break;
                 case 'productDetail':
                     contentHtml = renderProductDetailPage();
-                    break;
-                case 'desa':
-                    contentHtml = renderDesaPage();
                     break;
                 case 'galeri':
                     contentHtml = renderGaleriPage();
@@ -808,7 +969,7 @@
             const closeQuickViewModalButton = document.getElementById('close-quick-view-modal-button');
             if (closeQuickViewModalButton) {
                 closeQuickViewModalButton.removeEventListener('click', closeProductQuickViewModal);
-                closeQuickViewModalButton.addEventListener('click', closeProductQuickViewModal);
+                closeQuickViewModalButton.addEventListener('click', closeQuickViewModalButton);
             }
             const quickViewDetailButton = document.getElementById('quick-view-detail-button');
             if (quickViewDetailButton) {
@@ -831,22 +992,6 @@
 
                 // Attach Intersection Observer for new homepage animations
                 setupIntersectionObserver();
-            }
-
-            // Testimonial Carousel controls (if on desa page)
-            if (currentPage === 'desa') {
-                const prevTestimonialButton = document.getElementById('testimonial-prev');
-                const nextTestimonialButton = document.getElementById('testimonial-next');
-                if (prevTestimonialButton && nextTestimonialButton) {
-                    prevTestimonialButton.removeEventListener('click', showPrevTestimonialItem);
-                    nextTestimonialButton.removeEventListener('click', showNextTestimonialItem);
-                    prevTestimonialButton.addEventListener('click', showPrevTestimonialItem);
-                    nextTestimonialButton.addEventListener('click', showNextTestimonialItem);
-                    startTestimonialCarousel();
-                }
-                // Ensure testimonial carousel is correctly positioned on resize
-                window.removeEventListener('resize', () => showTestimonialItem(currentTestimonialIndex));
-                window.addEventListener('resize', () => showTestimonialItem(currentTestimonialIndex));
             }
 
             // Interactive Product Rating (if on product detail page)
@@ -880,6 +1025,29 @@
                     copyLinkButton.removeEventListener('click', copyProductLink);
                     copyLinkButton.addEventListener('click', copyProductLink);
                 }
+            }
+
+            // Chatbot event listeners
+            const chatbotButton = document.getElementById('chatbot-button');
+            const closeChatbotButton = document.getElementById('close-chatbot-button');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotSendButton = document.getElementById('chatbot-send-button');
+
+            if (chatbotButton) {
+                chatbotButton.removeEventListener('click', toggleChatbot);
+                chatbotButton.addEventListener('click', toggleChatbot);
+            }
+            if (closeChatbotButton) {
+                closeChatbotButton.removeEventListener('click', toggleChatbot);
+                closeChatbotButton.addEventListener('click', toggleChatbot);
+            }
+            if (chatbotInput) {
+                chatbotInput.removeEventListener('keypress', handleChatInputKeyPress);
+                chatbotInput.addEventListener('keypress', handleChatInputKeyPress);
+            }
+            if (chatbotSendButton) {
+                chatbotSendButton.removeEventListener('click', sendChatMessage);
+                chatbotSendButton.addEventListener('click', sendChatMessage);
             }
         }
 
@@ -917,7 +1085,7 @@
             const statistics = [
                 { label: 'Jumlah Penduduk', value: 5200, icon: '<svg class="w-16 h-16 text-teal-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>' },
                 { label: 'Jumlah UMKM', value: products.length, icon: '<svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 10h-4V6c0-1.1-.9-2-2-2s-2 .9-2 2v4H6c-1.1 0-2 .9-2 2s.9 2 2 2h4v4c0 1.1.9 2 2 2s2-.9 2-2v-4h4c1.1 0 2-.9 2-2s-.9-2-2-2z"/></svg>' },
-                { label: 'Pengunjung Wisata (per bulan)', value: 1500, icon: '<svg class="w-16 h-16 text-yellow-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>' },
+                { label: 'Pengunjung Website (per bulan)', value: 1500, icon: '<svg class="w-16 h-16 text-yellow-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>' },
             ].map((stat, index) => `
                 <div class="bg-white rounded-lg shadow-md p-6 text-center transform transition duration-300 hover:scale-105 animate-fadeInUp" data-aos="fade-up" data-aos-delay="${index * 150}">
                     ${stat.icon}
@@ -942,46 +1110,42 @@
                 </section>
 
                 <div class="container mx-auto px-4 py-8">
-                    <!-- About Section -->
+                    <!-- About Srigonco & UMKM Section -->
                     <section class="bg-white rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Tentang Desa Srigonco</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                             <div class="order-2 md:order-1">
                                 <p class="text-gray-700 text-lg leading-relaxed mb-4" data-aos="fade-up" data-aos-delay="100">
-                                    Desa Srigonco, terletak di Kecamatan Bantur, Kabupaten Malang, Jawa Timur, adalah permata tersembunyi yang kaya akan keindahan alam dan potensi lokal. Dikelilingi oleh hamparan sawah hijau, perbukitan yang menawan, dan aliran sungai yang jernih, Srigonco menawarkan suasana pedesaan yang tenang dan asri.
+                                    Desa Srigonco, di Kecamatan Bantur, Kabupaten Malang, Jawa Timur, adalah rumah bagi UMKM inovatif yang berakar pada kekayaan alam dan budaya lokal. Kami bangga menghadirkan produk-produk berkualitas tinggi yang dibuat dengan dedikasi oleh masyarakat Srigonco.
                                 </p>
                                 <p class="text-gray-700 text-lg leading-relaxed mb-6" data-aos="fade-up" data-aos-delay="200">
-                                    Masyarakatnya yang ramah dan bersemangat tinggi mayoritas berprofesi sebagai petani dan pengrajin UMKM. Kami berkomitmen untuk mengembangkan desa ini secara berkelanjutan, melestarikan budaya, dan meningkatkan kesejahteraan melalui inovasi dan kolaborasi.
+                                    Setiap produk UMKM di sini tidak hanya mencerminkan keterampilan dan kreativitas, tetapi juga semangat gotong royong dan komitmen kami untuk memajukan ekonomi desa. Dengan berbelanja di sini, Anda tidak hanya mendapatkan produk unik, tetapi juga turut serta dalam mendukung keberlanjutan dan kesejahteraan komunitas kami.
                                 </p>
-                                <button onclick="navigateTo('desa')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Baca Selengkapnya tentang desa">
-                                    Baca Selengkapnya
+                                <button onclick="navigateTo('umkm')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Jelajahi Produk Kami">
+                                    Jelajahi Produk Kami
                                 </button>
                             </div>
                             <div class="order-1 md:order-2">
-                                <!--
-                                    Catatan: Gambar lokal (IMG/Pemandangan-Desa.JPG) tidak dapat dimuat langsung di lingkungan browser tanpa server.
-                                    Silakan ganti URL placeholder ini dengan URL gambar Anda yang sebenarnya jika Anda menghosting website.
-                                -->
-                                <img src="https://placehold.co/600x400/34D399/065F46?text=Pemandangan+Desa+Srigonco" alt="Pemandangan Desa Srigonco" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/34D399/065F46?text=Pemandangan+Desa+Srigonco';" data-aos="fade-left" />
+                                <img src="https://placehold.co/600x400/34D399/065F46?text=UMKM+Srigonco" alt="UMKM Desa Srigonco" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/34D399/065F46?text=UMKM+Desa+Srigonco';" data-aos="fade-left" />
                             </div>
                         </div>
                     </section>
 
                     <!-- Why Choose Us Section -->
                     <section class="py-12 bg-blue-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Mengapa Memilih Kami?</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="100">
                                 <svg class="w-16 h-16 text-teal-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <h3 class="text-xl font-semibold text-gray-800 mb-2">Produk Asli & Berkualitas</h3>
                                 <p class="text-gray-600">Kami menawarkan produk-produk UMKM asli Desa Srigonco dengan kualitas terjamin.</p>
                             </div>
-                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="200">
                                 <svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A2.5 2.5 0 1014.854 1.146 2.5 2.5 0 0012 10.5a2.5 2.5 0 00-2.854-9.354z"></path></svg>
                                 <h3 class="text-xl font-semibold text-gray-800 mb-2">Mendukung Komunitas Lokal</h3>
                                 <p class="text-gray-600">Setiap pembelian Anda berkontribusi langsung pada kesejahteraan warga desa.</p>
                             </div>
-                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="300">
                                 <svg class="w-16 h-16 text-yellow-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                                 <h3 class="text-xl font-semibold text-gray-800 mb-2">Pelayanan Ramah & Cepat</h3>
                                 <p class="text-gray-600">Kami siap melayani Anda dengan sepenuh hati dan respons yang cepat.</p>
@@ -1002,7 +1166,7 @@
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Produk Unggulan UMKM</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${products.slice(0, 3).map((product, index) => `
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
                                     <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover product-image-thumbnail cursor-pointer" data-image-src="${product.image}" data-image-caption="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/ADD8E6/000000?text=${encodeURIComponent(product.name)}';" />
                                     <div class="p-5">
                                         <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">${product.name}</h3>
@@ -1011,8 +1175,7 @@
                                             <span class="text-gray-600 text-sm">(${product.rating})</span>
                                         </div>
                                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-teal-700 font-bold text-lg">${product.priceText}</span>
+                                        <div class="flex justify-end items-center">
                                             <button data-product-id="${product.id}" class="bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
                                                 Lihat Cepat
                                             </button>
@@ -1033,7 +1196,7 @@
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal" data-aos="fade-up">Jelajahi Galeri Kami</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${galleryImages.slice(0, 3).map((img, index) => `
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
                                     <img
                                         src="${img.src}"
                                         alt="${img.title}"
@@ -1059,7 +1222,7 @@
                     <section class="py-12 bg-teal-600 text-white rounded-lg shadow-lg p-8 animate-fadeIn text-center" data-aos="fade-up">
                         <h2 class="text-3xl md:text-4xl font-bold mb-6 text-reveal" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
                         <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                            Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui WhatsApp untuk respons cepat.
+                            Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui WhatsApp untuk respons cepat atau gunakan chatbot kami!
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
                             <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-teal-700 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
@@ -1086,24 +1249,11 @@
                 product.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm.toLowerCase())))
             );
 
-            // Sorting logic
+            // Sorting logic (removed price sorting as prices are no longer displayed)
             if (selectedSort === 'name-asc') {
                 filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
             } else if (selectedSort === 'name-desc') {
                 filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
-            } else if (selectedSort === 'price-asc') {
-                // Handle cases where price is text like "Mulai Rp"
-                filteredProducts.sort((a, b) => {
-                    const priceA = typeof a.price === 'number' ? a.price : parseFloat(a.priceText.replace(/[^0-9,-]+/g, "").replace(",", "."));
-                    const priceB = typeof b.price === 'number' ? b.price : parseFloat(b.priceText.replace(/[^0-9,-]+/g, "").replace(",", "."));
-                    return priceA - priceB;
-                });
-            } else if (selectedSort === 'price-desc') {
-                filteredProducts.sort((a, b) => {
-                    const priceA = typeof a.price === 'number' ? a.price : parseFloat(a.priceText.replace(/[^0-9,-]+/g, "").replace(",", "."));
-                    const priceB = typeof b.price === 'number' ? b.price : parseFloat(b.priceText.replace(/[^0-9,-]+/g, "").replace(",", "."));
-                    return priceB - priceA;
-                });
             }
 
             const displayedProducts = filteredProducts.slice(0, loadedProductCount);
@@ -1111,7 +1261,7 @@
             const categoryButtonsHtml = productCategories.map(category => `
                 <button
                     class="category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedCategory === category ? 'bg-teal-600 text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
+                    ${selectedCategory === category ? 'bg-teal-600 text-white shadow-md btn-gradient-hover' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
                     data-category="${category}"
                     aria-label="Filter kategori ${category}"
                 >
@@ -1120,7 +1270,7 @@
             `).join('');
 
             const productCards = displayedProducts.length > 0 ? displayedProducts.map(product => `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect animate-fadeIn" data-aos="fade-up">
                     <img
                         src="${product.image}"
                         alt="${product.name}"
@@ -1130,14 +1280,13 @@
                         onerror="this.onerror=null;this.src='https://placehold.co/400x300/ADD8E6/000000?text=${encodeURIComponent(product.name)}';"
                     />
                     <div class="p-5">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">${product.name}</h3>
                         <div class="flex items-center mb-2">
                             <div class="text-lg mr-2">${getStarRatingHtml(product.rating)}</div>
                             <span class="text-gray-600 text-sm">(${product.rating})</span>
                         </div>
                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-teal-700 font-bold text-lg">${product.priceText}</span>
+                        <div class="flex justify-end items-center">
                             <button data-product-id="${product.id}" class="bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
                                 Lihat Cepat
                             </button>
@@ -1147,14 +1296,17 @@
             `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Produk tidak ditemukan.</p>`;
 
             const loadMoreButtonHtml = (loadedProductCount < filteredProducts.length) ?
-                `<button id="load-more-products" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75" aria-label="Muat lebih banyak produk">
+                `<button id="load-more-products" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
                     Muat Lebih Banyak Produk
                 </button>` : '';
 
             return `
                 <div class="container mx-auto px-4 py-12">
                     <div class="bg-white rounded-lg shadow-lg p-8 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10">Produk Unggulan UMKM Desa Srigonco</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4">Produk Unggulan UMKM Desa Srigonco</h2>
+                        <p class="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto font-semibold">
+                            "Jelajahi Kekayaan Lokal: Kualitas Terbaik dari Hati Desa Srigonco."
+                        </p>
                         <div class="max-w-xl mx-auto mb-8 flex flex-col sm:flex-row gap-4">
                             <input
                                 type="text"
@@ -1168,8 +1320,6 @@
                                 <option value="default" ${selectedSort === 'default' ? 'selected' : ''}>Urutkan</option>
                                 <option value="name-asc" ${selectedSort === 'name-asc' ? 'selected' : ''}>Nama (A-Z)</option>
                                 <option value="name-desc" ${selectedSort === 'name-desc' ? 'selected' : ''}>Nama (Z-A)</option>
-                                <option value="price-asc" ${selectedSort === 'price-asc' ? 'selected' : ''}>Harga (Terendah)</option>
-                                <option value="price-desc" ${selectedSort === 'price-desc' ? 'selected' : ''}>Harga (Tertinggi)</option>
                             </select>
                         </div>
                         <div class="flex flex-wrap justify-center gap-3 mb-10">
@@ -1195,10 +1345,9 @@
             const recommendedProducts = products.filter(p =>
                 p.category === selectedProduct.category && p.id !== selectedProduct.id
             ).slice(0, 3).map(p => `
-                <div class="bg-white rounded-lg shadow-md p-4 text-center">
+                <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover-effect">
                     <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/200x150/ADD8E6/000000?text=${encodeURIComponent(p.name)}';" />
                     <h4 class="font-semibold text-gray-800 text-md mb-1 line-clamp-1">${p.name}</h4>
-                    <p class="text-teal-700 font-bold text-sm mb-2">${p.priceText}</p>
                     <button onclick="navigateTo('productDetail', ${p.id})" class="bg-teal-500 hover:bg-teal-600 text-white text-xs py-1 px-3 rounded-full" aria-label="Lihat detail ${p.name}">
                         Lihat
                     </button>
@@ -1225,7 +1374,6 @@
                             </div>
                             <div class="md:w-1/2">
                                 <h2 class="text-3xl font-bold text-gray-900 mb-3">${selectedProduct.name}</h2>
-                                <p class="text-teal-700 font-bold text-2xl mb-4">${selectedProduct.priceText}</p>
                                 <div class="flex items-center mb-4">
                                     <div class="text-2xl mr-2">${getStarRatingHtml(selectedProduct.rating)}</div>
                                     <span class="text-gray-600 text-lg">(${selectedProduct.rating} dari 5)</span>
@@ -1233,13 +1381,14 @@
                                 <p class="text-gray-700 leading-relaxed mb-6">${selectedProduct.description}</p>
                                 <h3 class="text-xl font-semibold text-gray-800 mb-2">Detail Produk:</h3>
                                 <p class="text-gray-600 leading-relaxed mb-4">${selectedProduct.details}</p>
-                                <p class="text-gray-700 font-semibold mb-6">Stok Tersedia: <span class="text-teal-600">${selectedProduct.stock}</span></p>
+                                <p class="text-gray-700 font-semibold mb-2">Stok Tersedia: <span class="text-teal-600">${selectedProduct.stock}</span></p>
+                                <p class="text-gray-700 font-semibold mb-6">Alamat Penjual: <span class="text-teal-600">${selectedProduct.address}</span></p>
                                 <div class="flex flex-wrap gap-4 mb-6">
                                     <a
                                         href="https://wa.me/${selectedProduct.whatsapp}?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(selectedProduct.name)}%20yang%20ada%20di%20website%20Desa%20Srigonco."
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+                                        class="inline-flex items-center bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 btn-gradient-hover"
                                         aria-label="Beli via WhatsApp"
                                     >
                                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -1279,140 +1428,6 @@
             `;
         }
 
-        function renderDesaPage() {
-            const testimonialCards = testimonials.map((t, index) => `
-                <div class="testimonial-carousel-item bg-white rounded-lg shadow-md p-6 text-center flex-shrink-0 w-full" data-aos="fade-up">
-                    <p class="text-gray-700 italic mb-4 text-lg">"${t.text}"</p>
-                    <p class="font-semibold text-gray-800 text-xl">- ${t.name}</p>
-                    <p class="text-sm text-gray-500 mb-2">${t.product}</p>
-                    <div class="flex justify-center mt-2 text-xl">
-                        ${getStarRatingHtml(t.rating)}
-                    </div>
-                </div>
-            `).join('');
-
-            const featuredPrograms = [
-                {
-                    title: 'Program Pertanian Berkelanjutan',
-                    description: 'Meningkatkan hasil panen dengan metode organik dan ramah lingkungan.',
-                    icon: '<svg class="w-12 h-12 text-teal-600 mx-auto mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9V7h2v6zm4 4h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>'
-                },
-                {
-                    title: 'Pemberdayaan UMKM Digital',
-                    description: 'Melatih dan mendampingi UMKM untuk pemasaran online dan peningkatan kualitas produk.',
-                    icon: '<svg class="w-12 h-12 text-blue-600 mx-auto mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
-                },
-                {
-                    title: 'Pengembangan Ekowisata Desa',
-                    description: 'Membuka potensi wisata alam dan budaya untuk meningkatkan pendapatan masyarakat.',
-                    icon: '<svg class="w-12 h-12 text-yellow-600 mx-auto mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9V7h2v6zm4 4h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>'
-                }
-            ].map((program, index) => `
-                <div class="bg-white rounded-lg shadow-md p-6 text-center" data-aos="fade-up" data-aos-delay="${index * 100}">
-                    ${program.icon}
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">${program.title}</h3>
-                    <p class="text-gray-600">${program.description}</p>
-                </div>
-            `).join('');
-
-
-            return `
-                <div class="container mx-auto px-4 py-12">
-                    <div class="bg-white rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10">Profil Desa Srigonco</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-10">
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Lokasi & Demografi</h3>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-4">
-                                    Desa Srigonco terletak di Kecamatan Bantur, Kabupaten Malang, Jawa Timur. Dikenal dengan keindahan alamnya yang
-                                    masih asri, desa ini menawarkan pemandangan perbukitan hijau, persawahan yang luas, dan sungai yang mengalir jernih.
-                                    Masyarakat Desa Srigonco mayoritas bermata pencarian sebagai petani dan peternak, dengan komoditas unggulan
-                                    seperti padi, jagung, kopi, dan berbagai hasil perkebunan lainnya.
-                                </p>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Data Demografi Singkat:</h3>
-                                <ul class="list-disc list-inside text-gray-700 text-lg mb-6 ml-4 space-y-1">
-                                    <li><span class="font-medium text-teal-600">Jumlah Penduduk:</span> ~5.200 jiwa</li>
-                                    <li><span class="font-medium text-teal-600">Mata Pencarian Utama:</span> Pertanian, Peternakan, Kerajinan, UMKM</li>
-                                    <li><span class="font-medium text-teal-600">Komoditas Unggulan:</span> Padi, Jagung, Kopi, Madu Hutan, Anyaman Bambu</li>
-                                </ul>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Visi & Misi Desa</h3>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-4">
-                                    <strong>Visi:</strong> Menjadikan Desa Srigonco sebagai desa mandiri, sejahtera, dan lestari berbasis potensi lokal dan inovasi digital.
-                                </p>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-6">
-                                    <strong>Misi:</strong>
-                                    <ul class="list-disc list-inside text-gray-700 ml-4">
-                                        <li>Meningkatkan kualitas sumber daya manusia melalui pendidikan dan pelatihan.</li>
-                                        <li>Mengembangkan potensi ekonomi lokal melalui UMKM dan pariwisata berkelanjutan.</li>
-                                        <li>Menciptakan lingkungan desa yang bersih, sehat, dan asri.</li>
-                                        <li>Membangun tata kelola pemerintahan desa yang transparan dan partisipatif.</li>
-                                        <li>Melestarikan dan mengembangkan seni budaya lokal.</li>
-                                    </ul>
-                                </p>
-                            </div>
-                            <div>
-                                <!--
-                                    Catatan: Gambar lokal (IMG/Pemandangan-Desa.JPG) tidak dapat dimuat langsung di lingkungan browser tanpa server.
-                                    Silakan ganti URL placeholder ini dengan URL gambar Anda yang sebenarnya jika Anda menghosting website.
-                                -->
-                                <img
-                                    src="https://placehold.co/600x400/34D399/065F46?text=Pemandangan+Desa+Srigonco"
-                                    alt="Pemandangan Desa Srigonco"
-                                    class="w-full h-auto rounded-lg shadow-md mb-6"
-                                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/34D399/065F46?text=Pemandangan+Desa+Srigonco';"
-                                />
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Sejarah & Budaya</h3>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-6">
-                                    Sejarah Desa Srigonco kaya akan cerita dan tradisi yang diturunkan dari generasi ke generasi. Nama "Srigonco"
-                                    sendiri memiliki makna filosofis yang mendalam bagi masyarakat setempat, mencerminkan kesuburan dan kemakmuran.
-                                    Desa ini telah menjadi pusat kegiatan pertanian dan kerajinan tangan selama berabad-abad. Berbagai
-                                    upacara adat dan kesenian tradisional seperti tari topeng Malangan dan karawitan sering diadakan, menarik minat wisatawan
-                                    yang ingin merasakan pengalaman otentik pedesaan.
-                                </p>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Potensi Wisata Desa</h3>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-6">
-                                    Desa Srigonco memiliki potensi besar untuk ekowisata dan agrowisata. Anda dapat menjelajahi hamparan sawah hijau yang menyejukkan,
-                                    mendaki bukit-bukit kecil dengan pemandangan indah, atau menikmati kesegaran air sungai yang jernih. Kami juga sedang mengembangkan
-                                    program kunjungan ke sentra-sentra UMKM untuk melihat langsung proses pembuatan produk lokal.
-                                </p>
-                                <button onclick="navigateTo('galeri')" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Keindahan Desa">
-                                    Lihat Keindahan Desa
-                                </button>
-                            </div>
-                        </div>
-                        <div class="text-center mt-8">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.0000000000005!2d112.59000000000001!3d-7.980000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-md" aria-label="Peta lokasi Desa Srigonco"></iframe>
-                            <p class="text-sm text-gray-500 mt-2">Lokasi perkiraan Desa Srigonco di Google Maps.</p>
-                        </div>
-                    </div>
-
-                    <!-- Program Unggulan Section -->
-                    <section class="py-12 animate-fadeIn">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10">Program Unggulan Desa Srigonco</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            ${featuredPrograms}
-                        </div>
-                    </section>
-
-                    <!-- Testimonials Section -->
-                    <section class="py-12 animate-fadeIn">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10">Apa Kata Mereka Tentang Kami?</h2>
-                        <div class="relative max-w-2xl mx-auto overflow-hidden">
-                            <div id="testimonial-carousel-container" class="testimonial-carousel-container">
-                                ${testimonialCards}
-                            </div>
-                            <button id="testimonial-prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 bg-opacity-50 text-white p-2 rounded-full ml-2 hover:bg-opacity-75 transition duration-300 z-10" aria-label="Testimoni sebelumnya">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <button id="testimonial-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 bg-opacity-50 text-white p-2 rounded-full mr-2 hover:bg-opacity-75 transition duration-300 z-10" aria-label="Testimoni berikutnya">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                    </section>
-                </div>
-            `;
-        }
-
         function renderGaleriPage() {
             let filteredGalleryImages = galleryImages.filter(img =>
                 (selectedGalleryCategory === 'Semua' || img.category === selectedGalleryCategory)
@@ -1421,7 +1436,7 @@
             const galleryCategoryButtonsHtml = galleryCategories.map(category => `
                 <button
                     class="gallery-category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedGalleryCategory === category ? 'bg-teal-600 text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
+                    ${selectedGalleryCategory === category ? 'bg-teal-600 text-white shadow-md btn-gradient-hover' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
                     data-category="${category}"
                     aria-label="Filter galeri berdasarkan ${category}"
                 >
@@ -1432,7 +1447,7 @@
             const displayedGalleryImages = filteredGalleryImages.slice(0, loadedGalleryCount);
 
             const galleryHtml = displayedGalleryImages.length > 0 ? displayedGalleryImages.map(img => `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up">
                     <img
                         src="${img.src}"
                         alt="${img.title}"
@@ -1448,7 +1463,7 @@
             `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Tidak ada gambar dalam kategori ini.</p>`;
 
             const loadMoreButtonHtml = (loadedGalleryCount < filteredGalleryImages.length) ?
-                `<button id="load-more-gallery" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75" aria-label="Muat lebih banyak foto galeri">
+                `<button id="load-more-gallery" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak foto galeri">
                     Muat Lebih Banyak Foto
                 </button>` : '';
 
@@ -1547,10 +1562,10 @@
             document.getElementById('quick-view-image').src = product.image;
             document.getElementById('quick-view-image').alt = product.name;
             document.getElementById('quick-view-name').textContent = product.name;
-            document.getElementById('quick-view-price').textContent = product.priceText;
             document.getElementById('quick-view-rating').innerHTML = getStarRatingHtml(product.rating);
             document.getElementById('quick-view-description').textContent = product.description;
             document.getElementById('quick-view-stock').textContent = `Stok: ${product.stock}`;
+            document.getElementById('quick-view-address').textContent = `Alamat: ${product.address}`;
             document.getElementById('quick-view-whatsapp').href = `https://wa.me/${product.whatsapp}?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}%20yang%20ada%20di%20website%20Desa%20Srigonco.`;
             // Set data-product-id on the detail button so we can navigate to full detail
             document.getElementById('quick-view-detail-button').dataset.productId = product.id;
@@ -1642,7 +1657,7 @@
             if (!selectedProduct) return;
 
             const productUrl = window.location.origin + window.location.pathname + '?page=productDetail&id=' + selectedProduct.id;
-            const shareText = `Lihat produk UMKM menarik ini dari Desa Srigonco: ${selectedProduct.name} - ${selectedProduct.priceText}. Selengkapnya di: ${productUrl}`;
+            const shareText = `Lihat produk UMKM menarik ini dari Desa Srigonco: ${selectedProduct.name}. Selengkapnya di: ${productUrl}`;
 
             if (navigator.share) {
                 navigator.share({
@@ -1781,49 +1796,6 @@
             startCarousel();
         }
 
-        // --- Testimonial Carousel Logic ---
-        function showTestimonialItem(index) {
-            const itemsContainer = document.getElementById('testimonial-carousel-container');
-            const items = document.querySelectorAll('#testimonial-carousel-container .testimonial-carousel-item');
-            if (items.length === 0 || !itemsContainer) return;
-
-            // Calculate the width of one item (including potential margin/padding if any)
-            // For simplicity, assuming items are full width of their container
-            const itemWidth = items[0].offsetWidth;
-            itemsContainer.style.transform = `translateX(-${index * itemWidth}px)`;
-
-            currentTestimonialIndex = index;
-        }
-
-        function showNextTestimonialItem() {
-            const items = document.querySelectorAll('#testimonial-carousel-container .testimonial-carousel-item');
-            if (items.length === 0) return;
-            currentTestimonialIndex = (currentTestimonialIndex + 1) % items.length;
-            showTestimonialItem(currentTestimonialIndex);
-            resetTestimonialInterval();
-        }
-
-        function showPrevTestimonialItem() {
-            const items = document.querySelectorAll('#testimonial-carousel-container .testimonial-carousel-item');
-            if (items.length === 0) return;
-            currentTestimonialIndex = (currentTestimonialIndex - 1 + items.length) % items.length;
-            showTestimonialItem(currentTestimonialIndex);
-            resetTestimonialInterval();
-        }
-
-        function startTestimonialCarousel() {
-            if (testimonialInterval) {
-                clearInterval(testimonialInterval);
-            }
-            testimonialInterval = setInterval(showNextTestimonialItem, 7000); // Change testimonial every 7 seconds
-        }
-
-        function resetTestimonialInterval() {
-            clearInterval(testimonialInterval);
-            startTestimonialCarousel();
-        }
-
-
         // --- Utility Functions ---
 
         // Toggle mobile menu visibility
@@ -1847,7 +1819,6 @@
         function updateActiveNavLink() {
             const navLinks = [
                 { id: 'nav-home', page: 'home' },
-                { id: 'nav-desa', page: 'desa' },
                 { id: 'nav-umkm', page: 'umkm' },
                 { id: 'nav-galeri', page: 'galeri' }
             ];
@@ -1940,6 +1911,124 @@
                 }
             }
             requestAnimationFrame(updateNumber);
+        }
+
+
+        // --- Chatbot Logic ---
+        let chatHistory = []; // Stores chat messages for context
+
+        function toggleChatbot() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            chatbotContainer.classList.toggle('open');
+            // Toggle 'hidden' class for visibility transition
+            if (chatbotContainer.classList.contains('open')) {
+                chatbotContainer.classList.remove('hidden');
+                document.getElementById('chatbot-input').focus(); // Focus input when opened
+            } else {
+                // Add a small delay before hiding to allow transition to complete
+                setTimeout(() => {
+                    chatbotContainer.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function appendMessage(sender, text) {
+            const messagesDiv = document.getElementById('chatbot-messages');
+            const messageBubble = document.createElement('div');
+            messageBubble.classList.add('message-bubble');
+            if (sender === 'user') {
+                messageBubble.classList.add('user-message');
+            } else {
+                messageBubble.classList.add('bot-message');
+            }
+            messageBubble.textContent = text;
+            messagesDiv.appendChild(messageBubble);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+        }
+
+        async function sendChatMessage() {
+            const inputField = document.getElementById('chatbot-input');
+            const userMessage = inputField.value.trim();
+
+            if (userMessage === '') return;
+
+            appendMessage('user', userMessage);
+            chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+            inputField.value = ''; // Clear input
+
+            // Add a typing indicator
+            const messagesDiv = document.getElementById('chatbot-messages');
+            const typingIndicator = document.createElement('div');
+            typingIndicator.classList.add('message-bubble', 'bot-message', 'typing-indicator');
+            typingIndicator.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+            typingIndicator.id = 'typing-indicator';
+            messagesDiv.appendChild(typingIndicator);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            try {
+                // Improved prompt for the chatbot
+                const prompt = `Anda adalah chatbot untuk website UMKM Desa Srigonco. Tugas Anda adalah memberikan informasi produk UMKM yang tersedia.
+                Data produk yang Anda miliki: ${JSON.stringify(products)}.
+
+                Saat menjawab, perhatikan hal-hal berikut:
+                - Jika pengguna menanyakan tentang produk tertentu (misalnya "apa itu Fadin Snack?", "detail Batik Tulis?"), berikan informasi lengkap yang relevan dari data produk (nama, deskripsi, kategori, stok, dan alamat penjual).
+                - Jika pengguna menanyakan tentang kategori produk (misalnya "produk makanan kering apa saja?", "kerajinan yang tersedia?"), sebutkan produk-produk dalam kategori tersebut.
+                - Jika pengguna menanyakan ketersediaan stok atau alamat, berikan informasi tersebut jika ada.
+                - Jika Anda tidak menemukan produk yang relevan dalam data, katakan bahwa produk tersebut tidak ditemukan dan tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi via WhatsApp.
+                - Jaga nada bicara tetap ramah, membantu, dan profesional.
+                - Jangan berikan informasi yang tidak ada dalam data produk yang Anda miliki.
+                - Jika pertanyaan sangat umum atau di luar lingkup produk, berikan jawaban umum yang ramah dan tawarkan bantuan terkait produk.
+
+                Pertanyaan pengguna: ${userMessage}`;
+
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        responseMimeType: "text/plain", // Request plain text response
+                    }
+                };
+                const apiKey = ""; // Canvas will automatically provide this
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                let botResponseText = 'Maaf, saya tidak dapat memproses permintaan Anda saat ini. Silakan coba lagi.';
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    botResponseText = result.candidates[0].content.parts[0].text;
+                }
+
+                // Remove typing indicator
+                const existingTypingIndicator = document.getElementById('typing-indicator');
+                if (existingTypingIndicator) {
+                    existingTypingIndicator.remove();
+                }
+
+                appendMessage('bot', botResponseText);
+                chatHistory.push({ role: 'model', parts: [{ text: botResponseText }] });
+
+            } catch (error) {
+                console.error('Error fetching from Gemini API:', error);
+                // Remove typing indicator
+                const existingTypingIndicator = document.getElementById('typing-indicator');
+                if (existingTypingIndicator) {
+                    existingTypingIndicator.remove();
+                }
+                appendMessage('bot', 'Maaf, terjadi kesalahan saat menghubungi server. Silakan coba lagi nanti.');
+            }
+        }
+
+        function handleChatInputKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
         }
 
 
