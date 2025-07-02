@@ -6,17 +6,17 @@
     <title>Desa Srigonco UMKM</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Poppins, Pacifico, and Comic Neue for comic style -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Custom styles for better aesthetics and responsiveness */
         body {
             font-family: 'Poppins', sans-serif; /* Changed font to Poppins */
-            background-color: #f8fafc; /* Light blue-gray background */
+            background-color: #FFFBF0; /* Light cream background */
             color: #333;
             line-height: 1.6;
-            /* Subtle background pattern */
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e2e8f0' fill-opacity='0.4'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23e2e8f0'/%3E%3C/g%3E%3C/svg%3E");
+            /* Subtle background pattern (adjusted color for cream background) */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FDF5E6' fill-opacity='0.4'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23FDF5E6'/%3E%3C/g%3E%3C/svg%3E");
         }
         /* Ensure main content has padding to avoid being hidden by fixed header */
         main {
@@ -358,6 +358,10 @@
                 height: 50px;
                 font-size: 1.5rem;
             }
+            /* Adjust header font size for smaller screens */
+            .header-title {
+                font-size: 1.75rem; /* text-3xl for mobile */
+            }
         }
 
         /* Typing indicator animation */
@@ -395,53 +399,238 @@
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
-        /* New: Repeating pulse animation for text */
-        @keyframes pulse-text {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.01); /* Subtle enlarge */
-                opacity: 0.95; /* Subtle fade */
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+        /* New: Card tilt effect on hover */
+        .card-tilt-effect:hover {
+            transform: translateY(-5px) rotateX(3deg) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-        .animate-pulse-text {
-            animation: pulse-text 2s infinite ease-in-out; /* 2 seconds duration, infinite, ease-in-out */
+        .card-tilt-effect {
+            transition: all 0.3s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        /* New: Gradient button with subtle border */
+        .btn-primary-gradient {
+            background-image: linear-gradient(to right, #0d9488, #14b8a6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-gradient:hover {
+            background-image: linear-gradient(to right, #14b8a6, #0d9488);
+            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* New: Secondary button style */
+        .btn-secondary {
+            background-color: #3b82f6; /* blue-500 */
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2563eb; /* blue-600 */
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* New: Category button active state */
+        .category-button.active {
+            background-image: linear-gradient(to right, #0d9488, #14b8a6);
+            color: white;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+            transform: translateY(-2px);
+        }
+        .category-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .category-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific style for the header title font */
+        .header-title {
+            font-family: 'Pacifico', cursive; /* Apply Pacifico font */
+        }
+
+        /* Navbar specific styles */
+        .navbar-link-hover-effect {
+            position: relative;
+        }
+        .navbar-link-hover-effect::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; /* Adjust based on desired distance from text */
+            left: 0;
+            width: 100%;
+            height: 2px; /* Thickness of the underline */
+            background-color: #0d9488; /* Teal-600 */
+            transform: scaleX(0);
+            transition: transform 0.3s ease-out;
+            transform-origin: bottom left;
+        }
+        .navbar-link-hover-effect:hover::after,
+        .navbar-link-hover-effect.active::after {
+            transform: scaleX(1);
+        }
+        .navbar-link-hover-effect.active {
+            font-weight: 700; /* Bold for active link */
+            color: #0d9488; /* Teal-600 for active link */
+        }
+
+        /* Comic/Folktale style for sections and cards */
+        .comic-section-title {
+            font-family: 'Pacifico', cursive;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2), 5px 5px 0px rgba(0,0,0,0.1); /* Comic-like shadow */
+            color: #4a2c00; /* Dark brown for text */
+        }
+        .comic-section-bg {
+            background-image: linear-gradient(to bottom right, #fffbeb, #fef3c7); /* Warm, paper-like gradient */
+            border: 4px solid #d97706; /* Strong orange-700 border for comic effect */
+            box-shadow: 8px 8px 0px -2px rgba(139, 69, 19, 0.6); /* More pronounced offset shadow */
+            border-radius: 1.5rem; /* rounded-3xl */
+            transition: all 0.3s ease-in-out;
+            padding: 3rem; /* Consistent padding for sections */
+        }
+        .comic-section-bg:hover {
+            transform: translate(-5px, -5px); /* Slight lift on hover */
+            box-shadow: 12px 12px 0px -2px rgba(139, 69, 19, 0.8);
+        }
+
+        .comic-card {
+            background-image: linear-gradient(to bottom right, #fffbeb, #fef3c7); /* Warm, paper-like gradient */
+            border: 2px solid #8b4513; /* Brown border */
+            box-shadow: 6px 6px 0px -2px rgba(139, 69, 19, 0.4); /* Offset shadow for comic effect */
+            transition: all 0.2s ease-in-out;
+        }
+        .comic-card:hover {
+            transform: translate(-3px, -3px); /* Slight lift */
+            box-shadow: 9px 9px 0px -2px rgba(139, 69, 19, 0.6);
+        }
+        .comic-icon {
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3)); /* Icon shadow */
+        }
+
+        /* Adjustments for specific sections to fit comic theme */
+        /* Why Choose Us section */
+        .why-choose-us-section {
+            background-image: linear-gradient(to bottom right, #fffbeb, #fef3c7);
+            border: 4px solid #d97706;
+            box-shadow: 8px 8px 0px -2px rgba(139, 69, 19, 0.6);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease-in-out;
+            padding: 3rem; /* Consistent padding for sections */
+        }
+        .why-choose-us-section:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 12px 12px 0px -2px rgba(139, 69, 19, 0.8);
+        }
+        .why-choose-us-card {
+            background-image: linear-gradient(to bottom right, #ffffff, #fdf9e9); /* Lighter, subtle comic card */
+            border: 2px solid #a0522d; /* Sienna-like border */
+            box-shadow: 4px 4px 0px -1px rgba(160, 82, 45, 0.3);
+            transition: all 0.3s ease;
+        }
+        .why-choose-us-card:hover {
+            transform: translateY(-5px) translateX(-2px);
+            box-shadow: 8px 8px 0px -1px rgba(160, 82, 45, 0.5);
+            border-color: #d97706;
+        }
+        .why-choose-us-icon {
+            color: #d97706; /* Default orange-700 */
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+        }
+        .why-choose-us-card:nth-child(2) .why-choose-us-icon { color: #3b82f6; } /* Blue */
+        .why-choose-us-card:nth-child(3) .why-choose-us-icon { color: #facc15; } /* Yellow */
+
+
+        /* Quick Contact Section */
+        .contact-section-bg {
+            background-image: linear-gradient(to right, #d97706, #fbbf24); /* Orange-700 to Amber-400 */
+            border: 4px solid #9a3412; /* Darker orange border */
+            box-shadow: 8px 8px 0px -2px rgba(154, 52, 18, 0.6);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease-in-out;
+            padding: 3rem; /* Consistent padding for sections */
+        }
+        .contact-section-bg:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 12px 12px 0px -2px rgba(154, 52, 18, 0.8);
+        }
+        .contact-button-primary {
+            background-color: white;
+            color: #d97706; /* Orange-700 */
+            border: 2px solid #d97706;
+            transition: all 0.3s ease;
+        }
+        .contact-button-primary:hover {
+            background-color: #d97706;
+            color: white;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+            transform: translateY(-2px);
+        }
+        .contact-button-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+        .contact-button-secondary:hover {
+            background-color: white;
+            color: #d97706; /* Orange-700 */
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Footer specific styles */
+        .footer-comic-bg {
+            background-image: linear-gradient(to bottom right, #4a2c00, #8b4513); /* Dark brown to sienna gradient */
+            border-top: 4px solid #d97706; /* Orange-700 border at the top */
+            box-shadow: 0 -8px 0px -2px rgba(139, 69, 19, 0.6); /* Offset shadow upwards */
+            color: #fef3c7; /* Light paper-like color for text */
+            padding: 2.5rem; /* py-10, px-4 md:px-8 */
+        }
+        .footer-comic-bg h3 {
+            color: #facc15; /* Yellow-400 for titles */
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+        }
+        .footer-comic-bg .text-gray-400, .footer-comic-bg .text-gray-500 {
+            color: #fef3c7; /* Light paper-like color for general text */
+        }
+        .footer-comic-bg a, .footer-comic-bg button {
+            color: #fef3c7; /* Light paper-like color for links/buttons */
+            transition: color 0.3s ease;
+        }
+        .footer-comic-bg a:hover, .footer-comic-bg button:hover {
+            color: #facc15; /* Yellow-400 on hover */
+        }
+        .footer-comic-bg .border-t {
+            border-color: #a0522d; /* Sienna border for separator */
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="bg-gradient-to-r from-teal-500 to-teal-700 shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0">
+    <header class="bg-white shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0 border-b border-gray-200">
         <div class="flex items-center">
-            <!-- Logo Image - Replaced SVG with IMG tag pointing to IMG/Logo.png -->
-            <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-14 w-14 mr-4 rounded-full shadow-md border border-gray-200" onerror="this.onerror=null;this.src='https://placehold.co/56x56/ADD8E6/000000?text=Logo';" />
-            <span class="text-3xl md:text-4xl font-extrabold text-white text-shadow-lg">UMKM SRIGONCO</span>
+            <!-- Logo Image -->
+            <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-20 w-20 mr-4 rounded-full shadow-md border border-gray-100" onerror="this.onerror=null;this.src='https://placehold.co/80x80/ADD8E6/000000?text=Logo';" />
+            <span class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-teal-700 text-shadow-sm header-title">UMKM SRIGONCO</span>
         </div>
         <nav class="hidden md:flex space-x-8">
-            <button id="nav-home" onclick="navigateTo('home')" class="text-teal-100 hover:text-white text-lg font-semibold transition duration-300 group relative" aria-label="Beranda">
+            <button id="nav-home" onclick="navigateTo('home')" class="text-teal-700 hover:text-teal-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Beranda">
                 Beranda
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </button>
-            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-teal-100 hover:text-white text-lg font-semibold transition duration-300 group relative" aria-label="Produk UMKM">
+            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-teal-700 hover:text-teal-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Produk UMKM">
                 Produk UMKM
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </button>
-            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-teal-100 hover:text-white text-lg font-semibold transition duration-300 group relative" aria-label="Galeri Foto">
+            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-teal-700 hover:text-teal-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Galeri Foto">
                 Galeri
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </button>
         </nav>
         <div class="flex items-center space-x-4">
-            <!-- Search Icon Removed -->
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none" aria-label="Buka menu mobile">
+                <button id="mobile-menu-button" class="text-teal-700 hover:text-teal-900 focus:outline-none" aria-label="Buka menu mobile">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -554,36 +743,36 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 px-4 md:px-8 text-center mt-auto">
+    <footer class="footer-comic-bg py-8 px-4 md:px-8 text-center mt-auto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <h3 class="text-xl font-bold mb-4 text-teal-400">Desa Srigonco UMKM</h3>
-                <p class="text-gray-400">
+                <h3 class="text-xl font-bold mb-4">Desa Srigonco UMKM</h3>
+                <p>
                     Membangun desa mandiri dan sejahtera melalui potensi alam dan UMKM lokal.
                 </p>
             </div>
             <div>
-                <h3 class="text-xl font-bold mb-4 text-teal-400">Tautan Cepat</h3>
+                <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
                 <ul class="space-y-2">
-                    <li><button onclick="navigateTo('home')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Beranda">Beranda</button></li>
-                    <li><button onclick="navigateTo('umkm')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
-                    <li><button onclick="navigateTo('galeri')" class="text-gray-400 hover:text-white transition duration-300" aria-label="Galeri Foto">Galeri</button></li>
+                    <li><button onclick="navigateTo('home')" class="hover:text-yellow-400 transition duration-300" aria-label="Beranda">Beranda</button></li>
+                    <li><button onclick="navigateTo('umkm')" class="hover:text-yellow-400 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
+                    <li><button onclick="navigateTo('galeri')" class="hover:text-yellow-400 transition duration-300" aria-label="Galeri Foto">Galeri</button></li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-xl font-bold mb-4 text-teal-400">Ikuti Kami</h3>
+                <h3 class="text-xl font-bold mb-4">Ikuti Kami</h3>
                 <div class="flex justify-center space-x-4">
-                    <a href="https://facebook.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300" aria-label="Ikuti kami di Facebook">
+                    <a href="https://facebook.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-yellow-400 transition duration-300" aria-label="Ikuti kami di Facebook">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.04C6.51 2.04 2 6.55 2 12.04c0 4.93 3.58 9.04 8.28 9.87v-7.05H7.07V12.04h3.21V9.45c0-3.18 1.94-4.91 4.75-4.91 1.35 0 2.51.1 2.85.15v3.1h-1.85c-1.5 0-1.79.71-1.79 1.76v2.31h3.48l-.5 3.53h-2.98V21.91C18.42 21.08 22 16.97 22 12.04 22 6.55 17.49 2.04 12 2.04z"/></svg>
                     </a>
-                    <a href="https://instagram.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300" aria-label="Ikuti kami di Instagram">
+                    <a href="https://instagram.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-yellow-400 transition duration-300" aria-label="Ikuti kami di Instagram">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C18.14 2 22 5.86 22 10.2v3.6c0 4.34-3.86 8.2-7.8 8.2H7.8C3.46 22 2 18.14 2 13.8V10.2C2 5.86 3.86 2 7.8 2zm-.2 4A2.88 2.88 0 0 0 4.8 6.8v6.4c0 1.59 1.3 2.88 2.88 2.88h6.4c1.59 0 2.88-1.3 2.88-2.88V6.8c0-1.59-1.3-2.88-2.88-2.88H7.6zm9.6 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7.2c-2.65 0-4.8 2.15-4.8 4.8s2.15 4.8 4.8 4.8 4.8-2.15 4.8-4.8-2.15-4.8-4.8-4.8zm0 1.6c1.76 0 3.2 1.44 3.2 3.2s-1.44 3.2-3.2 3.2-3.2-1.44-3.2-3.2 1.44-3.2 3.2-3.2z"/></svg>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="mt-8 border-t border-gray-700 pt-6 text-sm text-gray-500">
-            &copy; <span id="current-year"></span> Desa Srigonco. Hak Cipta Dilindungi.
+        <div class="mt-8 border-t pt-6 text-sm">
+            &copy; <span id="current-year"></span> Desa Srigonco. Hak Cipta Dilindungi. By KKN UM
         </div>
     </footer>
 
@@ -904,9 +1093,9 @@
             ].map((item, index) => `
                 <div class="carousel-item ${index === 0 ? 'active' : ''} relative h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden parallax-bg" style="background-image: url('${item.image}')">
                     <div class="hero-overlay absolute inset-0 flex flex-col items-center justify-center text-white p-4 text-center">
-                        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal text-shadow-lg animate-pulse-text" data-aos="fade-up">${item.caption}</h1>
-                        <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100 animate-pulse-text" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
-                        <button onclick="navigateTo('umkm')" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 text-reveal delay-200" data-aos="fade-up" data-aos-delay="200" aria-label="Jelajahi Sekarang">
+                        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal text-shadow-lg" data-aos="fade-up">${item.caption}</h1>
+                        <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
+                        <button onclick="navigateTo('umkm')" class="btn-primary-gradient text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 text-reveal delay-200" data-aos="fade-up" data-aos-delay="200" aria-label="Jelajahi Sekarang">
                             Jelajahi Sekarang
                         </button>
                     </div>
@@ -915,7 +1104,7 @@
 
             return `
                 <!-- Hero Section -->
-                <section class="relative w-full overflow-hidden mb-12">
+                <section class="relative w-full overflow-hidden mb-16">
                     <div id="image-carousel" class="relative">
                         ${carouselItems}
                     </div>
@@ -928,73 +1117,88 @@
                 </section>
 
                 <div class="container mx-auto px-4 py-8">
-                    <!-- About Srigonco & UMKM Section -->
-                    <section class="bg-white rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                            <div class="order-2 md:order-1">
-                                <p class="text-gray-700 text-lg leading-relaxed mb-4 animate-pulse-text" data-aos="fade-up" data-aos-delay="100">
+                    <!-- About Srigonco & UMKM Section - Now with Comic/Folktale Design -->
+                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 comic-section-title" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                            <div class="order-2 md:order-1 text-gray-800">
+                                <p class="text-lg leading-relaxed mb-4 font-semibold" data-aos="fade-up" data-aos-delay="100">
                                     Desa Srigonco, di Kecamatan Bantur, Kabupaten Malang, Jawa Timur, adalah rumah bagi UMKM inovatif yang berakar pada kekayaan alam dan budaya lokal. Kami bangga menghadirkan produk-produk berkualitas tinggi yang dibuat dengan dedikasi oleh masyarakat Srigonco.
                                 </p>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-6 animate-pulse-text" data-aos="fade-up" data-aos-delay="200">
+                                <p class="text-lg leading-relaxed mb-6 font-semibold" data-aos="fade-up" data-aos-delay="200">
                                     Setiap produk UMKM di sini tidak hanya mencerminkan keterampilan dan kreativitas, tetapi juga semangat gotong royong dan komitmen kami untuk memajukan ekonomi desa. Dengan berbelanja di sini, Anda tidak hanya mendapatkan produk unik, tetapi juga turut serta dalam mendukung keberlanjutan dan kesejahteraan komunitas kami.
                                 </p>
-                                <button onclick="navigateTo('umkm')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Jelajahi Produk Kami">
+                                <button onclick="navigateTo('umkm')" class="btn-secondary text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Jelajahi Produk Kami">
                                     Jelajahi Produk Kami
                                 </button>
                             </div>
                             <div class="order-1 md:order-2">
-                                <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/34D399/065F46?text=Logo+Desa+Srigonco+UMKM';" data-aos="fade-left" />
+                                <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="rounded-2xl shadow-xl w-full h-auto object-cover border-4 border-amber-500 transform transition duration-500 hover:scale-102 hover:shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFDDC1/8B4513?text=Logo+Desa+Srigonco+UMKM';" data-aos="fade-left" />
                             </div>
                         </div>
                     </section>
 
-                    <!-- Our Mission Section - New Section -->
-                    <section class="py-12 bg-blue-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Misi Kami: Membangun Masa Depan Gemilang Bersama UMKM Srigonco</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                            <div class="order-1">
-                                <img src="IMG/Misi-kami.png" alt="Misi Kami" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Misi+Kami';" data-aos="fade-right" />
+                    <!-- Our Mission Section - Comic/Folktale Design -->
+                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 comic-section-title" data-aos="fade-up">Misi Kami: Membangun Masa Depan Gemilang</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                            <div class="order-1 md:order-2">
+                                <img src="IMG/Misi-kami.png" alt="Misi Kami" class="rounded-2xl shadow-xl w-full h-auto object-cover border-4 border-amber-500 transform transition duration-500 hover:scale-102 hover:shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFDDC1/8B4513?text=Misi+Kami';" data-aos="fade-right" />
                             </div>
-                            <div class="order-2">
-                                <p class="text-gray-700 text-lg leading-relaxed mb-4 animate-pulse-text" data-aos="fade-up" data-aos-delay="100">
+                            <div class="order-2 md:order-1 text-gray-800">
+                                <p class="text-lg leading-relaxed mb-6 font-semibold" data-aos="fade-up" data-aos-delay="100">
                                     Di jantung Desa Srigonco, Kecamatan Bantur, Kabupaten Malang, kami memiliki misi yang kuat: memberdayakan setiap individu dan keluarga melalui pengembangan Usaha Mikro, Kecil, dan Menengah (UMKM) yang berkelanjutan. Kami percaya bahwa dengan mengoptimalkan potensi lokal, kami dapat menciptakan peluang ekonomi yang berkesinambungan, meningkatkan taraf hidup, dan melestarikan warisan budaya serta kearifan lokal yang kaya melalui setiap produk unggulan yang kami hasilkan.
                                 </p>
-                                <p class="text-gray-700 text-lg leading-relaxed mb-6 animate-pulse-text" data-aos="fade-up" data-aos-delay="200">
-                                    Komitmen kami berlandaskan pada tiga pilar utama: **Inovasi**, **Kualitas**, dan **Integritas**. Kami terus berinovasi dalam produk dan proses, memastikan setiap hasil karya memiliki kualitas terbaik, serta menjunjung tinggi kejujuran dalam setiap interaksi bisnis. Dengan demikian, setiap pembelian yang Anda lakukan tidak hanya memberikan kepuasan, tetapi juga secara langsung berkontribusi pada pembangunan komunitas dan masa depan yang lebih cerah bagi Desa Srigonco.
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6 mt-8 animate-fadeInUp delay-200" data-aos="fade-up" data-aos-delay="200">Komitmen Kami Berlandaskan Tiga Pilar Utama:</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                                    <div class="p-4 rounded-xl shadow-lg comic-card animate-fadeInUp delay-300" data-aos="fade-up" data-aos-delay="300">
+                                        <svg class="w-16 h-16 text-red-600 mx-auto mb-3 comic-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4.636 17.364l-.707.707M3 12H2m15.364 4.636l.707.707M12 21v-1m-6.364-1.636l-.707-.707M12 12a9 9 0 110 0 9 9 0 010 0z"></path></svg>
+                                        <p class="font-bold text-gray-800 text-xl font-['Comic_Neue']">Inovasi</p>
+                                    </div>
+                                    <div class="p-4 rounded-xl shadow-lg comic-card animate-fadeInUp delay-400" data-aos="fade-up" data-aos-delay="400">
+                                        <svg class="w-16 h-16 text-blue-600 mx-auto mb-3 comic-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        <p class="font-bold text-gray-800 text-xl font-['Comic_Neue']">Kualitas</p>
+                                    </div>
+                                    <div class="p-4 rounded-xl shadow-lg comic-card animate-fadeInUp delay-500" data-aos="fade-up" data-aos-delay="500">
+                                        <svg class="w-16 h-16 text-green-600 mx-auto mb-3 comic-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                        <p class="font-bold text-gray-800 text-xl font-['Comic_Neue']">Integritas</p>
+                                    </div>
+                                </div>
+                                <p class="text-lg leading-relaxed mt-6 font-semibold" data-aos="fade-up" data-aos-delay="600">
+                                    Dengan demikian, setiap pembelian yang Anda lakukan tidak hanya memberikan kepuasan, tetapi juga secara langsung berkontribusi pada pembangunan komunitas dan masa depan yang lebih cerah bagi Desa Srigonco.
                                 </p>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Why Choose Us Section -->
-                    <section class="py-12 bg-blue-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
+                    <!-- Why Choose Us Section - Strong & Professional Design -->
+                    <section class="py-16 why-choose-us-section mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-12 comic-section-title" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="100">
-                                <svg class="w-16 h-16 text-teal-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Produk Asli & Berkualitas</h3>
-                                <p class="text-gray-600">Kami menawarkan produk-produk UMKM asli Desa Srigonco dengan kualitas terjamin.</p>
+                            <div class="p-8 rounded-2xl why-choose-us-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                                <svg class="w-24 h-24 why-choose-us-icon mx-auto mb-6 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Produk Asli & Berkualitas</h3>
+                                <p class="text-gray-600 leading-relaxed">Kami menawarkan produk-produk UMKM asli Desa Srigonco dengan kualitas terjamin, dibuat dengan bahan pilihan dan proses yang cermat.</p>
                             </div>
-                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="200">
-                                <svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A2.5 2.5 0 1014.854 1.146 2.5 2.5 0 0012 10.5a2.5 2.5 0 00-2.854-9.354z"></path></svg>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Mendukung Komunitas Lokal</h3>
-                                <p class="text-gray-600">Setiap pembelian Anda berkontribusi langsung pada kesejahteraan warga desa.</p>
+                            <div class="p-8 rounded-2xl why-choose-us-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                                <svg class="w-24 h-24 why-choose-us-icon mx-auto mb-6 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A2.5 2.5 0 1014.854 1.146 2.5 2.5 0 0012 10.5a2.5 2.5 0 00-2.854-9.354z"></path></svg>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Mendukung Komunitas Lokal</h3>
+                                <p class="text-gray-600 leading-relaxed">Setiap pembelian Anda berkontribusi langsung pada kesejahteraan warga desa, membantu mereka tumbuh dan berkembang.</p>
                             </div>
-                            <div class="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="300">
-                                <svg class="w-16 h-16 text-yellow-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Pelayanan Ramah & Cepat</h3>
-                                <p class="text-gray-600">Kami siap melayani Anda dengan sepenuh hati dan respons yang cepat.</p>
+                            <div class="p-8 rounded-2xl why-choose-us-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                                <svg class="w-24 h-24 why-choose-us-icon mx-auto mb-6 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Pelayanan Ramah & Cepat</h3>
+                                <p class="text-gray-600 leading-relaxed">Kami siap melayani Anda dengan sepenuh hati dan memberikan respons yang cepat untuk setiap pertanyaan atau kebutuhan Anda.</p>
                             </div>
                         </div>
                     </section>
 
                     <!-- Featured UMKM Products Section - Grid layout -->
-                    <section class="py-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Produk Unggulan UMKM</h2>
+                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title" data-aos="fade-up">Produk Unggulan UMKM</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${products.slice(0, 3).map((product, index) => `
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl comic-card animate-fadeIn" data-aos="fade-up" data-aos-delay="${index * 100}">
                                     <img
                                         src="${product.image}"
                                         alt="${product.name}"
@@ -1011,7 +1215,7 @@
                                         </div>
                                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
                                         <div class="flex justify-end items-center">
-                                            <button data-product-id="${product.id}" class="bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
+                                            <button data-product-id="${product.id}" class="btn-primary-gradient text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
                                                 Lihat Cepat
                                             </button>
                                         </div>
@@ -1020,18 +1224,18 @@
                             `).join('')}
                         </div>
                         <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="400">
-                            <button onclick="navigateTo('umkm')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Semua Produk UMKM">
+                            <button onclick="navigateTo('umkm')" class="btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Semua Produk UMKM">
                                 Lihat Semua Produk UMKM
                             </button>
                         </div>
                     </section>
 
                     <!-- Featured Gallery Section -->
-                    <section class="py-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Jelajahi Galeri Kami</h2>
+                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title" data-aos="fade-up">Jelajahi Galeri Kami</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${galleryImages.slice(0, 3).map((img, index) => `
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl comic-card" data-aos="fade-up" data-aos-delay="${index * 100}">
                                     <img
                                         src="${img.src}"
                                         alt="${img.title}"
@@ -1047,19 +1251,19 @@
                             `).join('')}
                         </div>
                         <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="400">
-                            <button onclick="navigateTo('galeri')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Semua Foto di Galeri">
+                            <button onclick="navigateTo('galeri')" class="btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak foto galeri">
                                 Lihat Semua Foto di Galeri
                             </button>
                         </div>
                     </section>
 
                     <!-- Testimonials Section - New Section -->
-                    <section class="py-12 bg-teal-50 rounded-lg shadow-lg p-8 mb-12 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
+                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${testimonials.map((testimonial, index) => `
-                                <div class="bg-white rounded-lg shadow-md p-6 text-center transform transition duration-300 hover:scale-105 card-hover-effect" data-aos="fade-up" data-aos-delay="${index * 100}">
-                                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-teal-500" onerror="this.onerror=null;this.src='https://placehold.co/80x80/ADD8E6/000000?text=Avatar';" />
+                                <div class="comic-card p-6 text-center transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-amber-500" onerror="this.onerror=null;this.src='https://placehold.co/80x80/ADD8E6/000000?text=Avatar';" />
                                     <p class="text-gray-700 italic mb-4 line-clamp-4">"${testimonial.quote}"</p>
                                     <p class="font-semibold text-gray-800">${testimonial.name}</p>
                                     <p class="text-sm text-gray-500">${testimonial.title}</p>
@@ -1069,19 +1273,19 @@
                     </section>
 
                     <!-- Quick Contact Section -->
-                    <section class="py-12 bg-teal-600 text-white rounded-lg shadow-lg p-8 animate-fadeIn text-center" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-reveal text-shadow-md animate-pulse-text" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
-                        <p class="text-lg mb-8 max-w-2xl mx-auto animate-pulse-text" data-aos="fade-up" data-aos-delay="100">
+                    <section class="py-16 contact-section-bg text-white mb-16 animate-fadeIn text-center" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 comic-section-title text-white" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
+                        <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                             Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui WhatsApp untuk respons cepat atau gunakan chatbot kami!
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-teal-700 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
+                            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center contact-button-primary font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
                                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z" />
                                         </svg>
                                         Chat via WhatsApp
                             </a>
-                            <a href="mailto:info.srigonco@example.com" class="inline-flex items-center text-white border border-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:bg-white hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-75" data-aos="fade-up" data-aos-delay="300" aria-label="Kirim Email">
+                            <a href="mailto:info.srigonco@example.com" class="inline-flex items-center contact-button-secondary font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Kirim Email">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 13h9A2 2 0 0021 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                 Kirim Email
                             </a>
@@ -1111,7 +1315,7 @@
             const categoryButtonsHtml = productCategories.map(category => `
                 <button
                     class="category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedCategory === category ? 'bg-teal-600 text-white shadow-md btn-gradient-hover' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
+                    ${selectedCategory === category ? 'active' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
                     data-category="${category}"
                     aria-label="Filter kategori ${category}"
                 >
@@ -1120,7 +1324,7 @@
             `).join('');
 
             const productCards = displayedProducts.length > 0 ? displayedProducts.map(product => `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect animate-fadeIn" data-aos="fade-up">
+                <div class="comic-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
                     <img
                         src="${product.image}"
                         alt="${product.name}"
@@ -1137,7 +1341,7 @@
                         </div>
                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
                         <div class="flex justify-end items-center">
-                            <button data-product-id="${product.id}" class="bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
+                            <button data-product-id="${product.id}" class="btn-primary-gradient text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
                                 Lihat Cepat
                             </button>
                         </div>
@@ -1146,14 +1350,14 @@
             `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Produk tidak ditemukan.</p>`;
 
             const loadMoreButtonHtml = (loadedProductCount < filteredProducts.length) ?
-                `<button id="load-more-products" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
+                `<button id="load-more-products" class="mt-8 btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
                     Muat Lebih Banyak Produk
                 </button>` : '';
 
             return `
                 <div class="container mx-auto px-4 py-12">
-                    <div class="bg-white rounded-lg shadow-lg p-8 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4 text-shadow-md">Produk Unggulan UMKM Desa Srigonco</h2>
+                    <div class="comic-section-bg animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4 comic-section-title">Produk Unggulan UMKM Desa Srigonco</h2>
                         <p class="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto font-semibold">
                             "Jelajahi Kekayaan Lokal: Kualitas Terbaik dari Hati Desa Srigonco."
                         </p>
@@ -1195,10 +1399,10 @@
             const recommendedProducts = products.filter(p =>
                 p.category === selectedProduct.category && p.id !== selectedProduct.id
             ).slice(0, 3).map(p => `
-                <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover-effect">
+                <div class="comic-card p-4 text-center">
                     <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/200x150/ADD8E6/000000?text=${encodeURIComponent(p.name)}';" />
                     <h4 class="font-semibold text-gray-800 text-md mb-1 line-clamp-1">${p.name}</h4>
-                    <button onclick="navigateTo('productDetail', ${p.id})" class="bg-teal-500 hover:bg-teal-600 text-white text-xs py-1 px-3 rounded-full" aria-label="Lihat detail ${p.name}">
+                    <button onclick="navigateTo('productDetail', ${p.id})" class="btn-primary-gradient text-white text-xs py-1 px-3 rounded-full" aria-label="Lihat detail ${p.name}">
                         Lihat
                     </button>
                 </div>
@@ -1206,7 +1410,7 @@
 
             return `
                 <div class="container mx-auto px-4 py-12">
-                    <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto animate-fadeIn" data-aos="fade-up">
+                    <div class="comic-section-bg max-w-4xl mx-auto animate-fadeIn" data-aos="fade-up">
                         <button onclick="navigateTo('umkm')" class="mb-6 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-300" aria-label="Kembali ke halaman produk">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                             Kembali ke Produk
@@ -1238,7 +1442,7 @@
                                         href="https://wa.me/${selectedProduct.whatsapp}?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(selectedProduct.name)}%20yang%20ada%20di%20website%20Desa%20Srigonco."
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 btn-gradient-hover"
+                                        class="inline-flex items-center btn-primary-gradient text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
                                         aria-label="Beli via WhatsApp"
                                     >
                                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -1246,7 +1450,7 @@
                                         </svg>
                                         Beli via WhatsApp
                                     </a>
-                                    <button id="share-product-button" class="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Bagikan produk ini">
+                                    <button id="share-product-button" class="inline-flex items-center btn-secondary text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Bagikan produk ini">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.865 13.111 9 12.87 9 12.5c0-.37.135-.611.316-.842l.006-.007a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006.007a.5.5 0 01-.707 0l-.006-.007zM12 18h.01M12 6h.01M12 12h.01M12 12a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006.007a.5.5 0 01-.707 0l-.006-.007zM12 18a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006.007a.5.5 0 01-.707 0l-.006-.007zM12 6a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006-.007a.5.5 0 01-.707 0l-.006-.007z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3M6 9v3m0 0v3m0-3h3m-3 0h-3M9 6h3m0 0h3M9 18h3m0 0h3"></path></svg>
                                         Bagikan Produk
                                     </button>
@@ -1267,7 +1471,7 @@
 
                         ${recommendedProducts.length > 0 ? `
                             <div class="mt-12 border-t border-gray-200 pt-8">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Rekomendasi Produk Serupa</h3>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center comic-section-title">Rekomendasi Produk Serupa</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                     ${recommendedProducts}
                                 </div>
@@ -1285,8 +1489,8 @@
 
             const galleryCategoryButtonsHtml = galleryCategories.map(category => `
                 <button
-                    class="gallery-category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedGalleryCategory === category ? 'bg-teal-600 text-white shadow-md btn-gradient-hover' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
+                    class="category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
+                    ${selectedGalleryCategory === category ? 'active' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
                     data-category="${category}"
                     aria-label="Filter kategori ${category}"
                 >
@@ -1297,7 +1501,7 @@
             const displayedGalleryImages = filteredGalleryImages.slice(0, loadedGalleryCount);
 
             const galleryHtml = displayedGalleryImages.length > 0 ? displayedGalleryImages.map(img => `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl card-hover-effect" data-aos="fade-up">
+                <div class="comic-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
                     <img
                         src="${img.src}"
                         alt="${img.title}"
@@ -1313,14 +1517,14 @@
             `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Tidak ada gambar dalam kategori ini.</p>`;
 
             const loadMoreButtonHtml = (loadedGalleryCount < filteredGalleryImages.length) ?
-                `<button id="load-more-gallery" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak foto galeri">
+                `<button id="load-more-gallery" class="mt-8 btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak foto galeri">
                     Muat Lebih Banyak Foto
                 </button>` : '';
 
             return `
                 <div class="container mx-auto px-4 py-12">
-                    <div class="bg-white rounded-lg shadow-lg p-8 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 text-shadow-md">Galeri Foto Desa Srigonco</h2>
+                    <div class="comic-section-bg animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title">Galeri Foto Desa Srigonco</h2>
                         <p class="text-lg text-gray-700 text-center mb-12 max-w-2xl mx-auto">
                             Jelajahi keindahan dan aktivitas di Desa Srigonco melalui koleksi foto kami. Dari pemandangan alam hingga kegiatan masyarakat dan UMKM.
                         </p>
@@ -1679,11 +1883,9 @@
 
                 if (desktopButton) {
                     if (link.page === currentPage) {
-                        desktopButton.classList.add('text-white', 'font-bold');
-                        desktopButton.classList.remove('text-teal-100');
+                        desktopButton.classList.add('active');
                     } else {
-                        desktopButton.classList.remove('text-white', 'font-bold');
-                        desktopButton.classList.add('text-teal-100');
+                        desktopButton.classList.remove('active');
                     }
                 }
                 if (mobileButton) {
@@ -1799,14 +2001,14 @@
                 -   **Lokasi:** Desa Srigonco terletak di Kecamatan Bantur, Kabupaten Malang, Jawa Timur.
                 -   **Fokus:** Desa ini berfokus pada pengembangan UMKM lokal yang inovatif, memanfaatkan kekayaan alam dan budaya setempat.
                 -   **Tujuan:** Membangun desa mandiri dan sejahtera melalui potensi UMKM.
-                -   **Keindahan Alam:** Desa Srigonco memiliki pemandangan alam yang asri dan tenang, seperti sawah hijau dan sungai jernih.
+                -   **Keindahan Alam:** Desa Srigonco memiliki pemandangan yang asri dan tenang, seperti sawah hijau dan sungai jernih.
                 -   **Budaya:** Masyarakat Srigonco menjunjung tinggi semangat gotong royong dan kreativitas dalam menghasilkan produk.
 
                 Saat menjawab pertanyaan pengguna, mohon ikuti instruksi berikut:
                 1.  **Jika pengguna menanyakan tentang produk tertentu** (misalnya "apa itu Fadin Snack?", "detail Batik Tulis?", "berapa stok Pretty Donat?", "alamat penjual Keripik Pangsit?"):
                     * Cari produk yang relevan dalam data \`products\`.
                     * Berikan informasi lengkap yang relevan dari data produk (nama, deskripsi, kategori, stok, dan alamat penjual).
-                    * Sertakan nomor WhatsApp penjual dalam format yang siap diklik (misalnya: "Anda bisa menghubungi penjual di WhatsApp: wa.me/6281234567890").
+                    * **Sertakan nomor WhatsApp penjual dalam format yang siap diklik (misalnya: "Anda bisa menghubungi penjual di WhatsApp: wa.me/6281234567890").**
                     * Jika relevan, sarankan produk lain yang serupa atau dalam kategori yang sama.
                 2.  **Jika pengguna menanyakan tentang kategori produk** (misalnya "produk makanan kering apa saja?", "kerajinan yang tersedia?"):
                     * Sebutkan nama-nama produk yang termasuk dalam kategori tersebut dari data \`products\`.
@@ -1816,7 +2018,7 @@
                     * Jaga jawaban tetap ringkas dan informatif.
                 4.  **Jika Anda tidak menemukan produk atau informasi yang relevan** dalam data Anda:
                     * Katakan dengan sopan bahwa produk/informasi tersebut tidak ditemukan.
-                    * Tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi admin website melalui WhatsApp umum (misalnya: "Anda bisa menghubungi admin kami di WhatsApp: wa.me/6281234567890 untuk bantuan lebih lanjut.").
+                    * **Tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi admin website melalui WhatsApp umum (misalnya: "Anda bisa menghubungi admin kami di WhatsApp: wa.me/6281234567890 untuk bantuan lebih lanjut.").**
                 5.  **Jaga nada bicara** tetap ramah, membantu, dan profesional.
                 6.  **Jangan berikan informasi yang tidak ada dalam data produk atau informasi umum desa** yang Anda miliki.
                 7.  **Jika pertanyaan sangat umum atau di luar lingkup produk dan informasi desa** (misalnya "apa kabar?", "cuaca hari ini?"), berikan jawaban umum yang ramah dan tawarkan bantuan terkait produk UMKM atau informasi Desa Srigonco.
