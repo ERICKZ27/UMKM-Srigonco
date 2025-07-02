@@ -6,21 +6,22 @@
     <title>Desa Srigonco UMKM</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Poppins, Pacifico, and Comic Neue for comic style -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Playfair Display (for headings), Lora (for subheadings), Inter (for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for better aesthetics and responsiveness */
+        /* Custom styles for Javanese Modern Professional aesthetics */
         body {
-            font-family: 'Poppins', sans-serif; /* Changed font to Poppins */
-            background-color: #FFFBF0; /* Light cream background */
+            font-family: 'Inter', sans-serif; /* Modern body font */
+            background-color: #F5F5DC; /* Light beige background */
             color: #333;
             line-height: 1.6;
-            /* Subtle background pattern (adjusted color for cream background) */
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FDF5E6' fill-opacity='0.4'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23FDF5E6'/%3E%3C/g%3E%3C/svg%3E");
+            /* Subtle background pattern inspired by traditional textures/batik */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23EDECE0' fill-opacity='0.8'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23EDECE0'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
         }
         /* Ensure main content has padding to avoid being hidden by fixed header */
         main {
-            padding-top: 80px; /* Adjust based on header height */
+            padding-top: 100px; /* Adjust based on header height */
         }
         /* Smooth scroll for anchor links */
         html {
@@ -83,7 +84,7 @@
         /* Loading spinner */
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #0d9488; /* Tailwind teal-600 */
+            border-left-color: #00796B; /* Medium Teal */
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -91,17 +92,6 @@
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-        /* Star rating hover effect */
-        .rating-star {
-            color: #d1d5db; /* gray-300 */
-            transition: color 0.15s ease-in-out, transform 0.1s ease-in-out;
-        }
-        .rating-star.filled {
-            color: #facc15; /* yellow-400 */
-        }
-        .rating-star:hover {
-            transform: scale(1.1);
         }
 
         /* Custom styles for hero section overlay */
@@ -209,186 +199,7 @@
             background-size: cover;
         }
 
-        /* Card hover effect with border and deeper shadow */
-        .card-hover-effect:hover {
-            border-color: #0d9488; /* teal-600 */
-            border-width: 2px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
-        }
-
-        /* Button gradient effect */
-        .btn-gradient-hover {
-            background-image: linear-gradient(to right, #0d9488, #14b8a6); /* teal-600 to teal-500 */
-            transition: all 0.3s ease;
-        }
-        .btn-gradient-hover:hover {
-            background-image: linear-gradient(to right, #14b8a6, #0d9488);
-            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);
-        }
-
-        /* Chatbot specific styles */
-        #chatbot-button {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background-color: #0d9488; /* teal-600 */
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            z-index: 100;
-            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-        }
-        #chatbot-button:hover {
-            transform: scale(1.1);
-            background-color: #0f766e; /* darker teal */
-        }
-
-        #chatbot-container {
-            position: fixed;
-            bottom: 90px; /* Above the button */
-            right: 24px;
-            width: 350px;
-            height: 500px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 100;
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            visibility: hidden;
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        #chatbot-container.open {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #chatbot-header {
-            background-color: #0d9488; /* teal-600 */
-            color: white;
-            padding: 16px;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #chatbot-messages {
-            flex-grow: 1;
-            padding: 16px;
-            overflow-y: auto;
-            background-color: #f0fdfa; /* teal-50 */
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .message-bubble {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 18px;
-            word-wrap: break-word;
-            line-height: 1.4;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        .user-message {
-            background-color: #14b8a6; /* teal-500 */
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-        .bot-message {
-            background-color: #e0f2f7; /* light blue */
-            color: #333;
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-        #chatbot-input-container {
-            display: flex;
-            padding: 16px;
-            border-top: 1px solid #e2e8f0; /* gray-200 */
-        }
-        #chatbot-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #cbd5e1; /* gray-300 */
-            border-radius: 20px;
-            margin-right: 10px;
-            font-size: 1rem;
-        }
-        #chatbot-send-button {
-            background-color: #0d9488; /* teal-600 */
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-        #chatbot-send-button:hover {
-            background-color: #0f766e; /* darker teal */
-        }
-        /* Responsive adjustments for chatbot */
-        @media (max-width: 768px) {
-            #chatbot-container {
-                width: 90%;
-                height: 80%;
-                bottom: 16px;
-                right: 5%;
-                left: 5%;
-                max-width: unset; /* Remove max-width for mobile */
-            }
-            #chatbot-button {
-                bottom: 16px;
-                right: 16px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-            /* Adjust header font size for smaller screens */
-            .header-title {
-                font-size: 1.75rem; /* text-3xl for mobile */
-            }
-        }
-
-        /* Typing indicator animation */
-        .typing-indicator span {
-            display: inline-block;
-            animation: bounce-dot 1.4s infinite ease-in-out;
-            animation-fill-mode: both;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: .2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: .4s;
-        }
-
-        @keyframes bounce-dot {
-            0%, 80%, 100% {
-                transform: scale(0);
-            }
-            40% {
-                transform: scale(1);
-            }
-        }
-
-        /* Custom text shadow utilities */
+        /* Text shadow utilities */
         .text-shadow-sm {
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
@@ -399,57 +210,57 @@
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
         }
 
-        /* New: Card tilt effect on hover */
-        .card-tilt-effect:hover {
-            transform: translateY(-5px) rotateX(3deg) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        .card-tilt-effect {
-            transition: all 0.3s ease-in-out;
-            transform-style: preserve-3d;
-        }
-
-        /* New: Gradient button with subtle border */
-        .btn-primary-gradient {
-            background-image: linear-gradient(to right, #0d9488, #14b8a6);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-primary-gradient:hover {
-            background-image: linear-gradient(to right, #14b8a6, #0d9488);
-            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* New: Secondary button style */
-        .btn-secondary {
-            background-color: #3b82f6; /* blue-500 */
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background-color: #2563eb; /* blue-600 */
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* New: Category button active state */
-        .category-button.active {
-            background-image: linear-gradient(to right, #0d9488, #14b8a6);
+        /* New: Elegant primary button */
+        .btn-primary-elegant {
+            background-color: #00796B; /* Medium Teal */
             color: white;
-            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+            border: 1px solid #004d40; /* Dark Teal */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 121, 107, 0.3);
+        }
+        .btn-primary-elegant:hover {
+            background-color: #004d40; /* Dark Teal */
+            box-shadow: 0 6px 15px rgba(0, 77, 64, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* New: Elegant secondary button */
+        .btn-secondary-elegant {
+            background-color: #DAA520; /* Goldenrod */
+            color: #5D4037; /* Dark Brown */
+            border: 1px solid #B8860B; /* Darker Goldenrod */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
+        }
+        .btn-secondary-elegant:hover {
+            background-color: #B8860B; /* Darker Goldenrod */
+            color: white;
+            box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Category button active state */
+        .category-button.active {
+            background-color: #00796B; /* Medium Teal */
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 121, 107, 0.3);
             transform: translateY(-2px);
         }
         .category-button {
             transition: all 0.2s ease-in-out;
+            background-color: #E0E0E0; /* Light Gray */
+            color: #555;
         }
         .category-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #D0D0D0;
         }
 
         /* Specific style for the header title font */
         .header-title {
-            font-family: 'Pacifico', cursive; /* Apply Pacifico font */
+            font-family: 'Playfair Display', serif; /* Apply Playfair Display font */
+            color: #004d40; /* Dark Teal */
         }
 
         /* Navbar specific styles */
@@ -463,7 +274,7 @@
             left: 0;
             width: 100%;
             height: 2px; /* Thickness of the underline */
-            background-color: #0d9488; /* Teal-600 */
+            background-color: #DAA520; /* Goldenrod */
             transform: scaleX(0);
             transition: transform 0.3s ease-out;
             transform-origin: bottom left;
@@ -474,138 +285,274 @@
         }
         .navbar-link-hover-effect.active {
             font-weight: 700; /* Bold for active link */
-            color: #0d9488; /* Teal-600 for active link */
+            color: #00796B; /* Medium Teal for active link */
         }
 
-        /* Comic/Folktale style for sections and cards */
-        .comic-section-title {
-            font-family: 'Pacifico', cursive;
-            text-shadow: 3px 3px 0px rgba(0,0,0,0.2), 5px 5px 0px rgba(0,0,0,0.1); /* Comic-like shadow */
-            color: #4a2c00; /* Dark brown for text */
+        /* Section styling - elegant and professional */
+        .elegant-section-title {
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            color: #5D4037; /* Dark Brown */
         }
-        .comic-section-bg {
-            background-image: linear-gradient(to bottom right, #fffbeb, #fef3c7); /* Warm, paper-like gradient */
-            border: 4px solid #d97706; /* Strong orange-700 border for comic effect */
-            box-shadow: 8px 8px 0px -2px rgba(139, 69, 19, 0.6); /* More pronounced offset shadow */
-            border-radius: 1.5rem; /* rounded-3xl */
+        .elegant-section-bg {
+            background-color: #FFFFFF; /* Clean white background for sections */
+            border: 2px solid #8D6E63; /* Medium brown border */
+            box-shadow: 6px 6px 0px -2px rgba(93, 64, 55, 0.4); /* Offset shadow with dark brown */
+            border-radius: 1rem; /* rounded-xl */
             transition: all 0.3s ease-in-out;
-            padding: 3rem; /* Consistent padding for sections */
+            padding: 3.5rem; /* Increased padding for spacious feel */
         }
-        .comic-section-bg:hover {
-            transform: translate(-5px, -5px); /* Slight lift on hover */
-            box-shadow: 12px 12px 0px -2px rgba(139, 69, 19, 0.8);
+        .elegant-section-bg:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 10px 10px 0px -2px rgba(93, 64, 55, 0.6);
         }
 
-        .comic-card {
-            background-image: linear-gradient(to bottom right, #fffbeb, #fef3c7); /* Warm, paper-like gradient */
-            border: 2px solid #8b4513; /* Brown border */
-            box-shadow: 6px 6px 0px -2px rgba(139, 69, 19, 0.4); /* Offset shadow for comic effect */
+        /* Card styling - clean and refined */
+        .elegant-card {
+            background-color: #FDFDFD; /* Slightly off-white for cards */
+            border: 1px solid #8D6E63; /* Medium brown border */
+            box-shadow: 4px 4px 0px -1px rgba(93, 64, 55, 0.2);
             transition: all 0.2s ease-in-out;
         }
-        .comic-card:hover {
-            transform: translate(-3px, -3px); /* Slight lift */
-            box-shadow: 9px 9px 0px -2px rgba(139, 69, 19, 0.6);
+        .elegant-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0px -1px rgba(93, 64, 55, 0.4);
+            border-color: #DAA520; /* Goldenrod border on hover */
         }
-        .comic-icon {
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3)); /* Icon shadow */
+        .elegant-icon {
+            color: #00796B; /* Medium Teal for icons */
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1));
         }
 
-        /* Adjustments for specific sections to fit comic theme */
-        /* Why Choose Us section */
-        .why-choose-us-section {
-            background-image: linear-gradient(to bottom right, #fffbeb, #fef3c7);
-            border: 4px solid #d97706;
-            box-shadow: 8px 8px 0px -2px rgba(139, 69, 19, 0.6);
-            border-radius: 1.5rem;
-            transition: all 0.3s ease-in-out;
-            padding: 3rem; /* Consistent padding for sections */
-        }
-        .why-choose-us-section:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: 12px 12px 0px -2px rgba(139, 69, 19, 0.8);
-        }
-        .why-choose-us-card {
-            background-image: linear-gradient(to bottom right, #ffffff, #fdf9e9); /* Lighter, subtle comic card */
-            border: 2px solid #a0522d; /* Sienna-like border */
-            box-shadow: 4px 4px 0px -1px rgba(160, 82, 45, 0.3);
-            transition: all 0.3s ease;
-        }
-        .why-choose-us-card:hover {
-            transform: translateY(-5px) translateX(-2px);
-            box-shadow: 8px 8px 0px -1px rgba(160, 82, 45, 0.5);
-            border-color: #d97706;
-        }
-        .why-choose-us-icon {
-            color: #d97706; /* Default orange-700 */
-            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
-        }
-        .why-choose-us-card:nth-child(2) .why-choose-us-icon { color: #3b82f6; } /* Blue */
-        .why-choose-us-card:nth-child(3) .why-choose-us-icon { color: #facc15; } /* Yellow */
-
+        /* Why Choose Us section specific icons */
+        .why-choose-us-icon-1 { color: #00796B; } /* Teal */
+        .why-choose-us-icon-2 { color: #DAA520; } /* Goldenrod */
+        .why-choose-us-icon-3 { color: #5D4037; } /* Dark Brown */
 
         /* Quick Contact Section */
-        .contact-section-bg {
-            background-image: linear-gradient(to right, #d97706, #fbbf24); /* Orange-700 to Amber-400 */
-            border: 4px solid #9a3412; /* Darker orange border */
-            box-shadow: 8px 8px 0px -2px rgba(154, 52, 18, 0.6);
-            border-radius: 1.5rem;
+        .contact-section-bg-elegant {
+            background-image: linear-gradient(to right, #5D4037, #8D6E63); /* Dark Brown to Medium Brown */
+            border: 1px solid #4E342E; /* Even darker brown border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
             transition: all 0.3s ease-in-out;
-            padding: 3rem; /* Consistent padding for sections */
+            padding: 3.5rem;
+            color: white;
         }
-        .contact-section-bg:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: 12px 12px 0px -2px rgba(154, 52, 18, 0.8);
+        .contact-section-bg-elegant:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
-        .contact-button-primary {
+        .contact-button-primary-elegant {
             background-color: white;
-            color: #d97706; /* Orange-700 */
-            border: 2px solid #d97706;
+            color: #00796B; /* Medium Teal */
+            border: 2px solid #00796B;
             transition: all 0.3s ease;
         }
-        .contact-button-primary:hover {
-            background-color: #d97706;
+        .contact-button-primary-elegant:hover {
+            background-color: #004d40;
             color: white;
-            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 77, 64, 0.4);
             transform: translateY(-2px);
         }
-        .contact-button-secondary {
+        .contact-button-secondary-elegant {
             background-color: transparent;
             color: white;
             border: 2px solid white;
             transition: all 0.3s ease;
         }
-        .contact-button-secondary:hover {
+        .contact-button-secondary-elegant:hover {
             background-color: white;
-            color: #d97706; /* Orange-700 */
+            color: #00796B; /* Medium Teal */
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
             transform: translateY(-2px);
         }
 
         /* Footer specific styles */
-        .footer-comic-bg {
-            background-image: linear-gradient(to bottom right, #4a2c00, #8b4513); /* Dark brown to sienna gradient */
-            border-top: 4px solid #d97706; /* Orange-700 border at the top */
-            box-shadow: 0 -8px 0px -2px rgba(139, 69, 19, 0.6); /* Offset shadow upwards */
-            color: #fef3c7; /* Light paper-like color for text */
-            padding: 2.5rem; /* py-10, px-4 md:px-8 */
+        .footer-elegant-bg {
+            background-color: #4E342E; /* Darker Brown */
+            border-top: 4px solid #DAA520; /* Goldenrod border at the top */
+            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.2);
+            color: #F5F5DC; /* Light beige for text */
+            padding: 3rem;
         }
-        .footer-comic-bg h3 {
-            color: #facc15; /* Yellow-400 for titles */
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+        .footer-elegant-bg h3 {
+            color: #FFD700; /* Gold for titles */
+            font-family: 'Lora', serif;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
         }
-        .footer-comic-bg .text-gray-400, .footer-comic-bg .text-gray-500 {
-            color: #fef3c7; /* Light paper-like color for general text */
+        .footer-elegant-bg .text-gray-400, .footer-elegant-bg .text-gray-500 {
+            color: #C0C0C0; /* Slightly darker light gray for general text */
         }
-        .footer-comic-bg a, .footer-comic-bg button {
-            color: #fef3c7; /* Light paper-like color for links/buttons */
+        .footer-elegant-bg a, .footer-elegant-bg button {
+            color: #F5F5DC; /* Light beige for links/buttons */
             transition: color 0.3s ease;
         }
-        .footer-comic-bg a:hover, .footer-comic-bg button:hover {
-            color: #facc15; /* Yellow-400 on hover */
+        .footer-elegant-bg a:hover, .footer-elegant-bg button:hover {
+            color: #FFD700; /* Gold on hover */
         }
-        .footer-comic-bg .border-t {
-            border-color: #a0522d; /* Sienna border for separator */
+        .footer-elegant-bg .border-t {
+            border-color: #6D4C41; /* Slightly lighter brown for separator */
         }
+
+        /* Chatbot specific styles - adjusted to new theme */
+        #chatbot-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #00796B; /* Medium Teal */
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 100; /* Ensure it's above other content */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #chatbot-button:hover {
+            background-color: #004d40; /* Dark Teal */
+            transform: scale(1.05);
+        }
+
+        #chatbot-container {
+            position: fixed;
+            bottom: 90px; /* Above the button */
+            right: 24px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 100;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+        }
+        #chatbot-container.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #chatbot-header {
+            background-color: #00796B; /* Medium Teal */
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        #chatbot-header h3 {
+            margin: 0;
+            font-family: 'Lora', serif;
+        }
+        #chatbot-header button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0;
+        }
+
+        #chatbot-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: #F0F8F8; /* Very light teal/gray */
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .message-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+        }
+        .user-message {
+            background-color: #009688; /* Slightly lighter Teal */
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0.25rem; /* Smoother corner */
+        }
+        .bot-message {
+            background-color: #E0F2F1; /* Lightest Teal */
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 0.25rem; /* Smoother corner */
+        }
+        .typing-indicator {
+            background-color: #E0F2F1;
+            color: #333;
+            animation: pulse 1.5s infinite;
+            width: fit-content;
+        }
+        .typing-indicator span {
+            animation: dot-bounce 1.5s infinite;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        @keyframes dot-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        #chatbot-input-container {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #E0E0E0;
+            background-color: #F9F9F9;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        #chatbot-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #B0BEC5; /* Light blue-gray */
+            border-radius: 0.5rem;
+            margin-right: 0.5rem;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        #chatbot-input:focus {
+            border-color: #00796B;
+            box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+        }
+        #chatbot-send-button {
+            background-color: #00796B; /* Medium Teal */
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        #chatbot-send-button:hover {
+            background-color: #004d40; /* Dark Teal */
+            transform: scale(1.05);
+        }
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -614,23 +561,20 @@
     <header class="bg-white shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0 border-b border-gray-200">
         <div class="flex items-center">
             <!-- Logo Image -->
-            <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-20 w-20 mr-4 rounded-full shadow-md border border-gray-100" onerror="this.onerror=null;this.src='https://placehold.co/80x80/ADD8E6/000000?text=Logo';" />
-            <span class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-teal-700 text-shadow-sm header-title">UMKM SRIGONCO</span>
+            <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-20 w-20 mr-4 rounded-full shadow-md border border-gray-100" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DAA520/FFFFFF?text=Logo';" />
+            <span class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-shadow-sm header-title">UMKM SRIGONCO</span>
         </div>
         <nav class="hidden md:flex space-x-8">
-            <button id="nav-home" onclick="navigateTo('home')" class="text-teal-700 hover:text-teal-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Beranda">
+            <button id="nav-home" onclick="navigateTo('home')" class="text-gray-700 hover:text-gray-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Beranda">
                 Beranda
             </button>
-            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-teal-700 hover:text-teal-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Produk UMKM">
+            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-gray-700 hover:text-gray-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Produk UMKM">
                 Produk UMKM
-            </button>
-            <button id="nav-galeri" onclick="navigateTo('galeri')" class="text-teal-700 hover:text-teal-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Galeri Foto">
-                Galeri
             </button>
         </nav>
         <div class="flex items-center space-x-4">
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-teal-700 hover:text-teal-900 focus:outline-none" aria-label="Buka menu mobile">
+                <button id="mobile-menu-button" class="text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Buka menu mobile">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -640,15 +584,14 @@
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-gray-800 bg-opacity-95 z-30 flex flex-col items-center justify-center space-y-6 hidden">
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-gray-900 bg-opacity-95 z-30 flex flex-col items-center justify-center space-y-6 hidden">
         <button id="close-mobile-menu" class="absolute top-6 right-6 text-white hover:text-gray-300 focus:outline-none" aria-label="Tutup menu mobile">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
-        <button id="mobile-nav-home" onclick="navigateTo('home')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Beranda">Beranda</button>
-        <button id="mobile-nav-umkm" onclick="navigateTo('umkm')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button>
-        <button id="mobile-nav-galeri" onclick="navigateTo('galeri')" class="text-white text-3xl font-semibold hover:text-teal-400 transition duration-300" aria-label="Galeri Foto">Galeri</button>
+        <button id="mobile-nav-home" onclick="navigateTo('home')" class="text-white text-3xl font-semibold hover:text-DAA520 transition duration-300" aria-label="Beranda">Beranda</button>
+        <button id="mobile-nav-umkm" onclick="navigateTo('umkm')" class="text-white text-3xl font-semibold hover:text-DAA520 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button>
     </div>
 
     <!-- Main Content Area -->
@@ -689,7 +632,6 @@
                 </div>
                 <div>
                     <h3 id="quick-view-name" class="text-2xl font-bold text-gray-900 mb-2"></h3>
-                    <div id="quick-view-rating" class="flex items-center mb-3 text-lg"></div>
                     <p id="quick-view-description" class="text-gray-700 text-sm mb-4 line-clamp-4"></p>
                     <p id="quick-view-stock" class="text-gray-700 font-semibold text-sm mb-4"></p>
                     <p id="quick-view-address" class="text-gray-700 text-sm mb-4"></p>
@@ -709,7 +651,7 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top-button" class="fixed bottom-6 right-6 bg-teal-600 hover:bg-teal-700 text-white p-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 hidden" aria-label="Kembali ke atas">
+    <button id="back-to-top-button" class="fixed bottom-6 right-6 bg-00796B hover:bg-004d40 text-white p-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-00796B focus:ring-opacity-75 hidden" aria-label="Kembali ke atas">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
@@ -743,7 +685,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer-comic-bg py-8 px-4 md:px-8 text-center mt-auto">
+    <footer class="footer-elegant-bg py-8 px-4 md:px-8 text-center mt-auto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
                 <h3 class="text-xl font-bold mb-4">Desa Srigonco UMKM</h3>
@@ -754,18 +696,17 @@
             <div>
                 <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
                 <ul class="space-y-2">
-                    <li><button onclick="navigateTo('home')" class="hover:text-yellow-400 transition duration-300" aria-label="Beranda">Beranda</button></li>
-                    <li><button onclick="navigateTo('umkm')" class="hover:text-yellow-400 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
-                    <li><button onclick="navigateTo('galeri')" class="hover:text-yellow-400 transition duration-300" aria-label="Galeri Foto">Galeri</button></li>
+                    <li><button onclick="navigateTo('home')" class="hover:text-FFD700 transition duration-300" aria-label="Beranda">Beranda</button></li>
+                    <li><button onclick="navigateTo('umkm')" class="hover:text-FFD700 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
                 </ul>
             </div>
             <div>
                 <h3 class="text-xl font-bold mb-4">Ikuti Kami</h3>
                 <div class="flex justify-center space-x-4">
-                    <a href="https://facebook.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-yellow-400 transition duration-300" aria-label="Ikuti kami di Facebook">
+                    <a href="https://facebook.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-FFD700 transition duration-300" aria-label="Ikuti kami di Facebook">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.04C6.51 2.04 2 6.55 2 12.04c0 4.93 3.58 9.04 8.28 9.87v-7.05H7.07V12.04h3.21V9.45c0-3.18 1.94-4.91 4.75-4.91 1.35 0 2.51.1 2.85.15v3.1h-1.85c-1.5 0-1.79.71-1.79 1.76v2.31h3.48l-.5 3.53h-2.98V21.91C18.42 21.08 22 16.97 22 12.04 22 6.55 17.49 2.04 12 2.04z"/></svg>
                     </a>
-                    <a href="https://instagram.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-yellow-400 transition duration-300" aria-label="Ikuti kami di Instagram">
+                    <a href="https://instagram.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-FFD700 transition duration-300" aria-label="Ikuti kami di Instagram">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C18.14 2 22 5.86 22 10.2v3.6c0 4.34-3.86 8.2-7.8 8.2H7.8C3.46 22 2 18.14 2 13.8V10.2C2 5.86 3.86 2 7.8 2zm-.2 4A2.88 2.88 0 0 0 4.8 6.8v6.4c0 1.59 1.3 2.88 2.88 2.88h6.4c1.59 0 2.88-1.3 2.88-2.88V6.8c0-1.59-1.3-2.88-2.88-2.88H7.6zm9.6 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7.2c-2.65 0-4.8 2.15-4.8 4.8s2.15 4.8 4.8 4.8 4.8-2.15 4.8-4.8-2.15-4.8-4.8-4.8zm0 1.6c1.76 0 3.2 1.44 3.2 3.2s-1.44 3.2-3.2 3.2-3.2-1.44-3.2-3.2 1.44-3.2 3.2-3.2z"/></svg>
                     </a>
                 </div>
@@ -783,24 +724,19 @@
         let searchTerm = '';
         let selectedCategory = 'Semua';
         let selectedSort = 'default'; // New state for sorting
-        let selectedGalleryCategory = 'Semua'; // New state for gallery filtering
         let showBackToTop = false;
         let currentCarouselIndex = 0; // For hero carousel
         let carouselInterval;
         let showLoading = false;
-        let currentProductRating = 0; // For interactive rating
 
-        // Pagination for UMKM and Gallery
+        // Pagination for UMKM
         const itemsPerPage = 6;
         let loadedProductCount = itemsPerPage;
-        let loadedGalleryCount = itemsPerPage;
 
         // --- Data ---
         // Moved data definitions inside DOMContentLoaded to ensure they are fully parsed before use.
         let products = [];
         let productCategories = [];
-        let galleryImages = [];
-        let galleryCategories = [];
         let testimonials = []; // New testimonials data
 
         // --- Helper Functions ---
@@ -814,28 +750,6 @@
                 timeout = setTimeout(() => func.apply(context, args), delay);
             };
         }
-
-        // Generates star rating HTML
-        function getStarRatingHtml(rating, isInteractive = false) {
-            let starsHtml = '';
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 !== 0; // Check for half star
-            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-
-            for (let i = 1; i <= fullStars; i++) {
-                starsHtml += `<span class="rating-star ${isInteractive ? 'cursor-pointer' : ''} filled" data-star="${i}" aria-label="${i} bintang">&#9733;</span>`; // Full star
-            }
-            if (halfStar) {
-                // For a true half star, you might use a different unicode or SVG.
-                // For simplicity, we'll just add another filled star for half, making it visually round up.
-                starsHtml += `<span class="rating-star ${isInteractive ? 'cursor-pointer' : ''} filled" data-star="${fullStars + 1}" aria-label="${fullStars + 1} bintang">&#9733;</span>`;
-            }
-            for (let i = fullStars + (halfStar ? 1 : 0) + 1; i <= 5; i++) {
-                starsHtml += `<span class="rating-star ${isInteractive ? 'cursor-pointer' : ''}" data-star="${i}" aria-label="${i} bintang">&#9733;</span>`; // Empty star
-            }
-            return starsHtml;
-        }
-
 
         // Show/hide loading spinner
         function toggleLoading(show) {
@@ -858,16 +772,10 @@
                 searchTerm = ''; // Reset search term on page change
                 selectedCategory = 'Semua'; // Reset category filter
                 selectedSort = 'default'; // Reset sort order
-                selectedGalleryCategory = 'Semua'; // Reset gallery category filter
                 loadedProductCount = itemsPerPage; // Reset pagination
-                loadedGalleryCount = itemsPerPage; // Reset pagination
-                currentProductRating = 0; // Reset rating for product detail page
 
                 if (page === 'productDetail' && dataId !== null) {
                     selectedProduct = products.find(p => p.id === dataId);
-                    if (selectedProduct) {
-                        currentProductRating = selectedProduct.rating; // Set initial rating for display
-                    }
                 }
 
                 renderContent();
@@ -898,9 +806,6 @@
                     break;
                 case 'productDetail':
                     contentHtml = renderProductDetailPage();
-                    break;
-                case 'galeri':
-                    contentHtml = renderGaleriPage();
                     break;
                 default:
                     contentHtml = `<div class="text-center py-12 text-gray-600">Halaman tidak ditemukan.</div>`;
@@ -939,28 +844,15 @@
                 sortDropdown.addEventListener('change', handleSortChange);
             }
 
-            // Gallery category filter buttons
-            const galleryCategoryButtons = document.querySelectorAll('.gallery-category-button');
-            galleryCategoryButtons.forEach(button => {
-                button.removeEventListener('click', handleGalleryCategoryFilter);
-                button.addEventListener('click', handleGalleryCategoryFilter);
-            });
-
-
-            // Load More buttons
+            // Load More button
             const loadMoreProductsBtn = document.getElementById('load-more-products');
             if (loadMoreProductsBtn) {
                 loadMoreProductsBtn.removeEventListener('click', loadMoreProducts);
                 loadMoreProductsBtn.addEventListener('click', loadMoreProducts);
             }
-            const loadMoreGalleryBtn = document.getElementById('load-more-gallery');
-            if (loadMoreGalleryBtn) {
-                loadMoreGalleryBtn.removeEventListener('click', loadMoreGallery);
-                loadMoreGalleryBtn.addEventListener('click', loadMoreGallery);
-            }
 
-            // Product/Gallery image click to open modal
-            const imagesToModal = document.querySelectorAll('.product-image-thumbnail, .gallery-image-thumbnail');
+            // Product image click to open modal
+            const imagesToModal = document.querySelectorAll('.product-image-thumbnail');
             imagesToModal.forEach(img => {
                 img.removeEventListener('click', handleImageClickToModal);
                 img.addEventListener('click', handleImageClickToModal);
@@ -997,7 +889,6 @@
                 quickViewDetailButton.addEventListener('click', handleQuickViewDetailClick);
             }
 
-
             // Carousel controls (if on home page)
             if (currentPage === 'home') {
                 const prevButton = document.getElementById('carousel-prev');
@@ -1014,37 +905,18 @@
                 setupIntersectionObserver();
             }
 
-            // Interactive Product Rating (if on product detail page)
-            if (currentPage === 'productDetail') {
-                const ratingInputDiv = document.getElementById('rating-input');
-                if (ratingInputDiv) {
-                    const stars = ratingInputDiv.querySelectorAll('.rating-star');
-                    stars.forEach(star => {
-                        star.removeEventListener('mouseover', highlightStars);
-                        star.removeEventListener('mouseout', resetStars);
-                        star.removeEventListener('click', setRating);
+            // Share product button
+            const shareProductButton = document.getElementById('share-product-button');
+            if (shareProductButton) {
+                shareProductButton.removeEventListener('click', shareProduct);
+                shareProductButton.addEventListener('click', shareProduct);
+            }
 
-                        star.addEventListener('mouseover', highlightStars);
-                        star.addEventListener('mouseout', resetStars);
-                        star.addEventListener('click', setRating);
-                    });
-                    // Initial highlight based on currentProductRating
-                    highlightStars(null, currentProductRating);
-                }
-
-                // Share product button
-                const shareProductButton = document.getElementById('share-product-button');
-                if (shareProductButton) {
-                    shareProductButton.removeEventListener('click', shareProduct);
-                    shareProductButton.addEventListener('click', shareProduct);
-                }
-
-                // Copy Link button
-                const copyLinkButton = document.getElementById('copy-link-button');
-                if (copyLinkButton) {
-                    copyLinkButton.removeEventListener('click', copyProductLink);
-                    copyLinkButton.addEventListener('click', copyProductLink);
-                }
+            // Copy Link button
+            const copyLinkButton = document.getElementById('copy-link-button');
+            if (copyLinkButton) {
+                copyLinkButton.removeEventListener('click', copyProductLink);
+                copyLinkButton.addEventListener('click', copyLinkButton);
             }
 
             // Chatbot event listeners
@@ -1093,9 +965,9 @@
             ].map((item, index) => `
                 <div class="carousel-item ${index === 0 ? 'active' : ''} relative h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden parallax-bg" style="background-image: url('${item.image}')">
                     <div class="hero-overlay absolute inset-0 flex flex-col items-center justify-center text-white p-4 text-center">
-                        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal text-shadow-lg" data-aos="fade-up">${item.caption}</h1>
-                        <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
-                        <button onclick="navigateTo('umkm')" class="btn-primary-gradient text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 text-reveal delay-200" data-aos="fade-up" data-aos-delay="200" aria-label="Jelajahi Sekarang">
+                        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal text-shadow-lg font-['Playfair_Display']" data-aos="fade-up">${item.caption}</h1>
+                        <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100 font-['Lora']" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
+                        <button onclick="navigateTo('umkm')" class="btn-primary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-00796B focus:ring-opacity-75 text-reveal delay-200" data-aos="fade-up" data-aos-delay="200" aria-label="Jelajahi Sekarang">
                             Jelajahi Sekarang
                         </button>
                     </div>
@@ -1117,9 +989,9 @@
                 </section>
 
                 <div class="container mx-auto px-4 py-8">
-                    <!-- About Srigonco & UMKM Section - Now with Comic/Folktale Design -->
-                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 comic-section-title" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
+                    <!-- About Srigonco & UMKM Section -->
+                    <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-10 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Desa Srigonco: Pusat UMKM Berbudaya</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div class="order-2 md:order-1 text-gray-800">
                                 <p class="text-lg leading-relaxed mb-4 font-semibold" data-aos="fade-up" data-aos-delay="100">
@@ -1128,40 +1000,40 @@
                                 <p class="text-lg leading-relaxed mb-6 font-semibold" data-aos="fade-up" data-aos-delay="200">
                                     Setiap produk UMKM di sini tidak hanya mencerminkan keterampilan dan kreativitas, tetapi juga semangat gotong royong dan komitmen kami untuk memajukan ekonomi desa. Dengan berbelanja di sini, Anda tidak hanya mendapatkan produk unik, tetapi juga turut serta dalam mendukung keberlanjutan dan kesejahteraan komunitas kami.
                                 </p>
-                                <button onclick="navigateTo('umkm')" class="btn-secondary text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Jelajahi Produk Kami">
+                                <button onclick="navigateTo('umkm')" class="btn-secondary-elegant text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Jelajahi Produk Kami">
                                     Jelajahi Produk Kami
                                 </button>
                             </div>
                             <div class="order-1 md:order-2">
-                                <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="rounded-2xl shadow-xl w-full h-auto object-cover border-4 border-amber-500 transform transition duration-500 hover:scale-102 hover:shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFDDC1/8B4513?text=Logo+Desa+Srigonco+UMKM';" data-aos="fade-left" />
+                                <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="rounded-2xl shadow-xl w-full h-auto object-cover border-4 border-DAA520 transform transition duration-500 hover:scale-102 hover:shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/DAA520/FFFFFF?text=Logo+Desa+Srigonco+UMKM';" data-aos="fade-left" />
                             </div>
                         </div>
                     </section>
 
-                    <!-- Our Mission Section - Comic/Folktale Design -->
-                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 comic-section-title" data-aos="fade-up">Misi Kami: Membangun Masa Depan Gemilang</h2>
+                    <!-- Our Mission Section -->
+                    <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Misi Kami: Membangun Masa Depan Gemilang</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div class="order-1 md:order-2">
-                                <img src="IMG/Misi-kami.png" alt="Misi Kami" class="rounded-2xl shadow-xl w-full h-auto object-cover border-4 border-amber-500 transform transition duration-500 hover:scale-102 hover:shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFDDC1/8B4513?text=Misi+Kami';" data-aos="fade-right" />
+                                <img src="IMG/Misi-kami.png" alt="Misi Kami" class="rounded-2xl shadow-xl w-full h-auto object-cover border-4 border-DAA520 transform transition duration-500 hover:scale-102 hover:shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/DAA520/FFFFFF?text=Misi+Kami';" data-aos="fade-right" />
                             </div>
                             <div class="order-2 md:order-1 text-gray-800">
                                 <p class="text-lg leading-relaxed mb-6 font-semibold" data-aos="fade-up" data-aos-delay="100">
                                     Di jantung Desa Srigonco, Kecamatan Bantur, Kabupaten Malang, kami memiliki misi yang kuat: memberdayakan setiap individu dan keluarga melalui pengembangan Usaha Mikro, Kecil, dan Menengah (UMKM) yang berkelanjutan. Kami percaya bahwa dengan mengoptimalkan potensi lokal, kami dapat menciptakan peluang ekonomi yang berkesinambungan, meningkatkan taraf hidup, dan melestarikan warisan budaya serta kearifan lokal yang kaya melalui setiap produk unggulan yang kami hasilkan.
                                 </p>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-6 mt-8 animate-fadeInUp delay-200" data-aos="fade-up" data-aos-delay="200">Komitmen Kami Berlandaskan Tiga Pilar Utama:</h3>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6 mt-8 animate-fadeInUp delay-200 font-['Lora']" data-aos="fade-up" data-aos-delay="200">Komitmen Kami Berlandaskan Tiga Pilar Utama:</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-                                    <div class="p-4 rounded-xl shadow-lg comic-card animate-fadeInUp delay-300" data-aos="fade-up" data-aos-delay="300">
-                                        <svg class="w-16 h-16 text-red-600 mx-auto mb-3 comic-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4.636 17.364l-.707.707M3 12H2m15.364 4.636l.707.707M12 21v-1m-6.364-1.636l-.707-.707M12 12a9 9 0 110 0 9 9 0 010 0z"></path></svg>
-                                        <p class="font-bold text-gray-800 text-xl font-['Comic_Neue']">Inovasi</p>
+                                    <div class="p-4 rounded-xl shadow-lg elegant-card animate-fadeInUp delay-300" data-aos="fade-up" data-aos-delay="300">
+                                        <svg class="w-16 h-16 elegant-icon why-choose-us-icon-1 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4.636 17.364l-.707.707M3 12H2m15.364 4.636l.707.707M12 21v-1m-6.364-1.636l-.707-.707M12 12a9 9 0 110 0 9 9 0 010 0z"></path></svg>
+                                        <p class="font-bold text-gray-800 text-xl font-['Lora']">Inovasi</p>
                                     </div>
-                                    <div class="p-4 rounded-xl shadow-lg comic-card animate-fadeInUp delay-400" data-aos="fade-up" data-aos-delay="400">
-                                        <svg class="w-16 h-16 text-blue-600 mx-auto mb-3 comic-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        <p class="font-bold text-gray-800 text-xl font-['Comic_Neue']">Kualitas</p>
+                                    <div class="p-4 rounded-xl shadow-lg elegant-card animate-fadeInUp delay-400" data-aos="fade-up" data-aos-delay="400">
+                                        <svg class="w-16 h-16 elegant-icon why-choose-us-icon-2 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        <p class="font-bold text-gray-800 text-xl font-['Lora']">Kualitas</p>
                                     </div>
-                                    <div class="p-4 rounded-xl shadow-lg comic-card animate-fadeInUp delay-500" data-aos="fade-up" data-aos-delay="500">
-                                        <svg class="w-16 h-16 text-green-600 mx-auto mb-3 comic-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                                        <p class="font-bold text-gray-800 text-xl font-['Comic_Neue']">Integritas</p>
+                                    <div class="p-4 rounded-xl shadow-lg elegant-card animate-fadeInUp delay-500" data-aos="fade-up" data-aos-delay="500">
+                                        <svg class="w-16 h-16 elegant-icon why-choose-us-icon-3 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                        <p class="font-bold text-gray-800 text-xl font-['Lora']">Integritas</p>
                                     </div>
                                 </div>
                                 <p class="text-lg leading-relaxed mt-6 font-semibold" data-aos="fade-up" data-aos-delay="600">
@@ -1171,51 +1043,47 @@
                         </div>
                     </section>
 
-                    <!-- Why Choose Us Section - Strong & Professional Design -->
-                    <section class="py-16 why-choose-us-section mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-12 comic-section-title" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
+                    <!-- Why Choose Us Section -->
+                    <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-12 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                            <div class="p-8 rounded-2xl why-choose-us-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
-                                <svg class="w-24 h-24 why-choose-us-icon mx-auto mb-6 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Produk Asli & Berkualitas</h3>
+                            <div class="p-8 rounded-2xl elegant-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                                <svg class="w-24 h-24 elegant-icon why-choose-us-icon-1 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3 font-['Lora']">Produk Asli & Berkualitas</h3>
                                 <p class="text-gray-600 leading-relaxed">Kami menawarkan produk-produk UMKM asli Desa Srigonco dengan kualitas terjamin, dibuat dengan bahan pilihan dan proses yang cermat.</p>
                             </div>
-                            <div class="p-8 rounded-2xl why-choose-us-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="200">
-                                <svg class="w-24 h-24 why-choose-us-icon mx-auto mb-6 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A2.5 2.5 0 1014.854 1.146 2.5 2.5 0 0012 10.5a2.5 2.5 0 00-2.854-9.354z"></path></svg>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Mendukung Komunitas Lokal</h3>
+                            <div class="p-8 rounded-2xl elegant-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                                <svg class="w-24 h-24 elegant-icon why-choose-us-icon-2 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A2.5 2.5 0 1014.854 1.146 2.5 2.5 0 0012 10.5a2.5 2.5 0 00-2.854-9.354z"></path></svg>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3 font-['Lora']">Mendukung Komunitas Lokal</h3>
                                 <p class="text-gray-600 leading-relaxed">Setiap pembelian Anda berkontribusi langsung pada kesejahteraan warga desa, membantu mereka tumbuh dan berkembang.</p>
                             </div>
-                            <div class="p-8 rounded-2xl why-choose-us-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="300">
-                                <svg class="w-24 h-24 why-choose-us-icon mx-auto mb-6 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Pelayanan Ramah & Cepat</h3>
+                            <div class="p-8 rounded-2xl elegant-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                                <svg class="w-24 h-24 elegant-icon why-choose-us-icon-3 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3 font-['Lora']">Pelayanan Ramah & Cepat</h3>
                                 <p class="text-gray-600 leading-relaxed">Kami siap melayani Anda dengan sepenuh hati dan memberikan respons yang cepat untuk setiap pertanyaan atau kebutuhan Anda.</p>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Featured UMKM Products Section - Grid layout -->
-                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title" data-aos="fade-up">Produk Unggulan UMKM</h2>
+                    <!-- Featured UMKM Products Section -->
+                    <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Produk Unggulan UMKM</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${products.slice(0, 3).map((product, index) => `
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl comic-card animate-fadeIn" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                <div class="elegant-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up" data-aos-delay="${index * 100}">
                                     <img
                                         src="${product.image}"
                                         alt="${product.name}"
                                         class="w-full h-48 object-cover cursor-pointer product-image-thumbnail"
                                         data-image-src="${product.image}"
                                         data-image-caption="${product.name}"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/ADD8E6/000000?text=${encodeURIComponent(product.name)}';"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/DAA520/FFFFFF?text=${encodeURIComponent(product.name)}';"
                                     />
                                     <div class="p-5">
-                                        <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">${product.name}</h3>
-                                        <div class="flex items-center mb-2">
-                                            <div class="text-lg mr-2">${getStarRatingHtml(product.rating)}</div>
-                                            <span class="text-gray-600 text-sm">(${product.rating})</span>
-                                        </div>
+                                        <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2 font-['Lora']">${product.name}</h3>
                                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
                                         <div class="flex justify-end items-center">
-                                            <button data-product-id="${product.id}" class="btn-primary-gradient text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
+                                            <button data-product-id="${product.id}" class="btn-primary-elegant text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
                                                 Lihat Cepat
                                             </button>
                                         </div>
@@ -1224,48 +1092,21 @@
                             `).join('')}
                         </div>
                         <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="400">
-                            <button onclick="navigateTo('umkm')" class="btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Semua Produk UMKM">
+                            <button onclick="navigateTo('umkm')" class="btn-secondary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Semua Produk UMKM">
                                 Lihat Semua Produk UMKM
                             </button>
                         </div>
                     </section>
 
-                    <!-- Featured Gallery Section -->
-                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title" data-aos="fade-up">Jelajahi Galeri Kami</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            ${galleryImages.slice(0, 3).map((img, index) => `
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl comic-card" data-aos="fade-up" data-aos-delay="${index * 100}">
-                                    <img
-                                        src="${img.src}"
-                                        alt="${img.title}"
-                                        class="w-full h-64 object-cover cursor-pointer gallery-image-thumbnail"
-                                        data-image-src="${img.src}"
-                                        data-image-caption="${img.title}"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/800x600/ADD8E6/000000?text=${encodeURIComponent(img.title)}';"
-                                    />
-                                    <div class="p-4 text-center">
-                                        <p class="font-semibold text-gray-800">${img.title}</p>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="400">
-                            <button onclick="navigateTo('galeri')" class="btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak foto galeri">
-                                Lihat Semua Foto di Galeri
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- Testimonials Section - New Section -->
-                    <section class="py-16 comic-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
+                    <!-- Testimonials Section -->
+                    <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             ${testimonials.map((testimonial, index) => `
-                                <div class="comic-card p-6 text-center transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="${index * 100}">
-                                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-amber-500" onerror="this.onerror=null;this.src='https://placehold.co/80x80/ADD8E6/000000?text=Avatar';" />
+                                <div class="elegant-card p-6 text-center transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-DAA520" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DAA520/FFFFFF?text=Avatar';" />
                                     <p class="text-gray-700 italic mb-4 line-clamp-4">"${testimonial.quote}"</p>
-                                    <p class="font-semibold text-gray-800">${testimonial.name}</p>
+                                    <p class="font-semibold text-gray-800 font-['Lora']">${testimonial.name}</p>
                                     <p class="text-sm text-gray-500">${testimonial.title}</p>
                                 </div>
                             `).join('')}
@@ -1273,19 +1114,19 @@
                     </section>
 
                     <!-- Quick Contact Section -->
-                    <section class="py-16 contact-section-bg text-white mb-16 animate-fadeIn text-center" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6 comic-section-title text-white" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
+                    <section class="py-16 contact-section-bg-elegant text-white mb-16 animate-fadeIn text-center" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 elegant-section-title text-white font-['Playfair_Display']" data-aos="fade-up">Punya Pertanyaan? Hubungi Kami!</h2>
                         <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                             Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui WhatsApp untuk respons cepat atau gunakan chatbot kami!
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center contact-button-primary font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
+                            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center contact-button-primary-elegant font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
                                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z" />
                                         </svg>
                                         Chat via WhatsApp
                             </a>
-                            <a href="mailto:info.srigonco@example.com" class="inline-flex items-center contact-button-secondary font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Kirim Email">
+                            <a href="mailto:info.srigonco@example.com" class="inline-flex items-center contact-button-secondary-elegant font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Kirim Email">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 13h9A2 2 0 0021 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                 Kirim Email
                             </a>
@@ -1303,7 +1144,7 @@
                 product.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm.toLowerCase())))
             );
 
-            // Sorting logic (removed price sorting as prices are no longer displayed)
+            // Sorting logic
             if (selectedSort === 'name-asc') {
                 filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
             } else if (selectedSort === 'name-desc') {
@@ -1315,7 +1156,7 @@
             const categoryButtonsHtml = productCategories.map(category => `
                 <button
                     class="category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedCategory === category ? 'active' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
+                    ${selectedCategory === category ? 'active' : ''}"
                     data-category="${category}"
                     aria-label="Filter kategori ${category}"
                 >
@@ -1324,24 +1165,20 @@
             `).join('');
 
             const productCards = displayedProducts.length > 0 ? displayedProducts.map(product => `
-                <div class="comic-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
+                <div class="elegant-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
                     <img
                         src="${product.image}"
                         alt="${product.name}"
                         class="w-full h-48 object-cover cursor-pointer product-image-thumbnail"
                         data-image-src="${product.image}"
                         data-image-caption="${product.name}"
-                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/ADD8E6/000000?text=${encodeURIComponent(product.name)}';"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/DAA520/FFFFFF?text=${encodeURIComponent(product.name)}';"
                     />
                     <div class="p-5">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">${product.name}</h3>
-                        <div class="flex items-center mb-2">
-                            <div class="text-lg mr-2">${getStarRatingHtml(product.rating)}</div>
-                            <span class="text-gray-600 text-sm">(${product.rating})</span>
-                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2 font-['Lora']">${product.name}</h3>
                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
                         <div class="flex justify-end items-center">
-                            <button data-product-id="${product.id}" class="btn-primary-gradient text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
+                            <button data-product-id="${product.id}" class="btn-primary-elegant text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
                                 Lihat Cepat
                             </button>
                         </div>
@@ -1350,14 +1187,14 @@
             `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Produk tidak ditemukan.</p>`;
 
             const loadMoreButtonHtml = (loadedProductCount < filteredProducts.length) ?
-                `<button id="load-more-products" class="mt-8 btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
+                `<button id="load-more-products" class="mt-8 btn-secondary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
                     Muat Lebih Banyak Produk
                 </button>` : '';
 
             return `
                 <div class="container mx-auto px-4 py-12">
-                    <div class="comic-section-bg animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4 comic-section-title">Produk Unggulan UMKM Desa Srigonco</h2>
+                    <div class="elegant-section-bg animate-fadeIn" data-aos="fade-up">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4 elegant-section-title font-['Playfair_Display']">Produk Unggulan UMKM Desa Srigonco</h2>
                         <p class="text-lg text-gray-700 text-center mb-10 max-w-2xl mx-auto font-semibold">
                             "Jelajahi Kekayaan Lokal: Kualitas Terbaik dari Hati Desa Srigonco."
                         </p>
@@ -1366,11 +1203,11 @@
                                 type="text"
                                 id="umkm-search-input"
                                 placeholder="Cari produk..."
-                                class="flex-grow p-3 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 transition duration-200"
+                                class="flex-grow p-3 border border-gray-300 rounded-md shadow-sm focus:ring-00796B focus:border-00796B transition duration-200"
                                 value="${searchTerm}"
                                 aria-label="Cari produk"
                             />
-                            <select id="umkm-sort-dropdown" class="p-3 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 transition duration-200" aria-label="Urutkan produk">
+                            <select id="umkm-sort-dropdown" class="p-3 border border-gray-300 rounded-md shadow-sm focus:ring-00796B focus:border-00796B transition duration-200" aria-label="Urutkan produk">
                                 <option value="default" ${selectedSort === 'default' ? 'selected' : ''}>Urutkan</option>
                                 <option value="name-asc" ${selectedSort === 'name-asc' ? 'selected' : ''}>Nama (A-Z)</option>
                                 <option value="name-desc" ${selectedSort === 'name-desc' ? 'selected' : ''}>Nama (Z-A)</option>
@@ -1399,10 +1236,10 @@
             const recommendedProducts = products.filter(p =>
                 p.category === selectedProduct.category && p.id !== selectedProduct.id
             ).slice(0, 3).map(p => `
-                <div class="comic-card p-4 text-center">
-                    <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/200x150/ADD8E6/000000?text=${encodeURIComponent(p.name)}';" />
-                    <h4 class="font-semibold text-gray-800 text-md mb-1 line-clamp-1">${p.name}</h4>
-                    <button onclick="navigateTo('productDetail', ${p.id})" class="btn-primary-gradient text-white text-xs py-1 px-3 rounded-full" aria-label="Lihat detail ${p.name}">
+                <div class="elegant-card p-4 text-center">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/200x150/DAA520/FFFFFF?text=${encodeURIComponent(p.name)}';" />
+                    <h4 class="font-semibold text-gray-800 text-md mb-1 line-clamp-1 font-['Lora']">${p.name}</h4>
+                    <button onclick="navigateTo('productDetail', ${p.id})" class="btn-primary-elegant text-white text-xs py-1 px-3 rounded-full" aria-label="Lihat detail ${p.name}">
                         Lihat
                     </button>
                 </div>
@@ -1410,7 +1247,7 @@
 
             return `
                 <div class="container mx-auto px-4 py-12">
-                    <div class="comic-section-bg max-w-4xl mx-auto animate-fadeIn" data-aos="fade-up">
+                    <div class="elegant-section-bg max-w-4xl mx-auto animate-fadeIn" data-aos="fade-up">
                         <button onclick="navigateTo('umkm')" class="mb-6 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-300" aria-label="Kembali ke halaman produk">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                             Kembali ke Produk
@@ -1423,26 +1260,22 @@
                                     class="w-full h-auto rounded-lg shadow-md mb-6 md:mb-0 cursor-pointer product-image-thumbnail"
                                     data-image-src="${selectedProduct.image}"
                                     data-image-caption="${selectedProduct.name}"
-                                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/ADD8E6/000000?text=${encodeURIComponent(selectedProduct.name)}';"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/DAA520/FFFFFF?text=${encodeURIComponent(selectedProduct.name)}';"
                                 />
                             </div>
                             <div class="md:w-1/2">
-                                <h2 class="text-3xl font-bold text-gray-900 mb-3">${selectedProduct.name}</h2>
-                                <div class="flex items-center mb-4">
-                                    <div class="text-2xl mr-2">${getStarRatingHtml(selectedProduct.rating)}</div>
-                                    <span class="text-gray-600 text-lg">(${selectedProduct.rating} dari 5)</span>
-                                </div>
+                                <h2 class="text-3xl font-bold text-gray-900 mb-3 font-['Playfair_Display']">${selectedProduct.name}</h2>
                                 <p class="text-gray-700 leading-relaxed mb-6">${selectedProduct.description}</p>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Detail Produk:</h3>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2 font-['Lora']">Detail Produk:</h3>
                                 <p class="text-gray-600 leading-relaxed mb-4">${selectedProduct.details}</p>
-                                <p class="text-gray-700 font-semibold mb-2">Stok Tersedia: <span class="text-teal-600">${selectedProduct.stock}</span></p>
-                                <p class="text-gray-700 font-semibold mb-6">Alamat Penjual: <span class="text-teal-600">${selectedProduct.address}</span></p>
-                                <div class="flex flex-wrap gap-4 mb-6">
+                                <p class="text-gray-700 font-semibold mb-2">Stok Tersedia: <span class="text-00796B">${selectedProduct.stock}</span></p>
+                                <p class="text-gray-700 font-semibold mb-6">Alamat Penjual: <span class="text-00796B">${selectedProduct.address}</span></p>
+                                <div class="flex flex-col sm:flex-row flex-wrap gap-4 mb-6">
                                     <a
                                         href="https://wa.me/${selectedProduct.whatsapp}?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(selectedProduct.name)}%20yang%20ada%20di%20website%20Desa%20Srigonco."
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center btn-primary-gradient text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+                                        class="inline-flex items-center justify-center w-full sm:w-auto btn-primary-elegant text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
                                         aria-label="Beli via WhatsApp"
                                     >
                                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -1450,28 +1283,20 @@
                                         </svg>
                                         Beli via WhatsApp
                                     </a>
-                                    <button id="share-product-button" class="inline-flex items-center btn-secondary text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Bagikan produk ini">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.865 13.111 9 12.87 9 12.5c0-.37.135-.611.316-.842l.006-.007a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006.007a.5.5 0 01-.707 0l-.006-.007zM12 18h.01M12 6h.01M12 12h.01M12 12a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006.007a.5.5 0 01-.707 0l-.006-.007zM12 18a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006.007a.5.5 0 01-.707 0l-.006-.007zM12 6a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006-.007a.5.5 0 01-.707 0l-.006-.007z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3M6 9v3m0 0v3m0-3h3m-3 0h-3M9 6h3m0 0h3M9 18h3m0 0h3"></path></svg>
+                                    <button id="share-product-button" class="inline-flex items-center justify-center w-full sm:w-auto btn-secondary-elegant text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Bagikan produk ini">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.865 13.111 9 12.87 9 12.5c0-.37.135-.611.316-.842l.006-.007a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006-.007a.5.5 0 01-.707 0l-.006-.007zM12 18h.01M12 6h.01M12 12h.01M12 12a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006-.007a.5.5 0 01-.707 0l-.006-.007zM12 18a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006-.007a.5.5 0 01-.707 0l-.006-.007zM12 6a.5.5 0 01.707 0l.006.007c.181.231.316.472.316.842s-.135.611-.316.842l-.006-.007a.5.5 0 01-.707 0l-.006-.007z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3M6 9v3m0 0v3m0-3h3m-3 0h-3M9 6h3m0 0h3M9 18h3m0 0h3"></path></svg>
                                         Bagikan Produk
                                     </button>
-                                    <button id="copy-link-button" class="inline-flex items-center bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Salin tautan produk">
+                                    <button id="copy-link-button" class="inline-flex items-center justify-center w-full sm:w-auto bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Salin tautan produk">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m-4 4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                         Salin Tautan
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-12">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Berikan Penilaian Anda</h3>
-                            <div id="rating-input" class="flex justify-center text-4xl">
-                                ${getStarRatingHtml(currentProductRating, true)}
-                            </div>
-                            <p id="rating-message" class="text-center text-sm text-gray-600 mt-2">Klik bintang untuk memberi nilai.</p>
-                        </div>
-
                         ${recommendedProducts.length > 0 ? `
                             <div class="mt-12 border-t border-gray-200 pt-8">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center comic-section-title">Rekomendasi Produk Serupa</h3>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center elegant-section-title font-['Playfair_Display']">Rekomendasi Produk Serupa</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                     ${recommendedProducts}
                                 </div>
@@ -1482,65 +1307,7 @@
             `;
         }
 
-        function renderGaleriPage() {
-            let filteredGalleryImages = galleryImages.filter(img =>
-                (selectedGalleryCategory === 'Semua' || img.category === selectedGalleryCategory)
-            );
-
-            const galleryCategoryButtonsHtml = galleryCategories.map(category => `
-                <button
-                    class="category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedGalleryCategory === category ? 'active' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}"
-                    data-category="${category}"
-                    aria-label="Filter kategori ${category}"
-                >
-                    ${category}
-                </button>
-            `).join('');
-
-            const displayedGalleryImages = filteredGalleryImages.slice(0, loadedGalleryCount);
-
-            const galleryHtml = displayedGalleryImages.length > 0 ? displayedGalleryImages.map(img => `
-                <div class="comic-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
-                    <img
-                        src="${img.src}"
-                        alt="${img.title}"
-                        class="w-full h-64 object-cover cursor-pointer gallery-image-thumbnail"
-                        data-image-src="${img.src}"
-                        data-image-caption="${img.title}"
-                        onerror="this.onerror=null;this.src='https://placehold.co/800x600/ADD8E6/000000?text=${encodeURIComponent(img.title)}';"
-                    />
-                    <div class="p-4 text-center">
-                        <p class="font-semibold text-gray-800">${img.title}</p>
-                    </div>
-                </div>
-            `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Tidak ada gambar dalam kategori ini.</p>`;
-
-            const loadMoreButtonHtml = (loadedGalleryCount < filteredGalleryImages.length) ?
-                `<button id="load-more-gallery" class="mt-8 btn-secondary text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak foto galeri">
-                    Muat Lebih Banyak Foto
-                </button>` : '';
-
-            return `
-                <div class="container mx-auto px-4 py-12">
-                    <div class="comic-section-bg animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 comic-section-title">Galeri Foto Desa Srigonco</h2>
-                        <p class="text-lg text-gray-700 text-center mb-12 max-w-2xl mx-auto">
-                            Jelajahi keindahan dan aktivitas di Desa Srigonco melalui koleksi foto kami. Dari pemandangan alam hingga kegiatan masyarakat dan UMKM.
-                        </p>
-                        <div class="flex flex-wrap justify-center gap-3 mb-10">
-                            ${galleryCategoryButtonsHtml}
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            ${galleryHtml}
-                        </div>
-                        <div class="text-center">
-                            ${loadMoreButtonHtml}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+        // Removed renderGaleriPage function as per request
 
         // --- Event Handlers ---
 
@@ -1562,21 +1329,14 @@
             renderContent(); // Re-render UMKM page with new sort order
         }
 
-        function handleGalleryCategoryFilter(event) {
-            selectedGalleryCategory = event.target.dataset.category;
-            loadedGalleryCount = itemsPerPage; // Reset pagination on new filter
-            renderContent(); // Re-render gallery page with filtered results
-        }
+        // Removed handleGalleryCategoryFilter function as per request
 
         function loadMoreProducts() {
             loadedProductCount += itemsPerPage;
             renderContent();
         }
 
-        function loadMoreGallery() {
-            loadedGalleryCount += itemsPerPage;
-            renderContent();
-        }
+        // Removed loadMoreGallery function as per request
 
         function handleImageClickToModal(event) {
             const modal = document.getElementById('product-image-modal');
@@ -1616,7 +1376,6 @@
             document.getElementById('quick-view-image').src = product.image;
             document.getElementById('quick-view-image').alt = product.name;
             document.getElementById('quick-view-name').textContent = product.name;
-            document.getElementById('quick-view-rating').innerHTML = getStarRatingHtml(product.rating);
             document.getElementById('quick-view-description').textContent = product.description;
             document.getElementById('quick-view-stock').textContent = `Stok: ${product.stock}`;
             document.getElementById('quick-view-address').textContent = `Alamat: ${product.address}`;
@@ -1636,71 +1395,6 @@
             const productId = parseInt(event.target.dataset.productId);
             closeProductQuickViewModal(); // Close quick view modal first
             navigateTo('productDetail', productId); // Navigate to full detail page
-        }
-
-        /**
-         * Highlights stars on hover for interactive rating.
-         * @param {Event} event - The mouseover event.
-         * @param {number} [forceRating] - Optional: A specific rating to highlight (used for initial render).
-         */
-        function highlightStars(event, forceRating = null) {
-            const ratingInputDiv = document.getElementById('rating-input');
-            if (!ratingInputDiv) return;
-
-            const stars = ratingInputDiv.querySelectorAll('.rating-star');
-            const hoverRating = event ? parseInt(event.target.dataset.star) : forceRating;
-
-            stars.forEach(star => {
-                const starValue = parseInt(star.dataset.star);
-                if (starValue <= hoverRating) {
-                    star.classList.add('filled');
-                } else {
-                    star.classList.remove('filled');
-                }
-            });
-        }
-
-        /**
-         * Resets stars to the current selected rating on mouseout.
-         */
-        function resetStars() {
-            const ratingInputDiv = document.getElementById('rating-input');
-            if (!ratingInputDiv) return;
-
-            const stars = ratingInputDiv.querySelectorAll('.rating-star');
-            stars.forEach(star => {
-                const starValue = parseInt(star.dataset.star);
-                if (starValue <= currentProductRating) {
-                    star.classList.add('filled');
-                } else {
-                    star.classList.remove('filled');
-                }
-            });
-        }
-
-        /**
-         * Sets the product rating on click.
-         * @param {Event} event - The click event.
-         */
-        function setRating(event) {
-            const newRating = parseInt(event.target.dataset.star);
-            currentProductRating = newRating;
-            const ratingMessage = document.getElementById('rating-message');
-            if (ratingMessage) {
-                ratingMessage.textContent = `Anda memberi nilai ${newRating} bintang. Terima kasih!`;
-            }
-            highlightStars(null, newRating); // Ensure stars stay highlighted
-
-            // In a real application, this is where you would send the rating to a backend
-            console.log(`Produk ID ${selectedProduct.id} diberi nilai ${newRating} bintang.`);
-            // Simulate sending to backend
-            toggleLoading(true);
-            setTimeout(() => {
-                toggleLoading(false);
-                // Update selectedProduct.rating if this were a real update
-                // selectedProduct.rating = newRating;
-                // renderContent(); // Re-render to show updated average rating if applicable
-            }, 500);
         }
 
         /**
@@ -1873,8 +1567,7 @@
         function updateActiveNavLink() {
             const navLinks = [
                 { id: 'nav-home', page: 'home' },
-                { id: 'nav-umkm', page: 'umkm' },
-                { id: 'nav-galeri', page: 'galeri' }
+                { id: 'nav-umkm', page: 'umkm' }
             ];
 
             navLinks.forEach(link => {
@@ -1890,10 +1583,10 @@
                 }
                 if (mobileButton) {
                     if (link.page === currentPage) {
-                        mobileButton.classList.add('text-teal-400');
+                        mobileButton.classList.add('text-DAA520');
                         mobileButton.classList.remove('text-white');
                     } else {
-                        mobileButton.classList.remove('text-teal-400');
+                        mobileButton.classList.remove('text-DAA520');
                         mobileButton.classList.add('text-white');
                     }
                 }
@@ -2103,210 +1796,181 @@
                 {
                     id: 1,
                     name: 'Fadin Snack',
-                    description: 'Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Snack',
-                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    description: 'Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan. Teksturnya renyah dan rasanya gurih, cocok dinikmati kapan saja.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Fadin+Snack',
+                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Terbuat dari bahan-bahan pilihan tanpa pengawet buatan. Tersedia dalam berbagai varian rasa.',
                     whatsapp: '6281336531898',
                     category: 'Makanan Kering',
-                    rating: 4.5,
                     stock: 'Berdasarkan Pesanan',
-                    keywords: ['snack', 'makanan kering', 'fadin', 'camilan'],
+                    keywords: ['snack', 'makanan kering', 'fadin', 'camilan', 'renyah', 'gurih'],
                     address: 'Dusun Sumberjambe RT 35'
                 },
                 {
                     id: 2,
                     name: 'Fadin Gallery Kerajinan',
-                    description: 'Berbagai kerajinan tangan dari Fadin Gallery. Dibuat dengan detail dan kualitas.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Fadin+Gallery',
-                    details: 'Produk kerajinan. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    description: 'Berbagai kerajinan tangan unik dari Fadin Gallery. Dibuat dengan detail dan kualitas tinggi, cocok untuk hiasan atau hadiah.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Fadin+Gallery',
+                    details: 'Produk kerajinan tangan. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Setiap produk dibuat secara manual dengan sentuhan artistik, mencerminkan budaya lokal.',
                     whatsapp: '6281336531898',
                     category: 'Kerajinan',
-                    rating: 4.7,
                     stock: 'Berdasarkan Pesanan',
-                    keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan'],
+                    keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan', 'hadiah', 'seni'],
                     address: 'Dusun Sumberjambe RT 35'
                 },
                 {
                     id: 3,
                     name: 'SALAD BUAH Vani Wijayanti',
-                    description: 'Salad buah segar, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Salad+Buah',
-                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari.',
+                    description: 'Salad buah segar dengan dressing creamy, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan dan higienis.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Salad+Buah',
+                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari. Menggunakan buah-buahan segar musiman dan dressing rahasia yang lezat.',
                     whatsapp: '6282143167792',
                     category: 'Makanan Basah',
-                    rating: 4.8,
                     stock: 'Tersedia Setiap Hari',
-                    keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar'],
+                    keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar', 'dressing'],
                     address: 'Sumberjambe RT 40 RW 06'
                 },
                 {
                     id: 4,
                     name: 'Pretty Donat',
-                    description: 'Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Pretty+Donat',
-                    details: 'Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan.',
+                    description: 'Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan, cocok untuk segala usia.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Pretty+Donat',
+                    details: 'Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan. Varian topping beragam, dari cokelat hingga keju.',
                     whatsapp: '6282245943031',
                     category: 'Makanan Kering',
-                    rating: 4.6,
                     stock: 'Tersedia / Berdasarkan Pesanan',
-                    keywords: ['donat', 'pretty', 'roti', 'manis'],
+                    keywords: ['donat', 'pretty', 'roti', 'manis', 'topping', 'empuk'],
                     address: 'Srigonco Watu Sigar RT 2'
                 },
                 {
                     id: 5,
                     name: 'Aneka Kue Dwi Purwati',
-                    description: 'Berbagai macam kue kering dan basah, cocok untuk acara atau camilan. Dibuat sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Aneka+Kue',
-                    details: 'Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO).',
+                    description: 'Berbagai macam kue kering dan basah, cocok untuk acara atau camilan keluarga. Dibuat sesuai pesanan dengan resep tradisional.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Aneka+Kue',
+                    details: 'Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO). Tersedia kue nastar, kastengel, bolu, dan banyak lagi.',
                     whatsapp: '6281217205508',
                     category: 'Makanan',
-                    rating: 4.7,
                     stock: 'Berdasarkan Pesanan',
-                    keywords: ['kue', 'kue kering', 'kue basah', 'camilan'],
+                    keywords: ['kue', 'kue kering', 'kue basah', 'camilan', 'tradisional', 'acara'],
                     address: 'Watusigar RT 24/04, Desa Srigonco'
                 },
                 {
                     id: 6,
                     name: 'Makanan dan Aneka Minuman Muhamad Akbar',
-                    description: 'Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Makanan+Minuman',
-                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari.',
+                    description: 'Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari, cocok untuk menemani aktivitas Anda.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Makanan+Minuman',
+                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari. Minuman tersedia dalam berbagai rasa buah, makanan ringan renyah dan gurih.',
                     whatsapp: '6285815365961',
                     category: 'Makanan & Minuman',
-                    rating: 4.3,
                     stock: 'Tersedia Setiap Hari',
-                    keywords: ['makanan', 'minuman', 'snack', 'segar'],
+                    keywords: ['makanan', 'minuman', 'snack', 'segar', 'camilan'],
                     address: 'Srigonco RT 15'
                 },
                 {
                     id: 7,
                     name: 'Sosis Bakar & Corndog Khusnul Khatimah',
-                    description: 'Sosis bakar dan corndog lezat, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Sosis+Corndog',
-                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    description: 'Sosis bakar dan corndog lezat dengan saus pilihan, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan dengan bahan berkualitas.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Sosis+Corndog',
+                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Tersedia pilihan saus pedas dan manis, serta topping keju.',
                     whatsapp: '6282232158608',
                     category: 'Makanan Basah',
-                    rating: 4.4,
                     stock: 'Berdasarkan Pesanan',
-                    keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basar'],
+                    keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basah', 'saus', 'keju'],
                     address: 'Dusun Sumberjambe RT 36'
                 },
                 {
                     id: 8,
                     name: 'Keripik Pangsit & Cireng Dewi Irawati',
-                    description: 'Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pangsit',
-                    details: 'Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan.',
+                    description: 'Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan, cocok untuk teman ngemil.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Keripik+Pangsit',
+                    details: 'Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan. Keripik pangsit dengan berbagai bumbu, cireng kenyal gurih.',
                     whatsapp: '6281216659745',
                     category: 'Makanan Kering',
-                    rating: 4.6,
                     stock: 'Tersedia / Berdasarkan Pesanan',
-                    keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih'],
+                    keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih', 'renyah', 'bumbu'],
                     address: 'Desa Srigonco, Dusun Sumberjambe'
                 },
                 {
                     id: 9,
                     name: 'Snack & Minuman Silvia Puji Rahayu',
-                    description: 'Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Snack+Minuman',
-                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO).',
+                    description: 'Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan, cocok untuk berbagai acara.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Snack+Minuman',
+                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Snack renyah dan minuman dengan rasa buah alami.',
                     whatsapp: '6281246787759',
                     category: 'Makanan & Minuman',
-                    rating: 4.5,
                     stock: 'Berdasarkan Pesanan',
-                    keywords: ['snack', 'minuman', 'camilan', 'segar'],
+                    keywords: ['snack', 'minuman', 'camilan', 'segar', 'acara'],
                     address: 'Dsn. Sumber Jambe, RT/RW tidak spesifik'
                 },
                 {
                     id: 10,
                     name: 'Minuman Alvia',
-                    description: 'Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Minuman',
-                    details: 'Produk minuman. Pemasaran dalam desa. Produksi setiap hari.',
+                    description: 'Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari, cocok untuk melepas dahaga.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Minuman',
+                    details: 'Produk minuman. Pemasaran dalam desa. Produksi setiap hari. Tersedia es buah, es campur, dan berbagai jus segar.',
                     whatsapp: '6285649796149',
                     category: 'Minuman',
-                    rating: 4.2,
                     stock: 'Tersedia Setiap Hari',
-                    keywords: ['minuman', 'segar', 'olahan'],
+                    keywords: ['minuman', 'segar', 'olahan', 'jus', 'es buah'],
                     address: 'Sumberjambe RT 32'
                 },
                 {
                     id: 11,
                     name: 'Batik Tulis Lilis Setyowati',
-                    description: 'Kain batik tulis asli dengan motif khas dari Lilis Setyowati. Cocok untuk pakaian atau koleksi.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Batik+Tulis',
-                    details: 'Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari.',
+                    description: 'Kain batik tulis asli dengan motif khas Srigonco dari Lilis Setyowati. Cocok untuk pakaian atau koleksi, setiap helai adalah karya seni.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Batik+Tulis',
+                    details: 'Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari. Dibuat secara tradisional dengan pewarna alami, motif unik dan eksklusif.',
                     whatsapp: '6281336809484',
                     category: 'Kerajinan',
-                    rating: 4.9,
                     stock: 'Tersedia Setiap Hari',
-                    keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional'],
+                    keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional', 'seni', 'motif'],
                     address: 'Dusun Watusigar RT 2/RW tidak spesifik'
                 },
                 {
                     id: 12,
                     name: 'Stick Pepaya Pipit Meilandari',
-                    description: 'Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Stick+Pepaya',
-                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari.',
+                    description: 'Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari, cocok untuk oleh-oleh.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Stick+Pepaya',
+                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari. Terbuat dari pepaya pilihan, diolah tanpa bahan pengawet.',
                     whatsapp: '6285746346389',
                     category: 'Makanan Kering',
-                    rating: 4.3,
                     stock: 'Tersedia Setiap Hari',
-                    keywords: ['stick', 'pepaya', 'makanan kering', 'camilan'],
+                    keywords: ['stick', 'pepaya', 'makanan kering', 'camilan', 'oleh-oleh'],
                     address: 'RT 11 RW 2 Krajan Srigonco'
                 },
                 {
                     id: 13,
                     name: 'Keripik Pisang & Aneka Es Siti Nur Aini',
-                    description: 'Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan.',
-                    image: 'https://placehold.co/400x300/ADD8E6/000000?text=Keripik+Pisang+Es',
-                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan.',
+                    description: 'Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan, cocok untuk camilan dan pelepas dahaga.',
+                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Keripik+Pisang+Es',
+                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan. Keripik pisang tersedia rasa original, cokelat, keju. Aneka es meliputi es campur dan es teler.',
                     whatsapp: '6281231135846',
                     category: 'Makanan & Minuman',
-                    rating: 4.5,
                     stock: 'Tersedia / Berdasarkan Pesanan',
-                    keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman'],
+                    keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman', 'camilan', 'segar'],
                     address: 'Sukorame RT 24 RW 04'
                 }
             ];
             // Dynamically generate product categories from the new products array
             productCategories = ['Semua', ...new Set(products.map(p => p.category))];
 
-            galleryImages = [
-                { id: 1, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Pemandangan+Sawah', title: 'Pemandangan Sawah Hijau', category: 'Pemandangan Alam' },
-                { id: 2, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Panen+Padi', title: 'Aktivitas Panen Padi', category: 'Aktivitas Desa' },
-                { id: 3, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Sungai+Jernih', title: 'Sungai Jernih di Pedesaan', category: 'Pemandangan Alam' },
-                { id: 4, src: 'https://placehold.co/800x600/D1FAE5/10B981?text=UMKM+Kerajinan', title: 'Proses Pembuatan Kerajinan', category: 'Produk UMKM' },
-                { id: 5, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Festival+Desa', title: 'Suasana Festival Desa', category: 'Aktivitas Desa' },
-                { id: 6, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Warga+Berinteraksi', title: 'Interaksi Warga Desa', category: 'Aktivitas Desa' },
-                { id: 7, src: 'https://placehold.co/800x600/A7F3D0/065F46?text=Produk+Madu', title: 'Produk Madu Hutan', category: 'Produk UMKM' },
-                { id: 8, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Produk+Kopi', title: 'Produk Kopi Robusta', category: 'Produk UMKM' },
-                { id: 9, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Bukit+Hijau', title: 'Pemandangan Bukit Hijau', category: 'Pemandangan Alam' },
-                { id: 10, src: 'https://placehold.co/800x600/D1FAE5/10B981?text=Olahan+Makanan', title: 'Produk Olahan Makanan', category: 'Produk UMKM' },
-                { id: 11, src: 'https://placehold.co/800x600/FFDDC1/FF6F00?text=Pertanian+Modern', title: 'Inovasi Pertanian', category: 'Aktivitas Desa' },
-                { id: 12, src: 'https://placehold.co/800x600/C1DFF0/0056b3?text=Lingkungan+Desa', title: 'Lingkungan Desa Bersih', category: 'Pemandangan Alam' },
-            ];
-            galleryCategories = ['Semua', ...new Set(galleryImages.map(img => img.category))];
-
             testimonials = [
                 {
                     name: 'Budi Santoso',
                     title: 'Pengusaha Kuliner',
                     quote: 'Produk UMKM Desa Srigonco sangat berkualitas dan autentik. Saya sangat merekomendasikannya!',
-                    avatar: 'https://placehold.co/80x80/ADD8E6/000000?text=BS'
+                    avatar: 'https://placehold.co/80x80/DAA520/FFFFFF?text=BS'
                 },
                 {
                     name: 'Siti Aminah',
                     title: 'Pecinta Kerajinan',
                     quote: 'Kerajinan batiknya indah sekali, detailnya luar biasa. Bangga bisa mendukung produk lokal.',
-                    avatar: 'https://placehold.co/80x80/ADD8E6/000000?text=SA'
+                    avatar: 'https://placehold.co/80x80/DAA520/FFFFFF?text=SA'
                 },
                 {
                     name: 'Joko Susilo',
                     title: 'Wisatawan',
                     quote: 'Desa Srigonco asri dan produk makanannya lezat. Pengalaman belanja yang menyenangkan!',
-                    avatar: 'https://placehold.co/80x80/ADD8E6/000000?text=JS'
+                    avatar: 'https://placehold.co/80x80/DAA520/FFFFFF?text=JS'
                 }
             ];
 
