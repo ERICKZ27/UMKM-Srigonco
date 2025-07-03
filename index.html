@@ -1,980 +1,1088 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Desa Srigonco UMKM</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Playfair Display (for headings), Lora (for subheadings), Inter (for body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <style>
-        /* Custom styles for Javanese Modern Professional aesthetics */
-        body {
-            font-family: 'Inter', sans-serif; /* Modern body font */
-            background-color: #F5F5DC; /* Light beige background */
-            color: #333;
-            line-height: 1.6;
-            /* Subtle background pattern inspired by traditional textures/batik */
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23EDECE0' fill-opacity='0.8'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23EDECE0'/%3E%3C/g%3E%3C/svg%3E");
-            background-repeat: repeat;
+      /* Custom styles for Javanese Modern Professional aesthetics */
+      body {
+        font-family: "Inter", sans-serif; /* Modern body font */
+        background-color: #f5f5dc; /* Light beige background */
+        color: #333;
+        line-height: 1.6;
+        /* Subtle background pattern inspired by traditional textures/batik */
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23EDECE0' fill-opacity='0.8'%3E%3Cpath d='M30 15a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 2a13 13 0 1 0 0 26 13 13 0 0 0 0-26zM0 0h60v60H0z' fill='%23EDECE0'/%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: repeat;
+      }
+      /* Ensure main content has padding to avoid being hidden by fixed header */
+      main {
+        padding-top: 100px; /* Adjust based on header height */
+      }
+      /* Smooth scroll for anchor links */
+      html {
+        scroll-behavior: smooth;
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .line-clamp-4 {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      /* Mobile menu specific styles */
+      .mobile-menu-overlay {
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      }
+      .mobile-menu-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .mobile-menu-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* Modal specific styles */
+      .modal {
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        opacity: 0;
+        transform: scale(0.95);
+        visibility: hidden;
+      }
+      .modal.open {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+      }
+      /* Carousel specific styles */
+      .carousel-item {
+        display: none;
+        transition: opacity 0.6s ease-in-out; /* Smooth fade transition */
+      }
+      .carousel-item.active {
+        display: block;
+        opacity: 1;
+      }
+      .carousel-item:not(.active) {
+        opacity: 0;
+      }
+      /* Loading spinner */
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #00796b; /* Medium Teal */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
-        /* Ensure main content has padding to avoid being hidden by fixed header */
-        main {
-            padding-top: 100px; /* Adjust based on header height */
-        }
-        /* Smooth scroll for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-4 {
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        /* Mobile menu specific styles */
-        .mobile-menu-overlay {
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        .mobile-menu-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .mobile-menu-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        /* Modal specific styles */
-        .modal {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            opacity: 0;
-            transform: scale(0.95);
-            visibility: hidden;
-        }
-        .modal.open {
-            opacity: 1;
-            transform: scale(1);
-            visibility: visible;
-        }
-        /* Carousel specific styles */
-        .carousel-item {
-            display: none;
-            transition: opacity 0.6s ease-in-out; /* Smooth fade transition */
-        }
-        .carousel-item.active {
-            display: block;
-            opacity: 1;
-        }
-        .carousel-item:not(.active) {
-            opacity: 0;
-        }
-        /* Loading spinner */
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #00796B; /* Medium Teal */
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+      }
 
-        /* Custom styles for hero section overlay */
-        .hero-overlay {
-            background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
-            backdrop-filter: blur(2px); /* Subtle blur effect */
-        }
-        .hero-overlay h1, .hero-overlay p {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6); /* Text shadow for better readability */
-        }
+      /* Custom styles for hero section overlay */
+      .hero-overlay {
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+        backdrop-filter: blur(2px); /* Subtle blur effect */
+      }
+      .hero-overlay h1,
+      .hero-overlay p {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Text shadow for better readability */
+      }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease-out forwards;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .animate-fadeInUp.delay-100 { animation-delay: 0.1s; }
-        .animate-fadeInUp.delay-200 { animation-delay: 0.2s; }
-        .animate-fadeInUp.delay-300 { animation-delay: 0.3s; }
-        .animate-fadeInUp.delay-400 { animation-delay: 0.4s; }
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+      .animate-fadeInUp.delay-100 {
+        animation-delay: 0.1s;
+      }
+      .animate-fadeInUp.delay-200 {
+        animation-delay: 0.2s;
+      }
+      .animate-fadeInUp.delay-300 {
+        animation-delay: 0.3s;
+      }
+      .animate-fadeInUp.delay-400 {
+        animation-delay: 0.4s;
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
+        to {
+          opacity: 1;
         }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
         }
-        .animate-bounce-once:hover {
-            animation: bounce 0.5s ease-in-out;
+        50% {
+          transform: translateY(-8px);
         }
+      }
+      .animate-bounce-once:hover {
+        animation: bounce 0.5s ease-in-out;
+      }
 
-        /* Text reveal/typewriter effect */
-        .text-reveal {
-            opacity: 0;
-            animation: textReveal 1.5s forwards;
-            animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-        }
+      /* Text reveal/typewriter effect */
+      .text-reveal {
+        opacity: 0;
+        animation: textReveal 1.5s forwards;
+        animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      }
 
-        @keyframes textReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      @keyframes textReveal {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
         }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-        /* Custom alert/confirm modal styling */
-        .custom-modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000; /* Higher than other modals */
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            visibility: hidden;
-        }
-        .custom-modal-backdrop.open {
-            opacity: 1;
-            visibility: visible;
-        }
-        .custom-modal-content {
-            background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
-            padding: 2.5rem; /* p-10 */
-            max-width: 28rem; /* max-w-md */
-            margin: auto;
-            text-align: center;
-            transform: scale(0.8);
-            transition: transform 0.3s ease-in-out;
-        }
-        .custom-modal-backdrop.open .custom-modal-content {
-            transform: scale(1);
-        }
-        /* Parallax effect for hero section */
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
+      /* Custom alert/confirm modal styling */
+      .custom-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000; /* Higher than other modals */
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        visibility: hidden;
+      }
+      .custom-modal-backdrop.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .custom-modal-content {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+        padding: 2.5rem; /* p-10 */
+        max-width: 28rem; /* max-w-md */
+        margin: auto;
+        text-align: center;
+        transform: scale(0.8);
+        transition: transform 0.3s ease-in-out;
+      }
+      .custom-modal-backdrop.open .custom-modal-content {
+        transform: scale(1);
+      }
+      /* Parallax effect for hero section */
+      .parallax-bg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
 
-        /* Text shadow utilities */
-        .text-shadow-sm {
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-        }
-        .text-shadow-md {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .text-shadow-lg {
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-        }
+      /* Text shadow utilities */
+      .text-shadow-sm {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      }
+      .text-shadow-md {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .text-shadow-lg {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+      }
 
-        /* New: Elegant primary button */
-        .btn-primary-elegant {
-            background-color: #00796B; /* Medium Teal */
-            color: white;
-            border: 1px solid #004d40; /* Dark Teal */
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 121, 107, 0.3);
-        }
-        .btn-primary-elegant:hover {
-            background-color: #004d40; /* Dark Teal */
-            box-shadow: 0 6px 15px rgba(0, 77, 64, 0.4);
-            transform: translateY(-2px);
-        }
+      /* New: Elegant primary button */
+      .btn-primary-elegant {
+        background-color: #00796b; /* Medium Teal */
+        color: white;
+        border: 1px solid #004d40; /* Dark Teal */
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 121, 107, 0.3);
+      }
+      .btn-primary-elegant:hover {
+        background-color: #004d40; /* Dark Teal */
+        box-shadow: 0 6px 15px rgba(0, 77, 64, 0.4);
+        transform: translateY(-2px);
+      }
 
-        /* New: Elegant secondary button */
-        .btn-secondary-elegant {
-            background-color: #DAA520; /* Goldenrod */
-            color: #5D4037; /* Dark Brown */
-            border: 1px solid #B8860B; /* Darker Goldenrod */
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
-        }
-        .btn-secondary-elegant:hover {
-            background-color: #B8860B; /* Darker Goldenrod */
-            color: white;
-            box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
-            transform: translateY(-2px);
-        }
+      /* New: Elegant secondary button */
+      .btn-secondary-elegant {
+        background-color: #daa520; /* Goldenrod */
+        color: #5d4037; /* Dark Brown */
+        border: 1px solid #b8860b; /* Darker Goldenrod */
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
+      }
+      .btn-secondary-elegant:hover {
+        background-color: #b8860b; /* Darker Goldenrod */
+        color: white;
+        box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
+        transform: translateY(-2px);
+      }
 
-        /* Category button active state */
-        .category-button.active {
-            background-color: #00796B; /* Medium Teal */
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 121, 107, 0.3);
-            transform: translateY(-2px);
-        }
-        .category-button {
-            transition: all 0.2s ease-in-out;
-            background-color: #E0E0E0; /* Light Gray */
-            color: #555;
-        }
-        .category-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            background-color: #D0D0D0;
-        }
+      /* Category button active state */
+      .category-button.active {
+        background-color: #00796b; /* Medium Teal */
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 121, 107, 0.3);
+        transform: translateY(-2px);
+      }
+      .category-button {
+        transition: all 0.2s ease-in-out;
+        background-color: #e0e0e0; /* Light Gray */
+        color: #555;
+      }
+      .category-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background-color: #d0d0d0;
+      }
 
-        /* Specific style for the header title font */
-        .header-title {
-            font-family: 'Playfair Display', serif; /* Apply Playfair Display font */
-            color: #004d40; /* Dark Teal */
-        }
+      /* Specific style for the header title font */
+      .header-title {
+        font-family: "Playfair Display", serif; /* Apply Playfair Display font */
+        color: #004d40; /* Dark Teal */
+      }
 
-        /* Navbar specific styles */
-        .navbar-link-hover-effect {
-            position: relative;
-        }
-        .navbar-link-hover-effect::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; /* Adjust based on desired distance from text */
-            left: 0;
-            width: 100%;
-            height: 2px; /* Thickness of the underline */
-            background-color: #DAA520; /* Goldenrod */
-            transform: scaleX(0);
-            transition: transform 0.3s ease-out;
-            transform-origin: bottom left;
-        }
-        .navbar-link-hover-effect:hover::after,
-        .navbar-link-hover-effect.active::after {
-            transform: scaleX(1);
-        }
-        .navbar-link-hover-effect.active {
-            font-weight: 700; /* Bold for active link */
-            color: #00796B; /* Medium Teal for active link */
-        }
+      /* Navbar specific styles */
+      .navbar-link-hover-effect {
+        position: relative;
+      }
+      .navbar-link-hover-effect::after {
+        content: "";
+        position: absolute;
+        bottom: -4px; /* Adjust based on desired distance from text */
+        left: 0;
+        width: 100%;
+        height: 2px; /* Thickness of the underline */
+        background-color: #daa520; /* Goldenrod */
+        transform: scaleX(0);
+        transition: transform 0.3s ease-out;
+        transform-origin: bottom left;
+      }
+      .navbar-link-hover-effect:hover::after,
+      .navbar-link-hover-effect.active::after {
+        transform: scaleX(1);
+      }
+      .navbar-link-hover-effect.active {
+        font-weight: 700; /* Bold for active link */
+        color: #00796b; /* Medium Teal for active link */
+      }
 
-        /* Section styling - elegant and professional */
-        .elegant-section-title {
-            font-family: 'Playfair Display', serif;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-            color: #5D4037; /* Dark Brown */
-        }
-        .elegant-section-bg {
-            background-color: #FFFFFF; /* Clean white background for sections */
-            border: 2px solid #8D6E63; /* Medium brown border */
-            box-shadow: 6px 6px 0px -2px rgba(93, 64, 55, 0.4); /* Offset shadow with dark brown */
-            border-radius: 1rem; /* rounded-xl */
-            transition: all 0.3s ease-in-out;
-            padding: 3.5rem; /* Increased padding for spacious feel */
-        }
-        .elegant-section-bg:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: 10px 10px 0px -2px rgba(93, 64, 55, 0.6);
-        }
+      /* Section styling - elegant and professional */
+      .elegant-section-title {
+        font-family: "Playfair Display", serif;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        color: #5d4037; /* Dark Brown */
+      }
+      .elegant-section-bg {
+        background-color: #ffffff; /* Clean white background for sections */
+        border: 2px solid #8d6e63; /* Medium brown border */
+        box-shadow: 6px 6px 0px -2px rgba(93, 64, 55, 0.4); /* Offset shadow with dark brown */
+        border-radius: 1rem; /* rounded-xl */
+        transition: all 0.3s ease-in-out;
+        padding: 3.5rem; /* Increased padding for spacious feel */
+      }
+      .elegant-section-bg:hover {
+        transform: translate(-5px, -5px);
+        box-shadow: 10px 10px 0px -2px rgba(93, 64, 55, 0.6);
+      }
 
-        /* Card styling - clean and refined */
-        .elegant-card {
-            background-color: #FDFDFD; /* Slightly off-white for cards */
-            border: 1px solid #8D6E63; /* Medium brown border */
-            box-shadow: 4px 4px 0px -1px rgba(93, 64, 55, 0.2);
-            transition: all 0.2s ease-in-out;
-        }
-        .elegant-card:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 7px 7px 0px -1px rgba(93, 64, 55, 0.4);
-            border-color: #DAA520; /* Goldenrod border on hover */
-        }
-        .elegant-icon {
-            color: #00796B; /* Medium Teal for icons */
-            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1));
-        }
+      /* Card styling - clean and refined */
+      .elegant-card {
+        background-color: #fdfdfd; /* Slightly off-white for cards */
+        border: 1px solid #8d6e63; /* Medium brown border */
+        box-shadow: 4px 4px 0px -1px rgba(93, 64, 55, 0.2);
+        transition: all 0.2s ease-in-out;
+      }
+      .elegant-card:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 7px 7px 0px -1px rgba(93, 64, 55, 0.4);
+        border-color: #daa520; /* Goldenrod border on hover */
+      }
+      .elegant-icon {
+        color: #00796b; /* Medium Teal for icons */
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.1));
+      }
 
-        /* Why Choose Us section specific icons */
-        .why-choose-us-icon-1 { color: #00796B; } /* Teal */
-        .why-choose-us-icon-2 { color: #DAA520; } /* Goldenrod */
-        .why-choose-us-icon-3 { color: #5D4037; } /* Dark Brown */
+      /* Why Choose Us section specific icons */
+      .why-choose-us-icon-1 {
+        color: #00796b;
+      } /* Teal */
+      .why-choose-us-icon-2 {
+        color: #daa520;
+      } /* Goldenrod */
+      .why-choose-us-icon-3 {
+        color: #5d4037;
+      } /* Dark Brown */
 
-        /* Quick Contact Section */
-        .contact-section-bg-elegant {
-            background-image: linear-gradient(to right, #5D4037, #8D6E63); /* Dark Brown to Medium Brown */
-            border: 1px solid #4E342E; /* Even darker brown border */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 1rem;
-            transition: all 0.3s ease-in-out;
-            padding: 3.5rem;
-            color: white;
-        }
-        .contact-section-bg-elegant:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-        .contact-button-primary-elegant {
-            background-color: white;
-            color: #00796B; /* Medium Teal */
-            border: 2px solid #00796B;
-            transition: all 0.3s ease;
-        }
-        .contact-button-primary-elegant:hover {
-            background-color: #004d40;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 77, 64, 0.4);
-            transform: translateY(-2px);
-        }
-        .contact-button-secondary-elegant {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            transition: all 0.3s ease;
-        }
-        .contact-button-secondary-elegant:hover {
-            background-color: white;
-            color: #00796B; /* Medium Teal */
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-        }
+      /* Quick Contact Section */
+      .contact-section-bg-elegant {
+        background-image: linear-gradient(to right, #5d4037, #8d6e63); /* Dark Brown to Medium Brown */
+        border: 1px solid #4e342e; /* Even darker brown border */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 1rem;
+        transition: all 0.3s ease-in-out;
+        padding: 3.5rem;
+        color: white;
+      }
+      .contact-section-bg-elegant:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      }
+      .contact-button-primary-elegant {
+        background-color: white;
+        color: #00796b; /* Medium Teal */
+        border: 2px solid #00796b;
+        transition: all 0.3s ease;
+      }
+      .contact-button-primary-elegant:hover {
+        background-color: #004d40;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 77, 64, 0.4);
+        transform: translateY(-2px);
+      }
+      .contact-button-secondary-elegant {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+        transition: all 0.3s ease;
+      }
+      .contact-button-secondary-elegant:hover {
+        background-color: white;
+        color: #00796b; /* Medium Teal */
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px);
+      }
 
-        /* Footer specific styles */
-        .footer-elegant-bg {
-            background-color: #4E342E; /* Darker Brown */
-            border-top: 4px solid #DAA520; /* Goldenrod border at the top */
-            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.2);
-            color: #F5F5DC; /* Light beige for text */
-            padding: 3rem;
-        }
-        .footer-elegant-bg h3 {
-            color: #FFD700; /* Gold for titles */
-            font-family: 'Lora', serif;
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
-        }
-        .footer-elegant-bg .text-gray-400, .footer-elegant-bg .text-gray-500 {
-            color: #C0C0C0; /* Slightly darker light gray for general text */
-        }
-        .footer-elegant-bg a, .footer-elegant-bg button {
-            color: #F5F5DC; /* Light beige for links/buttons */
-            transition: color 0.3s ease;
-        }
-        .footer-elegant-bg a:hover, .footer-elegant-bg button:hover {
-            color: #FFD700; /* Gold on hover */
-        }
-        .footer-elegant-bg .border-t {
-            border-color: #6D4C41; /* Slightly lighter brown for separator */
-        }
+      /* Footer specific styles */
+      .footer-elegant-bg {
+        background-color: #4e342e; /* Darker Brown */
+        border-top: 4px solid #daa520; /* Goldenrod border at the top */
+        box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.2);
+        color: #f5f5dc; /* Light beige for text */
+        padding: 3rem;
+      }
+      .footer-elegant-bg h3 {
+        color: #ffd700; /* Gold for titles */
+        font-family: "Lora", serif;
+        text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+      }
+      .footer-elegant-bg .text-gray-400,
+      .footer-elegant-bg .text-gray-500 {
+        color: #c0c0c0; /* Slightly darker light gray for general text */
+      }
+      .footer-elegant-bg a,
+      .footer-elegant-bg button {
+        color: #f5f5dc; /* Light beige for links/buttons */
+        transition: color 0.3s ease;
+      }
+      .footer-elegant-bg a:hover,
+      .footer-elegant-bg button:hover {
+        color: #ffd700; /* Gold on hover */
+      }
+      .footer-elegant-bg .border-t {
+        border-color: #6d4c41; /* Slightly lighter brown for separator */
+      }
 
-        /* Chatbot specific styles - adjusted to new theme */
-        #chatbot-button {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background-color: #00796B; /* Medium Teal */
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            z-index: 100; /* Ensure it's above other content */
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        #chatbot-button:hover {
-            background-color: #004d40; /* Dark Teal */
-            transform: scale(1.05);
-        }
+      /* Chatbot specific styles - adjusted to new theme */
+      #chatbot-button {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background-color: #00796b; /* Medium Teal */
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 100; /* Ensure it's above other content */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      #chatbot-button:hover {
+        background-color: #004d40; /* Dark Teal */
+        transform: scale(1.05);
+      }
 
-        #chatbot-container {
-            position: fixed;
-            bottom: 90px; /* Above the button */
-            right: 24px;
-            width: 350px;
-            height: 450px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 100;
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            visibility: hidden;
-        }
-        #chatbot-container.open {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
+      #chatbot-container {
+        position: fixed;
+        bottom: 90px; /* Above the button */
+        right: 24px;
+        width: 350px;
+        height: 450px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 100;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
+        visibility: hidden;
+      }
+      #chatbot-container.open {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        visibility: visible;
+      }
 
-        #chatbot-header {
-            background-color: #00796B; /* Medium Teal */
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-        }
-        #chatbot-header h3 {
-            margin: 0;
-            font-family: 'Lora', serif;
-        }
-        #chatbot-header button {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.5rem;
-            padding: 0;
-        }
+      #chatbot-header {
+        background-image: linear-gradient(to right, #00796b, #1e90ff); /* Blue-green gradient */
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+      #chatbot-header h3 {
+        margin: 0;
+        font-family: "Lora", serif;
+        display: flex;
+        align-items: center;
+      }
+      #chatbot-header button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 0;
+      }
 
-        #chatbot-messages {
-            flex-grow: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            background-color: #F0F8F8; /* Very light teal/gray */
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        .message-bubble {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 1rem;
-            line-height: 1.4;
-            word-wrap: break-word;
-            font-size: 0.9rem;
-        }
-        .user-message {
-            background-color: #009688; /* Slightly lighter Teal */
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 0.25rem; /* Smoother corner */
-        }
-        .bot-message {
-            background-color: #E0F2F1; /* Lightest Teal */
-            color: #333;
-            align-self: flex-start;
-            border-bottom-left-radius: 0.25rem; /* Smoother corner */
-        }
-        .typing-indicator {
-            background-color: #E0F2F1;
-            color: #333;
-            animation: pulse 1.5s infinite;
-            width: fit-content;
-        }
-        .typing-indicator span {
-            animation: dot-bounce 1.5s infinite;
-        }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+      #chatbot-messages {
+        flex-grow: 1;
+        padding: 1rem;
+        overflow-y: auto;
+        background-color: #f0f8f8; /* Very light teal/gray */
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .message-bubble {
+        max-width: 80%;
+        padding: 0.75rem 1rem;
+        border-radius: 1rem;
+        line-height: 1.4;
+        word-wrap: break-word;
+        font-size: 0.9rem;
+      }
+      .user-message {
+        background-color: #009688; /* Slightly lighter Teal */
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 0.25rem; /* Smoother corner */
+      }
+      .bot-message {
+        background-color: #e0f2f1; /* Lightest Teal */
+        color: #333;
+        align-self: flex-start;
+        border-bottom-left-radius: 0.25rem; /* Smoother corner */
+      }
+      .typing-indicator {
+        background-color: #e0f2f1;
+        color: #333;
+        animation: pulse 1.5s infinite;
+        width: fit-content;
+      }
+      .typing-indicator span {
+        animation: dot-bounce 1.5s infinite;
+      }
+      .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
 
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+      @keyframes pulse {
+        0% {
+          opacity: 0.6;
         }
-        @keyframes dot-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+        50% {
+          opacity: 1;
         }
+        100% {
+          opacity: 0.6;
+        }
+      }
+      @keyframes dot-bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
 
-        #chatbot-input-container {
-            display: flex;
-            padding: 1rem;
-            border-top: 1px solid #E0E0E0;
-            background-color: #F9F9F9;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-        }
-        #chatbot-input {
-            flex-grow: 1;
-            padding: 0.75rem;
-            border: 1px solid #B0BEC5; /* Light blue-gray */
-            border-radius: 0.5rem;
-            margin-right: 0.5rem;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        #chatbot-input:focus {
-            border-color: #00796B;
-            box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
-        }
-        #chatbot-send-button {
-            background-color: #00796B; /* Medium Teal */
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        #chatbot-send-button:hover {
-            background-color: #004d40; /* Dark Teal */
-            transform: scale(1.05);
-        }
+      #chatbot-input-container {
+        display: flex;
+        padding: 1rem;
+        border-top: 1px solid #e0e0e0;
+        background-color: #f9f9f9;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+      #chatbot-input {
+        flex-grow: 1;
+        padding: 0.75rem;
+        border: 1px solid #b0bec5; /* Light blue-gray */
+        border-radius: 0.5rem;
+        margin-right: 0.5rem;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      #chatbot-input:focus {
+        border-color: #00796b;
+        box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+      }
+      #chatbot-send-button {
+        background-color: #00796b; /* Medium Teal */
+        color: white;
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      #chatbot-send-button:hover {
+        background-color: #004d40; /* Dark Teal */
+        transform: scale(1.05);
+      }
 
+      /* Quick reply buttons for chatbot */
+      .quick-reply-button {
+        background-color: #e0f2f1; /* Lightest Teal */
+        color: #00796b; /* Medium Teal */
+        border: 1px solid #b2dfdb; /* Lighter Teal border */
+        padding: 0.5rem 1rem;
+        border-radius: 9999px; /* Full rounded */
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .quick-reply-button:hover {
+        background-color: #b2dfdb; /* Lighter Teal */
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
     </style>
-</head>
-<body class="min-h-screen flex flex-col">
-
+  </head>
+  <body class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-white shadow-lg py-4 px-6 md:px-8 flex justify-between items-center fixed w-full z-20 top-0 border-b border-gray-200">
-        <div class="flex items-center">
-            <!-- Logo Image -->
-            <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-20 w-20 mr-4 rounded-full shadow-md border border-gray-100" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DAA520/FFFFFF?text=Logo';" />
-            <span class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-shadow-sm header-title">UMKM SRIGONCO</span>
-        </div>
+      <!-- Left Section (Main Logo and Title) -->
+      <div class="flex items-center">
+        <img src="IMG/Logo.png" alt="Logo Desa Srigonco UMKM" class="h-16 w-16 mr-4 rounded-full shadow-md border border-gray-100" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DAA520/FFFFFF?text=Logo';" />
+        <span class="text-xl md:text-2xl lg:text-3xl font-extrabold text-shadow-sm header-title">UMKM SRIGONCO</span>
+      </div>
+
+      <!-- Right Section (Desktop Nav and Mobile Menu Button) -->
+      <div class="flex items-center space-x-8">
         <nav class="hidden md:flex space-x-8">
-            <button id="nav-home" onclick="navigateTo('home')" class="text-gray-700 hover:text-gray-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Beranda">
-                Beranda
-            </button>
-            <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-gray-700 hover:text-gray-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Produk UMKM">
-                Produk UMKM
-            </button>
+          <button id="nav-home" onclick="navigateTo('home')" class="text-gray-700 hover:text-gray-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Beranda">Beranda</button>
+          <button id="nav-umkm" onclick="navigateTo('umkm')" class="text-gray-700 hover:text-gray-900 text-lg font-semibold transition duration-300 group relative navbar-link-hover-effect" aria-label="Produk UMKM">Produk UMKM</button>
         </nav>
-        <div class="flex items-center space-x-4">
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Buka menu mobile">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="text-gray-700 hover:text-gray-900 focus:outline-none md:hidden" aria-label="Buka menu mobile">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-gray-900 bg-opacity-95 z-30 flex flex-col items-center justify-center space-y-6 hidden">
-        <button id="close-mobile-menu" class="absolute top-6 right-6 text-white hover:text-gray-300 focus:outline-none" aria-label="Tutup menu mobile">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <button id="mobile-nav-home" onclick="navigateTo('home')" class="text-white text-3xl font-semibold hover:text-DAA520 transition duration-300" aria-label="Beranda">Beranda</button>
-        <button id="mobile-nav-umkm" onclick="navigateTo('umkm')" class="text-white text-3xl font-semibold hover:text-DAA520 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button>
+      <button id="close-mobile-menu" class="absolute top-6 right-6 text-white hover:text-gray-300 focus:outline-none" aria-label="Tutup menu mobile">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <button id="mobile-nav-home" onclick="navigateTo('home')" class="text-white text-3xl font-semibold hover:text-DAA520 transition duration-300" aria-label="Beranda">Beranda</button>
+      <button id="mobile-nav-umkm" onclick="navigateTo('umkm')" class="text-white text-3xl font-semibold hover:text-DAA520 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button>
+      <!-- Removed logos for mobile menu as requested -->
     </div>
 
     <!-- Main Content Area -->
     <main id="main-content" class="flex-grow">
-        <!-- Content will be loaded here by JavaScript -->
+      <!-- Content will be loaded here by JavaScript -->
     </main>
 
     <!-- Loading Spinner -->
     <div id="loading-spinner" class="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div class="spinner"></div>
+      <div class="spinner"></div>
     </div>
 
     <!-- Product Image Modal (for full-size image view) -->
     <div id="product-image-modal" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6 relative">
-            <button id="close-modal-button" class="absolute top-3 right-3 text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Tutup modal gambar">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <img id="modal-image" src="" alt="Product Image" class="w-full h-auto rounded-lg max-h-[70vh] object-contain mx-auto" />
-            <p id="modal-caption" class="text-center text-gray-700 mt-4 text-lg font-semibold"></p>
-            <div class="flex justify-center mt-4">
-                <button id="download-image-button" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75" aria-label="Unduh gambar">
-                    Unduh Gambar
-                </button>
-            </div>
+      <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6 relative">
+        <button id="close-modal-button" class="absolute top-3 right-3 text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Tutup modal gambar">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <img id="modal-image" src="" alt="Product Image" class="w-full h-auto rounded-lg max-h-[70vh] object-contain mx-auto" />
+        <p id="modal-caption" class="text-center text-gray-700 mt-4 text-lg font-semibold"></p>
+        <div class="flex justify-center mt-4">
+          <button
+            id="download-image-button"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+            aria-label="Unduh gambar"
+          >
+            Unduh Gambar
+          </button>
         </div>
+      </div>
     </div>
 
     <!-- Product Quick View Modal (for quick product details) -->
     <div id="product-quick-view-modal" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-xl w-full p-6 relative">
-            <button id="close-quick-view-modal-button" class="absolute top-3 right-3 text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Tutup modal tampilan cepat">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <img id="quick-view-image" src="" alt="Product Image" class="w-full h-auto rounded-lg shadow-md object-cover max-h-64 md:max-h-full" />
-                </div>
-                <div>
-                    <h3 id="quick-view-name" class="text-2xl font-bold text-gray-900 mb-2"></h3>
-                    <p id="quick-view-description" class="text-gray-700 text-sm mb-4 line-clamp-4"></p>
-                    <p id="quick-view-stock" class="text-gray-700 font-semibold text-sm mb-4"></p>
-                    <p id="quick-view-address" class="text-gray-700 text-sm mb-4"></p>
-                    <div class="flex flex-col gap-3">
-                        <a id="quick-view-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Beli via WhatsApp">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z" />
-                                        </svg>
-                            Beli via WhatsApp
-                        </a>
-                        <button id="quick-view-detail-button" class="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat detail produk">
-                            Lihat Detail Produk
-                        </button>
-                    </div>
-                </div>
+      <div class="bg-white rounded-lg shadow-xl max-w-xl w-full p-6 relative">
+        <button id="close-quick-view-modal-button" class="absolute top-3 right-3 text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Tutup modal tampilan cepat">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <img id="quick-view-image" src="" alt="Product Image" class="w-full h-auto rounded-lg shadow-md object-cover max-h-64 md:max-h-full" />
+          </div>
+          <div>
+            <h3 id="quick-view-name" class="text-2xl font-bold text-gray-900 mb-2"></h3>
+            <p id="quick-view-description" class="text-gray-700 text-sm mb-4 line-clamp-4"></p>
+            <p id="quick-view-stock" class="text-gray-700 font-semibold text-sm mb-4"></p>
+            <p id="quick-view-address" class="text-gray-700 text-sm mb-4"></p>
+            <div class="flex flex-col gap-3">
+              <a
+                id="quick-view-whatsapp"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+                aria-label="Beli via WhatsApp"
+              >
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z"
+                  />
+                </svg>
+                Beli via WhatsApp
+              </a>
+              <button
+                id="quick-view-detail-button"
+                class="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+                aria-label="Lihat detail produk"
+              >
+                Lihat Detail Produk
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top-button" class="fixed bottom-6 right-6 bg-00796B hover:bg-004d40 text-white p-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-00796B focus:ring-opacity-75 hidden" aria-label="Kembali ke atas">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
+    <button
+      id="back-to-top-button"
+      class="fixed bottom-6 right-6 bg-00796B hover:bg-004d40 text-white p-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-00796B focus:ring-opacity-75 hidden"
+      aria-label="Kembali ke atas"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+      </svg>
     </button>
 
     <!-- Chatbot Button -->
     <button id="chatbot-button" aria-label="Buka Chatbot">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-        </svg>
+      <!-- Using a generic chat icon. Replace with your PandaSari icon/SVG -->
+      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+      </svg>
     </button>
 
     <!-- Chatbot Container -->
     <div id="chatbot-container" class="hidden">
-        <div id="chatbot-header">
-            <h3 class="text-lg font-semibold">Chatbot UMKM Srigonco</h3>
-            <button id="close-chatbot-button" class="text-white hover:text-gray-200" aria-label="Tutup Chatbot">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
+      <div id="chatbot-header">
+        <h3 class="text-lg font-semibold">
+          <!-- Placeholder for PandaSari Avatar. Replace with your image/SVG -->
+          <span class="mr-2 text-2xl">🐼</span> PandaSari Chatbot
+        </h3>
+        <button id="close-chatbot-button" class="text-white hover:text-gray-200" aria-label="Tutup Chatbot">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <div id="chatbot-messages">
+        <!-- Chat messages will appear here -->
+        <div class="message-bubble bot-message">Halo! Saya chatbot PandaSari dari UMKM Desa Srigonco. Ada yang bisa saya bantu?</div>
+      </div>
+      <div class="p-3 bg-gray-50 border-t border-gray-200">
+        <h4 class="text-sm font-semibold text-gray-700 mb-2">Topik Bantuan Cepat:</h4>
+        <div class="flex flex-wrap gap-2">
+          <button class="quick-reply-button" data-query="Apa itu Fadin Snack?">Fadin Snack</button>
+          <button class="quick-reply-button" data-query="Produk kerajinan apa saja?">Kerajinan</button>
+          <button class="quick-reply-button" data-query="Dimana Desa Srigonco?">Lokasi Desa</button>
+          <button class="quick-reply-button" data-query="Bagaimana cara membeli produk?">Cara Beli</button>
+          <!-- Add more quick reply buttons as needed -->
         </div>
-        <div id="chatbot-messages">
-            <!-- Chat messages will appear here -->
-            <div class="message-bubble bot-message">Halo! Saya chatbot UMKM Desa Srigonco. Ada yang bisa saya bantu?</div>
-        </div>
-        <div id="chatbot-input-container">
-            <input type="text" id="chatbot-input" placeholder="Ketik pesan Anda..." aria-label="Ketik pesan Anda">
-            <button id="chatbot-send-button" aria-label="Kirim Pesan">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </button>
-        </div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Ketik pesan Anda..." aria-label="Ketik pesan Anda" />
+        <button id="chatbot-send-button" aria-label="Kirim Pesan">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer-elegant-bg py-8 px-4 md:px-8 text-center mt-auto">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-xl font-bold mb-4">Desa Srigonco UMKM</h3>
-                <p>
-                    Membangun desa mandiri dan sejahtera melalui potensi alam dan UMKM lokal.
-                </p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
-                <ul class="space-y-2">
-                    <li><button onclick="navigateTo('home')" class="hover:text-FFD700 transition duration-300" aria-label="Beranda">Beranda</button></li>
-                    <li><button onclick="navigateTo('umkm')" class="hover:text-FFD700 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Ikuti Kami</h3>
-                <div class="flex justify-center space-x-4">
-                    <a href="https://facebook.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-FFD700 transition duration-300" aria-label="Ikuti kami di Facebook">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.04C6.51 2.04 2 6.55 2 12.04c0 4.93 3.58 9.04 8.28 9.87v-7.05H7.07V12.04h3.21V9.45c0-3.18 1.94-4.91 4.75-4.91 1.35 0 2.51.1 2.85.15v3.1h-1.85c-1.5 0-1.79.71-1.79 1.76v2.31h3.48l-.5 3.53h-2.98V21.91C18.42 21.08 22 16.97 22 12.04 22 6.55 17.49 2.04 12 2.04z"/></svg>
-                    </a>
-                    <a href="https://instagram.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-FFD700 transition duration-300" aria-label="Ikuti kami di Instagram">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C18.14 2 22 5.86 22 10.2v3.6c0 4.34-3.86 8.2-7.8 8.2H7.8C3.46 22 2 18.14 2 13.8V10.2C2 5.86 3.86 2 7.8 2zm-.2 4A2.88 2.88 0 0 0 4.8 6.8v6.4c0 1.59 1.3 2.88 2.88 2.88h6.4c1.59 0 2.88-1.3 2.88-2.88V6.8c0-1.59-1.3-2.88-2.88-2.88H7.6zm9.6 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7.2c-2.65 0-4.8 2.15-4.8 4.8s2.15 4.8 4.8 4.8 4.8-2.15 4.8-4.8-2.15-4.8-4.8-4.8zm0 1.6c1.76 0 3.2 1.44 3.2 3.2s-1.44 3.2-3.2 3.2-3.2-1.44-3.2-3.2 1.44-3.2 3.2-3.2z"/></svg>
-                    </a>
-                </div>
-            </div>
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Desa Srigonco UMKM</h3>
+          <p>Membangun desa mandiri dan sejahtera melalui potensi alam dan UMKM lokal.</p>
         </div>
-        <div class="mt-8 border-t pt-6 text-sm">
-            &copy; <span id="current-year"></span> Desa Srigonco. Hak Cipta Dilindungi. By KKN UM
+        <div>
+          <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
+          <ul class="space-y-2">
+            <li><button onclick="navigateTo('home')" class="hover:text-FFD700 transition duration-300" aria-label="Beranda">Beranda</button></li>
+            <li><button onclick="navigateTo('umkm')" class="hover:text-FFD700 transition duration-300" aria-label="Produk UMKM">Produk UMKM</button></li>
+          </ul>
         </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Ikuti Kami</h3>
+          <div class="flex justify-center space-x-4">
+            <a href="https://facebook.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-FFD700 transition duration-300" aria-label="Ikuti kami di Facebook">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.04C6.51 2.04 2 6.55 2 12.04c0 4.93 3.58 9.04 8.28 9.87v-7.05H7.07V12.04h3.21V9.45c0-3.18 1.94-4.91 4.75-4.91 1.35 0 2.51.1 2.85.15v3.1h-1.85c-1.5 0-1.79.71-1.79 1.76v2.31h3.48l-.5 3.53h-2.98V21.91C18.42 21.08 22 16.97 22 12.04 22 6.55 17.49 2.04 12 2.04z"
+                />
+              </svg>
+            </a>
+            <a href="https://instagram.com/desasrigonco" target="_blank" rel="noopener noreferrer" class="hover:text-FFD700 transition duration-300" aria-label="Ikuti kami di Instagram">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M7.8 2h8.4C18.14 2 22 5.86 22 10.2v3.6c0 4.34-3.86 8.2-7.8 8.2H7.8C3.46 22 2 18.14 2 13.8V10.2C2 5.86 3.86 2 7.8 2zm-.2 4A2.88 2.88 0 0 0 4.8 6.8v6.4c0 1.59 1.3 2.88 2.88 2.88h6.4c1.59 0 2.88-1.3 2.88-2.88V6.8c0-1.59-1.3-2.88-2.88-2.88H7.6zm9.6 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7.2c-2.65 0-4.8 2.15-4.8 4.8s2.15 4.8 4.8 4.8 4.8-2.15 4.8-4.8-2.15-4.8-4.8-4.8zm0 1.6c1.76 0 3.2 1.44 3.2 3.2s-1.44 3.2-3.2 3.2-3.2-1.44-3.2-3.2 1.44-3.2 3.2-3.2z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 border-t pt-6 text-sm">&copy; 2025 Hak Cipta - Pemerintahan Desa Srigonco - Bekerja sama dengan KKN Univeritas Malang 2025.</div>
     </footer>
 
     <script>
-        // Global state variables
-        let currentPage = 'home';
-        let selectedProduct = null;
-        let searchTerm = '';
-        let selectedCategory = 'Semua';
-        let selectedSort = 'default'; // New state for sorting
-        let showBackToTop = false;
-        let currentCarouselIndex = 0; // For hero carousel
-        let carouselInterval;
-        let showLoading = false;
+      // Global state variables
+      let currentPage = "home";
+      let selectedProduct = null;
+      let searchTerm = "";
+      let selectedCategory = "Semua";
+      let selectedSort = "default"; // New state for sorting
+      let showBackToTop = false;
+      let currentCarouselIndex = 0; // For hero carousel
+      let carouselInterval;
+      let showLoading = false;
 
-        // Pagination for UMKM
-        const itemsPerPage = 6;
-        let loadedProductCount = itemsPerPage;
+      // Pagination for UMKM
+      const itemsPerPage = 6;
+      let loadedProductCount = itemsPerPage;
 
-        // --- Data ---
-        // Moved data definitions inside DOMContentLoaded to ensure they are fully parsed before use.
-        let products = [];
-        let productCategories = [];
-        let testimonials = []; // New testimonials data
+      // --- Data ---
+      // Moved data definitions inside DOMContentLoaded to ensure they are fully parsed before use.
+      let products = [];
+      let productCategories = [];
+      let testimonials = []; // New testimonials data
 
-        // --- Helper Functions ---
+      // --- Helper Functions ---
 
-        // Debounce function to limit how often a function is called
-        function debounce(func, delay) {
-            let timeout;
-            return function(...args) {
-                const context = this;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), delay);
-            };
+      // Debounce function to limit how often a function is called
+      function debounce(func, delay) {
+        let timeout;
+        return function (...args) {
+          const context = this;
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+      }
+
+      // Show/hide loading spinner
+      function toggleLoading(show) {
+        const spinner = document.getElementById("loading-spinner");
+        if (spinner) {
+          if (show) {
+            spinner.classList.remove("hidden");
+          } else {
+            spinner.classList.add("hidden");
+          }
+        }
+      }
+
+      // --- Core Navigation & Rendering ---
+      function navigateTo(page, dataId = null) {
+        toggleLoading(true); // Show loading spinner
+        setTimeout(() => {
+          // Simulate network delay
+          currentPage = page;
+          selectedProduct = null;
+          searchTerm = ""; // Reset search term on page change
+          selectedCategory = "Semua"; // Reset category filter
+          selectedSort = "default"; // Reset sort order
+          loadedProductCount = itemsPerPage; // Reset pagination
+
+          if (page === "productDetail" && dataId !== null) {
+            selectedProduct = products.find((p) => p.id === dataId);
+          }
+
+          renderContent();
+          toggleMobileMenu(false); // Close mobile menu
+          window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
+          toggleLoading(false); // Hide loading spinner
+
+          // Update active navigation link
+          updateActiveNavLink(); // New function call
+        }, 300); // Small delay for effect
+      }
+
+      function renderContent() {
+        const mainContentDiv = document.getElementById("main-content");
+        let contentHtml = "";
+
+        // Clear any previous carousel interval
+        if (carouselInterval) {
+          clearInterval(carouselInterval);
         }
 
-        // Show/hide loading spinner
-        function toggleLoading(show) {
-            const spinner = document.getElementById('loading-spinner');
-            if (spinner) {
-                if (show) {
-                    spinner.classList.remove('hidden');
-                } else {
-                    spinner.classList.add('hidden');
-                }
-            }
+        switch (currentPage) {
+          case "home":
+            contentHtml = renderHomePage();
+            break;
+          case "umkm":
+            contentHtml = renderUmkmPage();
+            break;
+          case "productDetail":
+            contentHtml = renderProductDetailPage();
+            break;
+          default:
+            contentHtml = `<div class="text-center py-12 text-gray-600">Halaman tidak ditemukan.</div>`;
+        }
+        mainContentDiv.innerHTML = contentHtml;
+
+        // Re-attach event listeners for dynamic content
+        attachEventListeners();
+      }
+
+      function attachEventListeners() {
+        // UMKM search input
+        const searchInput = document.getElementById("umkm-search-input");
+        if (searchInput) {
+          // Debounce the search input
+          const debouncedSearch = debounce((e) => {
+            searchTerm = e.target.value;
+            loadedProductCount = itemsPerPage; // Reset pagination on new search
+            renderContent();
+          }, 300);
+          searchInput.removeEventListener("input", debouncedSearch);
+          searchInput.addEventListener("input", debouncedSearch);
         }
 
-        // --- Core Navigation & Rendering ---
-        function navigateTo(page, dataId = null) {
-            toggleLoading(true); // Show loading spinner
-            setTimeout(() => { // Simulate network delay
-                currentPage = page;
-                selectedProduct = null;
-                searchTerm = ''; // Reset search term on page change
-                selectedCategory = 'Semua'; // Reset category filter
-                selectedSort = 'default'; // Reset sort order
-                loadedProductCount = itemsPerPage; // Reset pagination
+        // UMKM category filter buttons
+        const categoryButtons = document.querySelectorAll(".category-button");
+        categoryButtons.forEach((button) => {
+          button.removeEventListener("click", handleCategoryFilter);
+          button.addEventListener("click", handleCategoryFilter);
+        });
 
-                if (page === 'productDetail' && dataId !== null) {
-                    selectedProduct = products.find(p => p.id === dataId);
-                }
-
-                renderContent();
-                toggleMobileMenu(false); // Close mobile menu
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
-                toggleLoading(false); // Hide loading spinner
-
-                // Update active navigation link
-                updateActiveNavLink(); // New function call
-            }, 300); // Small delay for effect
+        // UMKM sort dropdown
+        const sortDropdown = document.getElementById("umkm-sort-dropdown");
+        if (sortDropdown) {
+          sortDropdown.removeEventListener("change", handleSortChange);
+          sortDropdown.addEventListener("change", handleSortChange);
         }
 
-        function renderContent() {
-            const mainContentDiv = document.getElementById('main-content');
-            let contentHtml = '';
-
-            // Clear any previous carousel interval
-            if (carouselInterval) {
-                clearInterval(carouselInterval);
-            }
-
-            switch (currentPage) {
-                case 'home':
-                    contentHtml = renderHomePage();
-                    break;
-                case 'umkm':
-                    contentHtml = renderUmkmPage();
-                    break;
-                case 'productDetail':
-                    contentHtml = renderProductDetailPage();
-                    break;
-                default:
-                    contentHtml = `<div class="text-center py-12 text-gray-600">Halaman tidak ditemukan.</div>`;
-            }
-            mainContentDiv.innerHTML = contentHtml;
-
-            // Re-attach event listeners for dynamic content
-            attachEventListeners();
+        // Load More button
+        const loadMoreProductsBtn = document.getElementById("load-more-products");
+        if (loadMoreProductsBtn) {
+          loadMoreProductsBtn.removeEventListener("click", loadMoreProducts);
+          loadMoreProductsBtn.addEventListener("click", loadMoreProducts);
         }
 
-        function attachEventListeners() {
-            // UMKM search input
-            const searchInput = document.getElementById('umkm-search-input');
-            if (searchInput) {
-                // Debounce the search input
-                const debouncedSearch = debounce((e) => {
-                    searchTerm = e.target.value;
-                    loadedProductCount = itemsPerPage; // Reset pagination on new search
-                    renderContent();
-                }, 300);
-                searchInput.removeEventListener('input', debouncedSearch);
-                searchInput.addEventListener('input', debouncedSearch);
-            }
+        // Product image click to open modal
+        const imagesToModal = document.querySelectorAll(".product-image-thumbnail");
+        imagesToModal.forEach((img) => {
+          img.removeEventListener("click", handleImageClickToModal);
+          img.addEventListener("click", handleImageClickToModal);
+        });
 
-            // UMKM category filter buttons
-            const categoryButtons = document.querySelectorAll('.category-button');
-            categoryButtons.forEach(button => {
-                button.removeEventListener('click', handleCategoryFilter);
-                button.addEventListener('click', handleCategoryFilter);
-            });
-
-            // UMKM sort dropdown
-            const sortDropdown = document.getElementById('umkm-sort-dropdown');
-            if (sortDropdown) {
-                sortDropdown.removeEventListener('change', handleSortChange);
-                sortDropdown.addEventListener('change', handleSortChange);
-            }
-
-            // Load More button
-            const loadMoreProductsBtn = document.getElementById('load-more-products');
-            if (loadMoreProductsBtn) {
-                loadMoreProductsBtn.removeEventListener('click', loadMoreProducts);
-                loadMoreProductsBtn.addEventListener('click', loadMoreProducts);
-            }
-
-            // Product image click to open modal
-            const imagesToModal = document.querySelectorAll('.product-image-thumbnail');
-            imagesToModal.forEach(img => {
-                img.removeEventListener('click', handleImageClickToModal);
-                img.addEventListener('click', handleImageClickToModal);
-            });
-
-            // Close modal button
-            const closeModalButton = document.getElementById('close-modal-button');
-            if (closeModalButton) {
-                closeModalButton.removeEventListener('click', closeImageModal);
-                closeModalButton.addEventListener('click', closeImageModal);
-            }
-
-            // Download image button in modal
-            const downloadImageButton = document.getElementById('download-image-button');
-            if (downloadImageButton) {
-                downloadImageButton.removeEventListener('click', downloadModalImage);
-                downloadImageButton.addEventListener('click', downloadModalImage);
-            }
-
-            // Product Quick View buttons
-            const quickViewButtons = document.querySelectorAll('.quick-view-button');
-            quickViewButtons.forEach(button => {
-                button.removeEventListener('click', (e) => openProductQuickViewModal(parseInt(e.currentTarget.dataset.productId)));
-                button.addEventListener('click', (e) => openProductQuickViewModal(parseInt(e.currentTarget.dataset.productId)));
-            });
-            const closeQuickViewModalButton = document.getElementById('close-quick-view-modal-button');
-            if (closeQuickViewModalButton) {
-                closeQuickViewModalButton.removeEventListener('click', closeProductQuickViewModal);
-                closeQuickViewModalButton.addEventListener('click', closeQuickViewModalButton);
-            }
-            const quickViewDetailButton = document.getElementById('quick-view-detail-button');
-            if (quickViewDetailButton) {
-                quickViewDetailButton.removeEventListener('click', handleQuickViewDetailClick);
-                quickViewDetailButton.addEventListener('click', handleQuickViewDetailClick);
-            }
-
-            // Carousel controls (if on home page)
-            if (currentPage === 'home') {
-                const prevButton = document.getElementById('carousel-prev');
-                const nextButton = document.getElementById('carousel-next');
-                if (prevButton && nextButton) {
-                    prevButton.removeEventListener('click', showPrevCarouselItem);
-                    nextButton.removeEventListener('click', showNextCarouselItem);
-                    prevButton.addEventListener('click', showPrevCarouselItem);
-                    nextButton.addEventListener('click', showNextCarouselItem);
-                    startCarousel(); // Start auto-play
-                }
-
-                // Attach Intersection Observer for new homepage animations
-                setupIntersectionObserver();
-            }
-
-            // Share product button
-            const shareProductButton = document.getElementById('share-product-button');
-            if (shareProductButton) {
-                shareProductButton.removeEventListener('click', shareProduct);
-                shareProductButton.addEventListener('click', shareProduct);
-            }
-
-            // Copy Link button
-            const copyLinkButton = document.getElementById('copy-link-button');
-            if (copyLinkButton) {
-                copyLinkButton.removeEventListener('click', copyProductLink);
-                copyLinkButton.addEventListener('click', copyLinkButton);
-            }
-
-            // Chatbot event listeners
-            const chatbotButton = document.getElementById('chatbot-button');
-            const closeChatbotButton = document.getElementById('close-chatbot-button');
-            const chatbotInput = document.getElementById('chatbot-input');
-            const chatbotSendButton = document.getElementById('chatbot-send-button');
-
-            if (chatbotButton) {
-                chatbotButton.removeEventListener('click', toggleChatbot);
-                chatbotButton.addEventListener('click', toggleChatbot);
-            }
-            if (closeChatbotButton) {
-                closeChatbotButton.removeEventListener('click', toggleChatbot);
-                closeChatbotButton.addEventListener('click', toggleChatbot);
-            }
-            if (chatbotInput) {
-                chatbotInput.removeEventListener('keypress', handleChatInputKeyPress);
-                chatbotInput.addEventListener('keypress', handleChatInputKeyPress);
-            }
-            if (chatbotSendButton) {
-                chatbotSendButton.removeEventListener('click', sendChatMessage);
-                chatbotSendButton.addEventListener('click', sendChatMessage);
-            }
+        // Close modal button
+        const closeModalButton = document.getElementById("close-modal-button");
+        if (closeModalButton) {
+          closeModalButton.removeEventListener("click", closeImageModal);
+          closeModalButton.addEventListener("click", closeImageModal);
         }
 
-        // --- Page Rendering Functions ---
+        // Download image button in modal
+        const downloadImageButton = document.getElementById("download-image-button");
+        if (downloadImageButton) {
+          downloadImageButton.removeEventListener("click", downloadModalImage);
+          downloadImageButton.addEventListener("click", downloadModalImage);
+        }
 
-        function renderHomePage() {
-            const carouselItems = [
-                {
-                    image: 'IMG/banner1.jpg',
-                    caption: 'Selamat Datang di Desa Srigonco',
-                    subtitle: 'Jelajahi keindahan alam dan kekayaan budaya kami.'
-                },
-                {
-                    image: 'IMG/banner2.jpg',
-                    caption: 'Dukung Produk Unggulan UMKM Desa Srigonco',
-                    subtitle: 'Kualitas terbaik dari tangan-tangan terampil.'
-                },
-                {
-                    image: 'IMG/banner3.jpg',
-                    caption: 'Pesona Alam Desa Srigonco',
-                    subtitle: 'Nikmati ketenangan dan keasrian pedesaan.'
-                }
-            ].map((item, index) => `
-                <div class="carousel-item ${index === 0 ? 'active' : ''} relative h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden parallax-bg" style="background-image: url('${item.image}')">
+        // Product Quick View buttons
+        const quickViewButtons = document.querySelectorAll(".quick-view-button");
+        quickViewButtons.forEach((button) => {
+          button.removeEventListener("click", (e) => openProductQuickViewModal(parseInt(e.currentTarget.dataset.productId)));
+          button.addEventListener("click", (e) => openProductQuickViewModal(parseInt(e.currentTarget.dataset.productId)));
+        });
+        const closeQuickViewModalButton = document.getElementById("close-quick-view-modal-button");
+        if (closeQuickViewModalButton) {
+          closeQuickViewModalButton.removeEventListener("click", closeProductQuickViewModal);
+          closeQuickViewModalButton.addEventListener("click", closeQuickViewModalButton);
+        }
+        const quickViewDetailButton = document.getElementById("quick-view-detail-button");
+        if (quickViewDetailButton) {
+          quickViewDetailButton.removeEventListener("click", handleQuickViewDetailClick);
+          quickViewDetailButton.addEventListener("click", handleQuickViewDetailClick);
+        }
+
+        // Carousel controls (if on home page)
+        if (currentPage === "home") {
+          const prevButton = document.getElementById("carousel-prev");
+          const nextButton = document.getElementById("carousel-next");
+          if (prevButton && nextButton) {
+            prevButton.removeEventListener("click", showPrevCarouselItem);
+            nextButton.removeEventListener("click", showNextCarouselItem);
+            prevButton.addEventListener("click", showPrevCarouselItem);
+            nextButton.addEventListener("click", showNextCarouselItem);
+            startCarousel(); // Start auto-play
+          }
+
+          // Attach Intersection Observer for new homepage animations
+          setupIntersectionObserver();
+        }
+
+        // Share product button
+        const shareProductButton = document.getElementById("share-product-button");
+        if (shareProductButton) {
+          shareProductButton.removeEventListener("click", shareProduct);
+          shareProductButton.addEventListener("click", shareProduct);
+        }
+
+        // Copy Link button
+        const copyLinkButton = document.getElementById("copy-link-button");
+        if (copyLinkButton) {
+          copyLinkButton.removeEventListener("click", copyProductLink);
+          copyLinkButton.addEventListener("click", copyLinkButton);
+        }
+
+        // Chatbot event listeners
+        const chatbotButton = document.getElementById("chatbot-button");
+        const closeChatbotButton = document.getElementById("close-chatbot-button");
+        const chatbotInput = document.getElementById("chatbot-input");
+        const chatbotSendButton = document.getElementById("chatbot-send-button");
+        const quickReplyButtons = document.querySelectorAll(".quick-reply-button"); // New: quick reply buttons
+
+        if (chatbotButton) {
+          chatbotButton.removeEventListener("click", toggleChatbot);
+          chatbotButton.addEventListener("click", toggleChatbot);
+        }
+        if (closeChatbotButton) {
+          closeChatbotButton.removeEventListener("click", toggleChatbot);
+          closeChatbotButton.addEventListener("click", toggleChatbot);
+        }
+        if (chatbotInput) {
+          chatbotInput.removeEventListener("keypress", handleChatInputKeyPress);
+          chatbotInput.addEventListener("keypress", handleChatInputKeyPress);
+        }
+        if (chatbotSendButton) {
+          chatbotSendButton.removeEventListener("click", sendChatMessage);
+          chatbotSendButton.addEventListener("click", sendChatMessage);
+        }
+        // New: Add event listeners for quick reply buttons
+        quickReplyButtons.forEach((button) => {
+          button.removeEventListener("click", handleQuickReplyClick);
+          button.addEventListener("click", handleQuickReplyClick);
+        });
+      }
+
+      // --- Page Rendering Functions ---
+
+      function renderHomePage() {
+        const carouselItems = [
+          {
+            image: "IMG/banner1.jpg",
+            caption: "Selamat Datang di Desa Srigonco",
+            subtitle: "Jelajahi keindahan alam dan kekayaan budaya kami.",
+          },
+          {
+            image: "IMG/banner2.jpg",
+            caption: "Dukung Produk Unggulan UMKM Desa Srigonco",
+            subtitle: "Kualitas terbaik dari tangan-tangan terampil.",
+          },
+          {
+            image: "IMG/banner3.jpg",
+            caption: "Pesona Alam Desa Srigonco",
+            subtitle: "Nikmati ketenangan dan keasrian pedesaan.",
+          },
+        ]
+          .map(
+            (item, index) => `
+                <div class="carousel-item ${index === 0 ? "active" : ""} relative h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden parallax-bg" style="background-image: url('${item.image}')">
                     <div class="hero-overlay absolute inset-0 flex flex-col items-center justify-center text-white p-4 text-center">
                         <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-reveal text-shadow-lg font-['Playfair_Display']" data-aos="fade-up">${item.caption}</h1>
                         <p class="text-lg md:text-2xl mb-8 max-w-3xl text-reveal delay-100 font-['Lora']" data-aos="fade-up" data-aos-delay="100">${item.subtitle}</p>
-                        <button onclick="navigateTo('umkm')" class="btn-primary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-00796B focus:ring-opacity-75 text-reveal delay-200" data-aos="fade-up" data-aos-delay="200" aria-label="Jelajahi Sekarang">
+                        <button onclick="navigateTo('umkm')" class="btn-primary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-bounce-once focus:outline-none focus:ring-2 focus:ring-00796B focus:ring-opacity-75 text-reveal delay-200" aria-label="Jelajahi Sekarang">
                             Jelajahi Sekarang
                         </button>
                     </div>
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
 
-            return `
+        return `
                 <!-- Hero Section -->
                 <section class="relative w-full overflow-hidden mb-16">
                     <div id="image-carousel" class="relative">
@@ -986,6 +1094,17 @@
                     <button id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full mr-4 hover:bg-opacity-75 transition duration-300 z-10" aria-label="Next image">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
+                </section>
+
+                <!-- Supported By Section -->
+                <section class="text-center py-8 mb-16 animate-fadeIn" data-aos="fade-up">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 elegant-section-title font-['Playfair_Display']">Supported By :</h2>
+                    <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 max-w-8xl mx-auto px-8">
+                        <img src="IMG/Logo-kab.mlg.png" alt="Logo Kabupaten Malang" class="h-28 w-auto mx-4 my-2 object-contain rounded-lg transition duration-300 ease-in-out transform hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/120x80/DAA520/FFFFFF?text=Kab.Mlg';" data-aos="fade-up" data-aos-delay="100"/>
+                        <img src="IMG/KKNP_20_UMSIDA.png" alt="Logo KKNP 20 UMSIDA" class="h-28 w-auto mx-4 my-2 object-contain rounded-lg transition duration-300 ease-in-out transform hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/120x80/5D4037/FFFFFF?text=KKNP';" data-aos="fade-up" data-aos-delay="200"/>
+                         <img src="IMG/Logo-Kampus-Merdeka.png" alt="Logo Kampus Merdeka" class="h-28 w-auto mx-4 my-2 object-contain rounded-lg transition duration-300 ease-in-out transform hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/120x80/00796B/FFFFFF?text=Kampus';" data-aos="fade-up" data-aos-delay="300"/>
+                        <img src="IMG/Logo-KKN.png" alt="Logo KKN Universitas Malang" class="h-40 w-auto mx-4 my-2 object-contain rounded-lg transition duration-300 ease-in-out transform hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/120x80/DAA520/FFFFFF?text=KKN';" data-aos="fade-up" data-aos-delay="400"/>
+                    </div>
                 </section>
 
                 <div class="container mx-auto px-4 py-8">
@@ -1045,7 +1164,7 @@
 
                     <!-- Why Choose Us Section -->
                     <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-12 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Mengapa Memilih Produk UMKM Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                             <div class="p-8 rounded-2xl elegant-card transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
                                 <svg class="w-24 h-24 elegant-icon why-choose-us-icon-1 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -1069,7 +1188,10 @@
                     <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Produk Unggulan UMKM</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            ${products.slice(0, 3).map((product, index) => `
+                            ${products
+                              .slice(0, 3)
+                              .map(
+                                (product, index) => `
                                 <div class="elegant-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up" data-aos-delay="${index * 100}">
                                     <img
                                         src="${product.image}"
@@ -1083,13 +1205,17 @@
                                         <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2 font-['Lora']">${product.name}</h3>
                                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
                                         <div class="flex justify-end items-center">
-                                            <button data-product-id="${product.id}" class="btn-primary-elegant text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${product.name}">
+                                            <button data-product-id="${product.id}" class="btn-primary-elegant text-white text-sm font-medium py-2 px-4 rounded-full transition duration-300 quick-view-button" aria-label="Lihat Cepat ${
+                                  product.name
+                                }">
                                                 Lihat Cepat
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                            `).join('')}
+                            `
+                              )
+                              .join("")}
                         </div>
                         <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="400">
                             <button onclick="navigateTo('umkm')" class="btn-secondary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Lihat Semua Produk UMKM">
@@ -1102,14 +1228,20 @@
                     <section class="py-16 elegant-section-bg mb-16 animate-fadeIn" data-aos="fade-up">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-10 elegant-section-title font-['Playfair_Display']" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            ${testimonials.map((testimonial, index) => `
+                            ${testimonials
+                              .map(
+                                (testimonial, index) => `
                                 <div class="elegant-card p-6 text-center transform transition duration-300 hover:scale-105" data-aos="fade-up" data-aos-delay="${index * 100}">
-                                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-DAA520" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DAA520/FFFFFF?text=Avatar';" />
+                                    <img src="${testimonial.avatar}" alt="${
+                                  testimonial.name
+                                }" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-DAA520" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DAA520/FFFFFF?text=Avatar';" />
                                     <p class="text-gray-700 italic mb-4 line-clamp-4">"${testimonial.quote}"</p>
                                     <p class="font-semibold text-gray-800 font-['Lora']">${testimonial.name}</p>
                                     <p class="text-sm text-gray-500">${testimonial.title}</p>
                                 </div>
-                            `).join('')}
+                            `
+                              )
+                              .join("")}
                         </div>
                     </section>
 
@@ -1120,13 +1252,13 @@
                             Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui WhatsApp untuk respons cepat atau gunakan chatbot kami!
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center contact-button-primary-elegant font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="200" aria-label="Chat via WhatsApp">
+                            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20Desa%20Srigonco." target="_blank" rel="noopener noreferrer" class="inline-flex items-center contact-button-primary-elegant font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" aria-label="Chat via WhatsApp">
                                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12.04 2C7.34 2 3.54 5.79 3.54 10.49c0 1.76.54 3.42 1.48 4.85L3 21.04l5.24-1.38c1.33.72 2.85 1.15 4.08 1.15 4.71 0 8.5-3.79 8.5-8.49S16.74 2 12.04 2zm3.39 12.24c-.16.27-.99.64-1.37.69-.37.05-.64.08-.92-.08-.27-.16-.99-.37-1.27-.85-.27-.47-.03-.72-.22-.92-.19-.19-.42-.27-.64-.27-.16 0-.34.03-.52.03-.19 0-.47.08-.72.34-.27.27-1.04 1.04-1.04 2.54s1.07 2.94 1.22 3.12c.16.19 2.03 3.12 4.93 4.35 2.39.99 2.85.79 3.34.79.47 0 .99-.19 1.15-.37.16-.19.27-.37.42-.64.16-.27.16-.47.11-.85-.05-.37-.19-.64-.37-.92-.16-.27-.37-.42-.52-.52-.16-.16-.34-.27-.47-.27-.16 0-.34.03-.52.11z" />
                                         </svg>
                                         Chat via WhatsApp
                             </a>
-                            <a href="mailto:info.srigonco@example.com" class="inline-flex items-center contact-button-secondary-elegant font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" data-aos="fade-up" data-aos-delay="300" aria-label="Kirim Email">
+                            <a href="mailto:info.srigonco@example.com" class="inline-flex items-center contact-button-secondary-elegant font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" aria-label="Kirim Email">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 13h9A2 2 0 0021 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                 Kirim Email
                             </a>
@@ -1134,37 +1266,46 @@
                     </section>
                 </div>
             `;
+      }
+
+      function renderUmkmPage() {
+        let filteredProducts = products.filter(
+          (product) =>
+            (selectedCategory === "Semua" || product.category === selectedCategory) &&
+            (product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              product.keywords.some((keyword) => keyword.toLowerCase().includes(searchTerm.toLowerCase())))
+        );
+
+        // Sorting logic
+        if (selectedSort === "name-asc") {
+          filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (selectedSort === "name-desc") {
+          filteredProducts.sort((a, b) => b.name.localeCompare(b.name));
         }
 
-        function renderUmkmPage() {
-            let filteredProducts = products.filter(product =>
-                (selectedCategory === 'Semua' || product.category === selectedCategory) &&
-                (product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm.toLowerCase())))
-            );
+        const displayedProducts = filteredProducts.slice(0, loadedProductCount);
 
-            // Sorting logic
-            if (selectedSort === 'name-asc') {
-                filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (selectedSort === 'name-desc') {
-                filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
-            }
-
-            const displayedProducts = filteredProducts.slice(0, loadedProductCount);
-
-            const categoryButtonsHtml = productCategories.map(category => `
+        const categoryButtonsHtml = productCategories
+          .map(
+            (category) => `
                 <button
                     class="category-button px-5 py-2 rounded-full text-sm font-medium transition duration-300
-                    ${selectedCategory === category ? 'active' : ''}"
+                    ${selectedCategory === category ? "active" : ""}"
                     data-category="${category}"
                     aria-label="Filter kategori ${category}"
                 >
                     ${category}
                 </button>
-            `).join('');
+            `
+          )
+          .join("");
 
-            const productCards = displayedProducts.length > 0 ? displayedProducts.map(product => `
+        const productCards =
+          displayedProducts.length > 0
+            ? displayedProducts
+                .map(
+                  (product) => `
                 <div class="elegant-card overflow-hidden transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl animate-fadeIn" data-aos="fade-up">
                     <img
                         src="${product.image}"
@@ -1184,14 +1325,19 @@
                         </div>
                     </div>
                 </div>
-            `).join('') : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Produk tidak ditemukan.</p>`;
+            `
+                )
+                .join("")
+            : `<p class="col-span-full text-center text-gray-600 text-lg py-10">Produk tidak ditemukan.</p>`;
 
-            const loadMoreButtonHtml = (loadedProductCount < filteredProducts.length) ?
-                `<button id="load-more-products" class="mt-8 btn-secondary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
+        const loadMoreButtonHtml =
+          loadedProductCount < filteredProducts.length
+            ? `<button id="load-more-products" class="mt-8 btn-secondary-elegant text-white font-semibold py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105" aria-label="Muat lebih banyak produk">
                     Muat Lebih Banyak Produk
-                </button>` : '';
+                </button>`
+            : "";
 
-            return `
+        return `
                 <div class="container mx-auto px-4 py-12">
                     <div class="elegant-section-bg animate-fadeIn" data-aos="fade-up">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4 elegant-section-title font-['Playfair_Display']">Produk Unggulan UMKM Desa Srigonco</h2>
@@ -1208,9 +1354,9 @@
                                 aria-label="Cari produk"
                             />
                             <select id="umkm-sort-dropdown" class="p-3 border border-gray-300 rounded-md shadow-sm focus:ring-00796B focus:border-00796B transition duration-200" aria-label="Urutkan produk">
-                                <option value="default" ${selectedSort === 'default' ? 'selected' : ''}>Urutkan</option>
-                                <option value="name-asc" ${selectedSort === 'name-asc' ? 'selected' : ''}>Nama (A-Z)</option>
-                                <option value="name-desc" ${selectedSort === 'name-desc' ? 'selected' : ''}>Nama (Z-A)</option>
+                                <option value="default" ${selectedSort === "default" ? "selected" : ""}>Urutkan</option>
+                                <option value="name-asc" ${selectedSort === "name-asc" ? "selected" : ""}>Nama (A-Z)</option>
+                                <option value="name-desc" ${selectedSort === "name-desc" ? "selected" : ""}>Nama (Z-A)</option>
                             </select>
                         </div>
                         <div class="flex flex-wrap justify-center gap-3 mb-10">
@@ -1225,17 +1371,19 @@
                     </div>
                 </div>
             `;
+      }
+
+      function renderProductDetailPage() {
+        if (!selectedProduct) {
+          return `<div class="text-center py-12 text-gray-600">Produk tidak ditemukan.</div>`;
         }
 
-        function renderProductDetailPage() {
-            if (!selectedProduct) {
-                return `<div class="text-center py-12 text-gray-600">Produk tidak ditemukan.</div>`;
-            }
-
-            // Simulate recommended products based on category
-            const recommendedProducts = products.filter(p =>
-                p.category === selectedProduct.category && p.id !== selectedProduct.id
-            ).slice(0, 3).map(p => `
+        // Simulate recommended products based on category
+        const recommendedProducts = products
+          .filter((p) => p.category === selectedProduct.category && p.id !== selectedProduct.id)
+          .slice(0, 3)
+          .map(
+            (p) => `
                 <div class="elegant-card p-4 text-center">
                     <img src="${p.image}" alt="${p.name}" class="w-full h-32 object-cover rounded-md mb-3" onerror="this.onerror=null;this.src='https://placehold.co/200x150/DAA520/FFFFFF?text=${encodeURIComponent(p.name)}';" />
                     <h4 class="font-semibold text-gray-800 text-md mb-1 line-clamp-1 font-['Lora']">${p.name}</h4>
@@ -1243,9 +1391,11 @@
                         Lihat
                     </button>
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
 
-            return `
+        return `
                 <div class="container mx-auto px-4 py-12">
                     <div class="elegant-section-bg max-w-4xl mx-auto animate-fadeIn" data-aos="fade-up">
                         <button onclick="navigateTo('umkm')" class="mb-6 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-300" aria-label="Kembali ke halaman produk">
@@ -1294,161 +1444,168 @@
                                 </div>
                             </div>
                         </div>
-                        ${recommendedProducts.length > 0 ? `
+                        ${
+                          recommendedProducts.length > 0
+                            ? `
                             <div class="mt-12 border-t border-gray-200 pt-8">
                                 <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center elegant-section-title font-['Playfair_Display']">Rekomendasi Produk Serupa</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                     ${recommendedProducts}
                                 </div>
                             </div>
-                        ` : ''}
+                        `
+                            : ""
+                        }
                     </div>
                 </div>
             `;
+      }
+
+      // Removed renderGaleriPage function as per request
+
+      // --- Event Handlers ---
+
+      function handleSearchInput(event) {
+        searchTerm = event.target.value;
+        loadedProductCount = itemsPerPage; // Reset pagination on new search
+        renderContent(); // Re-render UMKM page with filtered results
+      }
+
+      function handleCategoryFilter(event) {
+        selectedCategory = event.target.dataset.category;
+        loadedProductCount = itemsPerPage; // Reset pagination on new filter
+        renderContent(); // Re-render UMKM page with filtered results
+      }
+
+      function handleSortChange(event) {
+        selectedSort = event.target.value;
+        loadedProductCount = itemsPerPage; // Reset pagination on new sort
+        renderContent(); // Re-render UMKM page with new sort order
+      }
+
+      // Removed handleGalleryCategoryFilter function as per request
+
+      function loadMoreProducts() {
+        loadedProductCount += itemsPerPage;
+        renderContent();
+      }
+
+      // Removed loadMoreGallery function as per request
+
+      function handleImageClickToModal(event) {
+        const modal = document.getElementById("product-image-modal");
+        const modalImage = document.getElementById("modal-image");
+        const modalCaption = document.getElementById("modal-caption");
+        const downloadButton = document.getElementById("download-image-button");
+
+        modalImage.src = event.target.dataset.imageSrc;
+        modalCaption.textContent = event.target.dataset.imageCaption; // Corrected to imageCaption
+        downloadButton.href = event.target.dataset.imageSrc; // Set download link
+        downloadButton.download = event.target.dataset.imageCaption.replace(/\s/g, "_") + ".jpg"; // Set filename
+
+        modal.classList.add("open");
+      }
+
+      function closeImageModal() {
+        const modal = document.getElementById("product-image-modal");
+        modal.classList.remove("open");
+      }
+
+      function downloadModalImage() {
+        const modalImage = document.getElementById("modal-image");
+        const imageUrl = modalImage.src;
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = modalImage.alt.replace(/\s/g, "_") + ".jpg"; // Use alt text for filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function openProductQuickViewModal(productId) {
+        const product = products.find((p) => p.id === productId);
+        if (!product) return;
+
+        const modal = document.getElementById("product-quick-view-modal");
+        document.getElementById("quick-view-image").src = product.image;
+        document.getElementById("quick-view-image").alt = product.name;
+        document.getElementById("quick-view-name").textContent = product.name;
+        document.getElementById("quick-view-description").textContent = product.description;
+        document.getElementById("quick-view-stock").textContent = `Stok: ${product.stock}`;
+        document.getElementById("quick-view-address").textContent = `Alamat: ${product.address}`;
+        document.getElementById("quick-view-whatsapp").href = `https://wa.me/${product.whatsapp}?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}%20yang%20ada%20di%20website%20Desa%20Srigonco.`;
+        // Set data-product-id on the detail button so we can navigate to full detail
+        document.getElementById("quick-view-detail-button").dataset.productId = product.id;
+
+        modal.classList.add("open");
+      }
+
+      function closeProductQuickViewModal() {
+        const modal = document.getElementById("product-quick-view-modal");
+        modal.classList.remove("open");
+      }
+
+      function handleQuickViewDetailClick(event) {
+        const productId = parseInt(event.target.dataset.productId);
+        closeProductQuickViewModal(); // Close quick view modal first
+        navigateTo("productDetail", productId); // Navigate to full detail page
+      }
+
+      /**
+       * Shares the current product's URL and title using the Web Share API if available,
+       * otherwise provides a fallback for WhatsApp and clipboard.
+       */
+      function shareProduct() {
+        if (!selectedProduct) return;
+
+        const productUrl = window.location.origin + window.location.pathname + "?page=productDetail&id=" + selectedProduct.id;
+        const shareText = `Lihat produk UMKM menarik ini dari Desa Srigonco: ${selectedProduct.name}. Selengkapnya di: ${productUrl}`;
+
+        if (navigator.share) {
+          navigator
+            .share({
+              title: selectedProduct.name,
+              text: shareText,
+              url: productUrl,
+            })
+            .then(() => {
+              console.log("Produk berhasil dibagikan.");
+            })
+            .catch((error) => {
+              console.error("Gagal membagikan produk:", error);
+              // Fallback if share fails or is cancelled
+              fallbackShare(productUrl, shareText);
+            });
+        } else {
+          fallbackShare(productUrl, shareText);
         }
+      }
 
-        // Removed renderGaleriPage function as per request
+      function copyProductLink() {
+        if (!selectedProduct) return;
 
-        // --- Event Handlers ---
+        const productUrl = window.location.origin + window.location.pathname + "?page=productDetail&id=" + selectedProduct.id;
+        const el = document.createElement("textarea");
+        el.value = productUrl;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
 
-        function handleSearchInput(event) {
-            searchTerm = event.target.value;
-            loadedProductCount = itemsPerPage; // Reset pagination on new search
-            renderContent(); // Re-render UMKM page with filtered results
-        }
+        customAlert("Tautan produk telah disalin ke clipboard!");
+      }
 
-        function handleCategoryFilter(event) {
-            selectedCategory = event.target.dataset.category;
-            loadedProductCount = itemsPerPage; // Reset pagination on new filter
-            renderContent(); // Re-render UMKM page with filtered results
-        }
+      function fallbackShare(url, text) {
+        // Provide options for WhatsApp and copy to clipboard
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
 
-        function handleSortChange(event) {
-            selectedSort = event.target.value;
-            loadedProductCount = itemsPerPage; // Reset pagination on new sort
-            renderContent(); // Re-render UMKM page with new sort order
-        }
-
-        // Removed handleGalleryCategoryFilter function as per request
-
-        function loadMoreProducts() {
-            loadedProductCount += itemsPerPage;
-            renderContent();
-        }
-
-        // Removed loadMoreGallery function as per request
-
-        function handleImageClickToModal(event) {
-            const modal = document.getElementById('product-image-modal');
-            const modalImage = document.getElementById('modal-image');
-            const modalCaption = document.getElementById('modal-caption');
-            const downloadButton = document.getElementById('download-image-button');
-
-            modalImage.src = event.target.dataset.imageSrc;
-            modalCaption.textContent = event.target.dataset.imageCaption; // Corrected to imageCaption
-            downloadButton.href = event.target.dataset.imageSrc; // Set download link
-            downloadButton.download = event.target.dataset.imageCaption.replace(/\s/g, '_') + '.jpg'; // Set filename
-
-            modal.classList.add('open');
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('product-image-modal');
-            modal.classList.remove('open');
-        }
-
-        function downloadModalImage() {
-            const modalImage = document.getElementById('modal-image');
-            const imageUrl = modalImage.src;
-            const link = document.createElement('a');
-            link.href = imageUrl;
-            link.download = modalImage.alt.replace(/\s/g, '_') + '.jpg'; // Use alt text for filename
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function openProductQuickViewModal(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            const modal = document.getElementById('product-quick-view-modal');
-            document.getElementById('quick-view-image').src = product.image;
-            document.getElementById('quick-view-image').alt = product.name;
-            document.getElementById('quick-view-name').textContent = product.name;
-            document.getElementById('quick-view-description').textContent = product.description;
-            document.getElementById('quick-view-stock').textContent = `Stok: ${product.stock}`;
-            document.getElementById('quick-view-address').textContent = `Alamat: ${product.address}`;
-            document.getElementById('quick-view-whatsapp').href = `https://wa.me/${product.whatsapp}?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}%20yang%20ada%20di%20website%20Desa%20Srigonco.`;
-            // Set data-product-id on the detail button so we can navigate to full detail
-            document.getElementById('quick-view-detail-button').dataset.productId = product.id;
-
-            modal.classList.add('open');
-        }
-
-        function closeProductQuickViewModal() {
-            const modal = document.getElementById('product-quick-view-modal');
-            modal.classList.remove('open');
-        }
-
-        function handleQuickViewDetailClick(event) {
-            const productId = parseInt(event.target.dataset.productId);
-            closeProductQuickViewModal(); // Close quick view modal first
-            navigateTo('productDetail', productId); // Navigate to full detail page
-        }
-
-        /**
-         * Shares the current product's URL and title using the Web Share API if available,
-         * otherwise provides a fallback for WhatsApp and clipboard.
-         */
-        function shareProduct() {
-            if (!selectedProduct) return;
-
-            const productUrl = window.location.origin + window.location.pathname + '?page=productDetail&id=' + selectedProduct.id;
-            const shareText = `Lihat produk UMKM menarik ini dari Desa Srigonco: ${selectedProduct.name}. Selengkapnya di: ${productUrl}`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: selectedProduct.name,
-                    text: shareText,
-                    url: productUrl,
-                }).then(() => {
-                    console.log('Produk berhasil dibagikan.');
-                }).catch((error) => {
-                    console.error('Gagal membagikan produk:', error);
-                    // Fallback if share fails or is cancelled
-                    fallbackShare(productUrl, shareText);
-                });
-            } else {
-                fallbackShare(productUrl, shareText);
-            }
-        }
-
-        function copyProductLink() {
-            if (!selectedProduct) return;
-
-            const productUrl = window.location.origin + window.location.pathname + '?page=productDetail&id=' + selectedProduct.id;
-            const el = document.createElement('textarea');
-            el.value = productUrl;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-
-            customAlert('Tautan produk telah disalin ke clipboard!');
-        }
-
-        function fallbackShare(url, text) {
-            // Provide options for WhatsApp and copy to clipboard
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
-
-            // Use a custom confirmation dialog or a simple alert as window.confirm is not allowed
-            const customConfirm = (message, onConfirm, onCancel) => {
-                const modalBackdrop = document.createElement('div');
-                modalBackdrop.className = 'custom-modal-backdrop';
-                modalBackdrop.setAttribute('role', 'dialog');
-                modalBackdrop.setAttribute('aria-modal', 'true');
-                modalBackdrop.innerHTML = `
+        // Use a custom confirmation dialog or a simple alert as window.confirm is not allowed
+        const customConfirm = (message, onConfirm, onCancel) => {
+          const modalBackdrop = document.createElement("div");
+          modalBackdrop.className = "custom-modal-backdrop";
+          modalBackdrop.setAttribute("role", "dialog");
+          modalBackdrop.setAttribute("aria-modal", "true");
+          modalBackdrop.innerHTML = `
                     <div class="custom-modal-content">
                         <p class="text-gray-800 text-lg mb-6">${message}</p>
                         <div class="flex justify-center space-x-4">
@@ -1457,535 +1614,551 @@
                         </div>
                     </div>
                 `;
-                document.body.appendChild(modalBackdrop);
-                setTimeout(() => modalBackdrop.classList.add('open'), 10); // Animate in
+          document.body.appendChild(modalBackdrop);
+          setTimeout(() => modalBackdrop.classList.add("open"), 10); // Animate in
 
-                document.getElementById('confirm-ok').onclick = () => {
-                    modalBackdrop.classList.remove('open');
-                    setTimeout(() => modalBackdrop.remove(), 300); // Animate out then remove
-                    onConfirm();
-                };
-                document.getElementById('confirm-cancel').onclick = () => {
-                    modalBackdrop.classList.remove('open');
-                    setTimeout(() => modalBackdrop.remove(), 300); // Animate out then remove
-                    onCancel();
-                };
-            };
+          document.getElementById("confirm-ok").onclick = () => {
+            modalBackdrop.classList.remove("open");
+            setTimeout(() => modalBackdrop.remove(), 300); // Animate out then remove
+            onConfirm();
+          };
+          document.getElementById("confirm-cancel").onclick = () => {
+            modalBackdrop.classList.remove("open");
+            setTimeout(() => modalBackdrop.remove(), 300); // Animate out then remove
+            onCancel();
+          };
+        };
 
-            customConfirm(
-                "Web Share API tidak didukung. Apakah Anda ingin membagikan via WhatsApp atau menyalin tautan?",
-                () => { // On Confirm (OK)
-                    window.open(whatsappUrl, '_blank');
-                },
-                () => { // On Cancel (Batal)
-                    // Copy to clipboard
-                    const el = document.createElement('textarea');
-                    el.value = url;
-                    document.body.appendChild(el);
-                    el.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(el);
-                    customAlert('Tautan produk telah disalin ke clipboard!');
-                }
-            );
-        }
+        customConfirm(
+          "Web Share API tidak didukung. Apakah Anda ingin membagikan via WhatsApp atau menyalin tautan?",
+          () => {
+            // On Confirm (OK)
+            window.open(whatsappUrl, "_blank");
+          },
+          () => {
+            // On Cancel (Batal)
+            // Copy to clipboard
+            const el = document.createElement("textarea");
+            el.value = url;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+            customAlert("Tautan produk telah disalin ke clipboard!");
+          }
+        );
+      }
 
-        // Custom alert function
-        function customAlert(msg) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-75 text-white px-6 py-3 rounded-md shadow-lg z-50 animate-fadeIn';
-            alertDiv.textContent = msg;
-            document.body.appendChild(alertDiv);
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 2000);
-        }
+      // Custom alert function
+      function customAlert(msg) {
+        const alertDiv = document.createElement("div");
+        alertDiv.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-75 text-white px-6 py-3 rounded-md shadow-lg z-50 animate-fadeIn";
+        alertDiv.textContent = msg;
+        document.body.appendChild(alertDiv);
+        setTimeout(() => {
+          alertDiv.remove();
+        }, 2000);
+      }
 
-        // --- Carousel Logic (Hero Section) ---
-        function showCarouselItem(index) {
-            const items = document.querySelectorAll('#image-carousel .carousel-item');
-            if (items.length === 0) return;
+      // --- Carousel Logic (Hero Section) ---
+      function showCarouselItem(index) {
+        const items = document.querySelectorAll("#image-carousel .carousel-item");
+        if (items.length === 0) return;
 
-            items.forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            currentCarouselIndex = index;
-        }
-
-        function showNextCarouselItem() {
-            const items = document.querySelectorAll('#image-carousel .carousel-item');
-            if (items.length === 0) return;
-            currentCarouselIndex = (currentCarouselIndex + 1) % items.length;
-            showCarouselItem(currentCarouselIndex);
-            resetCarouselInterval();
-        }
-
-        function showPrevCarouselItem() {
-            const items = document.querySelectorAll('#image-carousel .carousel-item');
-            if (items.length === 0) return;
-            currentCarouselIndex = (currentCarouselIndex - 1 + items.length) % items.length;
-            showCarouselItem(currentCarouselIndex);
-            resetCarouselInterval();
-        }
-
-        function startCarousel() {
-            if (carouselInterval) {
-                clearInterval(carouselInterval);
-            }
-            carouselInterval = setInterval(showNextCarouselItem, 5000); // Change image every 5 seconds
-        }
-
-        function resetCarouselInterval() {
-            clearInterval(carouselInterval);
-            startCarousel();
-        }
-
-        // --- Utility Functions ---
-
-        // Toggle mobile menu visibility
-        function toggleMobileMenu(forceState = null) {
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-            if (forceState !== null) {
-                if (forceState) {
-                    mobileMenuOverlay.classList.remove('hidden');
-                    mobileMenuOverlay.classList.add('visible');
-                } else {
-                    mobileMenuOverlay.classList.remove('visible');
-                    mobileMenuOverlay.classList.add('hidden');
-                }
-            } else {
-                mobileMenuOverlay.classList.toggle('hidden');
-                mobileMenuOverlay.classList.toggle('visible');
-            }
-        }
-
-        // Update active navigation link in header and mobile menu
-        function updateActiveNavLink() {
-            const navLinks = [
-                { id: 'nav-home', page: 'home' },
-                { id: 'nav-umkm', page: 'umkm' }
-            ];
-
-            navLinks.forEach(link => {
-                const desktopButton = document.getElementById(link.id);
-                const mobileButton = document.getElementById(`mobile-${link.id}`);
-
-                if (desktopButton) {
-                    if (link.page === currentPage) {
-                        desktopButton.classList.add('active');
-                    } else {
-                        desktopButton.classList.remove('active');
-                    }
-                }
-                if (mobileButton) {
-                    if (link.page === currentPage) {
-                        mobileButton.classList.add('text-DAA520');
-                        mobileButton.classList.remove('text-white');
-                    } else {
-                        mobileButton.classList.remove('text-DAA520');
-                        mobileButton.classList.add('text-white');
-                    }
-                }
-            });
-        }
-
-
-        // Scroll to top functionality
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Intersection Observer for scroll animations (AOS-like)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const delay = parseInt(entry.target.dataset.aosDelay) || 0;
-                    if (entry.target.classList.contains('text-reveal')) {
-                        // For text-reveal, apply animation directly
-                        entry.target.style.animationDelay = `${delay}ms`;
-                        entry.target.style.opacity = 1; // Make it visible
-                    } else {
-                        // For other elements, add a class that triggers animation
-                        // Using animate-fadeInUp for general fade/slide up
-                        entry.target.classList.add('animate-fadeInUp');
-                        entry.target.style.animationDelay = `${delay}ms`;
-                    }
-                    observer.unobserve(entry.target); // Stop observing once animated
-                }
-            });
-        }, {
-            threshold: 0.1, // Trigger when 10% of the element is visible
-            rootMargin: '0px 0px -50px 0px' // Start animation a bit earlier
+        items.forEach((item, i) => {
+          if (i === index) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
         });
+        currentCarouselIndex = index;
+      }
 
-        function setupIntersectionObserver() {
-            document.querySelectorAll('[data-aos]').forEach(element => {
-                element.classList.remove('animate-fadeInUp', 'text-reveal'); // Remove previous animations
-                element.style.opacity = 0; // Hide elements initially for animation
-                observer.observe(element);
-            });
+      function showNextCarouselItem() {
+        const items = document.querySelectorAll("#image-carousel .carousel-item");
+        if (items.length === 0) return;
+        currentCarouselIndex = (currentCarouselIndex + 1) % items.length;
+        showCarouselItem(currentCarouselIndex);
+        resetCarouselInterval();
+      }
+
+      function showPrevCarouselItem() {
+        const items = document.querySelectorAll("#image-carousel .carousel-item");
+        if (items.length === 0) return;
+        currentCarouselIndex = (currentCarouselIndex - 1 + items.length) % items.length;
+        showCarouselItem(currentCarouselIndex);
+        resetCarouselInterval();
+      }
+
+      function startCarousel() {
+        if (carouselInterval) {
+          clearInterval(carouselInterval);
         }
+        carouselInterval = setInterval(showNextCarouselItem, 5000); // Change image every 5 seconds
+      }
 
-        // --- Chatbot Logic ---
-        let chatHistory = []; // Stores chat messages for context
+      function resetCarouselInterval() {
+        clearInterval(carouselInterval);
+        startCarousel();
+      }
 
-        function toggleChatbot() {
-            const chatbotContainer = document.getElementById('chatbot-container');
-            chatbotContainer.classList.toggle('open');
-            // Toggle 'hidden' class for visibility transition
-            if (chatbotContainer.classList.contains('open')) {
-                chatbotContainer.classList.remove('hidden');
-                document.getElementById('chatbot-input').focus(); // Focus input when opened
+      // --- Utility Functions ---
+
+      // Toggle mobile menu visibility
+      function toggleMobileMenu(forceState = null) {
+        const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+        if (forceState !== null) {
+          if (forceState) {
+            mobileMenuOverlay.classList.remove("hidden");
+            mobileMenuOverlay.classList.add("visible");
+          } else {
+            mobileMenuOverlay.classList.remove("visible");
+            mobileMenuOverlay.classList.add("hidden");
+          }
+        } else {
+          mobileMenuOverlay.classList.toggle("hidden");
+          mobileMenuOverlay.classList.toggle("visible");
+        }
+      }
+
+      // Update active navigation link in header and mobile menu
+      function updateActiveNavLink() {
+        const navLinks = [
+          { id: "nav-home", page: "home" },
+          { id: "nav-umkm", page: "umkm" },
+        ];
+
+        navLinks.forEach((link) => {
+          const desktopButton = document.getElementById(link.id);
+          const mobileButton = document.getElementById(`mobile-${link.id}`);
+
+          if (desktopButton) {
+            if (link.page === currentPage) {
+              desktopButton.classList.add("active");
             } else {
-                // Add a small delay before hiding to allow transition to complete
-                setTimeout(() => {
-                    chatbotContainer.classList.add('hidden');
-                }, 300);
+              desktopButton.classList.remove("active");
             }
-        }
-
-        function appendMessage(sender, text) {
-            const messagesDiv = document.getElementById('chatbot-messages');
-            const messageBubble = document.createElement('div');
-            messageBubble.classList.add('message-bubble');
-            if (sender === 'user') {
-                messageBubble.classList.add('user-message');
+          }
+          if (mobileButton) {
+            if (link.page === currentPage) {
+              mobileButton.classList.add("text-DAA520");
+              mobileButton.classList.remove("text-white");
             } else {
-                messageBubble.classList.add('bot-message');
+              mobileButton.classList.remove("text-DAA520");
+              mobileButton.classList.add("text-white");
             }
-            messageBubble.textContent = text;
-            messagesDiv.appendChild(messageBubble);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+          }
+        });
+      }
+
+      // Scroll to top functionality
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Intersection Observer for scroll animations (AOS-like)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const delay = parseInt(entry.target.dataset.aosDelay) || 0;
+              if (entry.target.classList.contains("text-reveal")) {
+                // For text-reveal, apply animation directly
+                entry.target.style.animationDelay = `${delay}ms`;
+                entry.target.style.opacity = 1; // Make it visible
+              } else {
+                // For other elements, add a class that triggers animation
+                // Using animate-fadeInUp for general fade/slide up
+                entry.target.classList.add("animate-fadeInUp");
+                entry.target.style.animationDelay = `${delay}ms`;
+              }
+              observer.unobserve(entry.target); // Stop observing once animated
+            }
+          });
+        },
+        {
+          threshold: 0.1, // Trigger when 10% of the element is visible
+          rootMargin: "0px 0px -50px 0px", // Start animation a bit earlier
         }
+      );
 
-        async function sendChatMessage() {
-            const inputField = document.getElementById('chatbot-input');
-            const userMessage = inputField.value.trim();
+      function setupIntersectionObserver() {
+        document.querySelectorAll("[data-aos]").forEach((element) => {
+          element.classList.remove("animate-fadeInUp", "text-reveal"); // Remove previous animations
+          element.style.opacity = 0; // Hide elements initially for animation
+          observer.observe(element);
+        });
+      }
 
-            if (userMessage === '') return;
+      // --- Chatbot Logic ---
+      let chatHistory = []; // Stores chat messages for context
 
-            appendMessage('user', userMessage);
-            chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
-            inputField.value = ''; // Clear input
+      // General WhatsApp contact for admin/fallback
+      const generalWhatsappContact = "6281234567890"; // Replace with actual admin WhatsApp number
 
-            // Add a typing indicator
-            const messagesDiv = document.getElementById('chatbot-messages');
-            const typingIndicator = document.createElement('div');
-            typingIndicator.classList.add('message-bubble', 'bot-message', 'typing-indicator');
-            typingIndicator.innerHTML = '<span>.</span><span>.</span><span>.</span>';
-            typingIndicator.id = 'typing-indicator';
-            messagesDiv.appendChild(typingIndicator);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      function toggleChatbot() {
+        const chatbotContainer = document.getElementById("chatbot-container");
+        chatbotContainer.classList.toggle("open");
+        // Toggle 'hidden' class for visibility transition
+        if (chatbotContainer.classList.contains("open")) {
+          chatbotContainer.classList.remove("hidden");
+          document.getElementById("chatbot-input").focus(); // Focus input when opened
+        } else {
+          // Add a small delay before hiding to allow transition to complete
+          setTimeout(() => {
+            chatbotContainer.classList.add("hidden");
+          }, 300);
+        }
+      }
 
-            try {
-                // Updated prompt for the chatbot
-                const prompt = `Anda adalah chatbot untuk website UMKM Desa Srigonco. Anda memiliki informasi tentang produk UMKM dan juga tentang Desa Srigonco secara umum.
+      function appendMessage(sender, text) {
+        const messagesDiv = document.getElementById("chatbot-messages");
+        const messageBubble = document.createElement("div");
+        messageBubble.classList.add("message-bubble");
+        if (sender === "user") {
+          messageBubble.classList.add("user-message");
+        } else {
+          messageBubble.classList.add("bot-message");
+        }
+        messageBubble.innerHTML = text; // Use innerHTML to allow for links, etc.
+        messagesDiv.appendChild(messageBubble);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+      }
+
+      async function sendChatMessage(messageText = null) {
+        const inputField = document.getElementById("chatbot-input");
+        const userMessage = messageText || inputField.value.trim();
+
+        if (userMessage === "") return;
+
+        appendMessage("user", userMessage);
+        chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+        inputField.value = "";
+
+        // Add a typing indicator
+        const messagesDiv = document.getElementById("chatbot-messages");
+        const typingIndicator = document.createElement("div");
+        typingIndicator.classList.add("message-bubble", "bot-message", "typing-indicator");
+        typingIndicator.innerHTML = "<span>.</span><span>.</span><span>.</span>";
+        typingIndicator.id = "typing-indicator";
+        messagesDiv.appendChild(typingIndicator);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        try {
+          // General information about Desa Srigonco
+          const desaSrigoncoInfo = `
+                - Lokasi: Desa Srigonco terletak di Kecamatan Bantur, Kabupaten Malang, Jawa Timur.
+                - Fokus: Desa ini berfokus pada pengembangan UMKM lokal yang inovatif, memanfaatkan kekayaan alam dan budaya setempat.
+                - Tujuan: Membangun desa mandiri dan sejahtera melalui potensi UMKM.
+                - Keindahan Alam: Desa Srigonco memiliki pemandangan yang asri dan tenang, seperti sawah hijau dan sungai jernih.
+                - Budaya: Masyarakat Srigonco menjunjung tinggi semangat gotong royong dan kreativitas dalam menghasilkan produk.
+            `;
+
+          // Constructing the prompt for the Gemini API
+          const prompt = `Anda adalah chatbot PandaSari untuk website UMKM Desa Srigonco. Anda memiliki informasi tentang produk UMKM dan juga tentang Desa Srigonco secara umum.
 
                 Data produk UMKM yang Anda miliki: ${JSON.stringify(products)}.
-
+                
                 Informasi umum tentang Desa Srigonco:
-                -   **Lokasi:** Desa Srigonco terletak di Kecamatan Bantur, Kabupaten Malang, Jawa Timur.
-                -   **Fokus:** Desa ini berfokus pada pengembangan UMKM lokal yang inovatif, memanfaatkan kekayaan alam dan budaya setempat.
-                -   **Tujuan:** Membangun desa mandiri dan sejahtera melalui potensi UMKM.
-                -   **Keindahan Alam:** Desa Srigonco memiliki pemandangan yang asri dan tenang, seperti sawah hijau dan sungai jernih.
-                -   **Budaya:** Masyarakat Srigonco menjunjung tinggi semangat gotong royong dan kreativitas dalam menghasilkan produk.
+                ${desaSrigoncoInfo}
 
                 Saat menjawab pertanyaan pengguna, mohon ikuti instruksi berikut:
-                1.  **Jika pengguna menanyakan tentang produk tertentu** (misalnya "apa itu Fadin Snack?", "detail Batik Tulis?", "berapa stok Pretty Donat?", "alamat penjual Keripik Pangsit?"):
+                1. Jika pengguna menanyakan tentang produk tertentu (misalnya "apa itu Fadin Snack?", "detail Batik Tulis?", "berapa stok Pretty Donat?", "alamat penjual Keripik Pangsit?"):
                     * Cari produk yang relevan dalam data \`products\`.
                     * Berikan informasi lengkap yang relevan dari data produk (nama, deskripsi, kategori, stok, dan alamat penjual).
-                    * **Sertakan nomor WhatsApp penjual dalam format yang siap diklik (misalnya: "Anda bisa menghubungi penjual di WhatsApp: wa.me/6281234567890").**
+                    * Sertakan nomor WhatsApp penjual dalam format yang siap diklik (misalnya: "Anda bisa menghubungi penjual di WhatsApp: <a href='https://wa.me/6281234567890' target='_blank' rel='noopener noreferrer' class='text-blue-500 hover:underline'>wa.me/6281234567890</a>").
                     * Jika relevan, sarankan produk lain yang serupa atau dalam kategori yang sama.
-                2.  **Jika pengguna menanyakan tentang kategori produk** (misalnya "produk makanan kering apa saja?", "kerajinan yang tersedia?"):
+                2. Jika pengguna menanyakan tentang kategori produk (misalnya "produk makanan kering apa saja?", "kerajinan yang tersedia?"):
                     * Sebutkan nama-nama produk yang termasuk dalam kategori tersebut dari data \`products\`.
                     * Jika ada banyak, sebutkan beberapa contoh dan tawarkan untuk melihat semua di halaman UMKM.
-                3.  **Jika pengguna menanyakan tentang Desa Srigonco secara umum** (misalnya "di mana Desa Srigonco?", "apa fokus desa ini?", "bagaimana budaya di Srigonco?", "apa saja keindahan alam di Srigonco?"):
+                3. Jika pengguna menanyakan tentang Desa Srigonco secara umum (misalnya "di mana Desa Srigonco?", "apa fokus desa ini?", "bagaimana budaya di Srigonco?", "apa saja keindahan alam di Srigonco?"):
                     * Berikan informasi yang relevan dari "Informasi umum tentang Desa Srigonco" di atas.
                     * Jaga jawaban tetap ringkas dan informatif.
-                4.  **Jika Anda tidak menemukan produk atau informasi yang relevan** dalam data Anda:
+                4. Jika Anda tidak menemukan produk atau informasi yang relevan dalam data Anda:
                     * Katakan dengan sopan bahwa produk/informasi tersebut tidak ditemukan.
-                    * **Tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi admin website melalui WhatsApp umum (misalnya: "Anda bisa menghubungi admin kami di WhatsApp: wa.me/6281234567890 untuk bantuan lebih lanjut.").**
-                5.  **Jaga nada bicara** tetap ramah, membantu, dan profesional.
-                6.  **Jangan berikan informasi yang tidak ada dalam data produk atau informasi umum desa** yang Anda miliki.
-                7.  **Jika pertanyaan sangat umum atau di luar lingkup produk dan informasi desa** (misalnya "apa kabar?", "cuaca hari ini?"), berikan jawaban umum yang ramah dan tawarkan bantuan terkait produk UMKM atau informasi Desa Srigonco.
+                    * Tawarkan untuk membantu mencari produk lain atau menyarankan untuk menghubungi admin website melalui WhatsApp umum (misalnya: "Anda bisa menghubungi admin kami di WhatsApp: <a href='https://wa.me/${generalWhatsappContact}' target='_blank' rel='noopener noreferrer' class='text-blue-500 hover:underline'>wa.me/${generalWhatsappContact}</a> untuk bantuan lebih lanjut.").
+                5. Jaga nada bicara tetap ramah, membantu, dan profesional.
+                6. Jangan berikan informasi yang tidak ada dalam data produk atau informasi umum desa yang Anda miliki.
+                7. Jika pertanyaan sangat umum atau di luar lingkup produk dan informasi desa (misalnya "apa kabar?", "cuaca hari ini?"), berikan jawaban umum yang ramah dan tawarkan bantuan terkait produk UMKM atau informasi Desa Srigonco.
 
                 Pertanyaan pengguna: ${userMessage}`;
 
-                const payload = {
-                    contents: [{ role: "user", parts: [{ text: prompt }] }],
-                    generationConfig: {
-                        responseMimeType: "text/plain", // Request plain text response
-                    }
-                };
-                const apiKey = ""; // Canvas will automatically provide this
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+          const payload = {
+            contents: [{ role: "user", parts: [{ text: prompt }] }],
+            generationConfig: {
+              responseMimeType: "text/plain",
+            },
+          };
+          const apiKey = ""; // Canvas will automatically provide this
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
 
-                const result = await response.json();
-                let botResponseText = 'Maaf, saya tidak dapat memproses permintaan Anda saat ini. Silakan coba lagi.';
+          const result = await response.json();
+          let botResponseText = "Maaf, saya tidak dapat memproses permintaan Anda saat ini. Silakan coba lagi.";
 
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    botResponseText = result.candidates[0].content.parts[0].text;
-                } else {
-                    console.error('Unexpected response structure from Gemini API:', result);
-                }
+          if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+            botResponseText = result.candidates[0].content.parts[0].text;
+          } else {
+            console.error("Unexpected response structure from Gemini API:", result);
+          }
 
-                // Remove typing indicator
-                const existingTypingIndicator = document.getElementById('typing-indicator');
-                if (existingTypingIndicator) {
-                    existingTypingIndicator.remove();
-                }
+          // Remove typing indicator
+          const existingTypingIndicator = document.getElementById("typing-indicator");
+          if (existingTypingIndicator) {
+            existingTypingIndicator.remove();
+          }
 
-                appendMessage('bot', botResponseText);
-                chatHistory.push({ role: 'model', parts: [{ text: botResponseText }] });
-
-            } catch (error) {
-                console.error('Error fetching from Gemini API:', error);
-                // Remove typing indicator
-                const existingTypingIndicator = document.getElementById('typing-indicator');
-                if (existingTypingIndicator) {
-                    existingTypingIndicator.remove();
-                }
-                appendMessage('bot', 'Maaf, terjadi kesalahan saat menghubungi server. Silakan coba lagi nanti.');
-            }
+          appendMessage("bot", botResponseText);
+          chatHistory.push({ role: "model", parts: [{ text: botResponseText }] });
+        } catch (error) {
+          console.error("Error fetching from Gemini API:", error);
+          // Remove typing indicator
+          const existingTypingIndicator = document.getElementById("typing-indicator");
+          if (existingTypingIndicator) {
+            existingTypingIndicator.remove();
+          }
+          appendMessage("bot", "Maaf, terjadi kesalahan saat menghubungi server. Silakan coba lagi nanti.");
         }
+      }
 
-        function handleChatInputKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendChatMessage();
-            }
+      function handleChatInputKeyPress(event) {
+        if (event.key === "Enter") {
+          sendChatMessage();
         }
+      }
 
+      // Handle quick reply button clicks
+      function handleQuickReplyClick(event) {
+        const query = event.target.dataset.query;
+        if (query) {
+          sendChatMessage(query); // Send the predefined query as a message
+        }
+      }
 
-        // Initializations ---
+      // Initializations ---
 
-        // Event listener for "Back to Top" button visibility
-        window.addEventListener('scroll', () => {
-            const backToTopButton = document.getElementById('back-to-top-button');
-            if (window.scrollY > 300) {
-                if (!showBackToTop) {
-                    backToTopButton.classList.remove('hidden');
-                    showBackToTop = true;
-                }
-            } else {
-                if (showBackToTop) {
-                    backToTopButton.classList.add('hidden');
-                    showBackToTop = false;
-                }
-            }
-        });
+      // Event listener for "Back to Top" button visibility
+      window.addEventListener("scroll", () => {
+        const backToTopButton = document.getElementById("back-to-top-button");
+        if (window.scrollY > 300) {
+          if (!showBackToTop) {
+            backToTopButton.classList.remove("hidden");
+            showBackToTop = true;
+          }
+        } else {
+          if (showBackToTop) {
+            backToTopButton.classList.add("hidden");
+            showBackToTop = false;
+          }
+        }
+      });
 
-        // Initial render when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // Define products and gallery data here, inside DOMContentLoaded
-            products = [
-                {
-                    id: 1,
-                    name: 'Fadin Snack',
-                    description: 'Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan. Teksturnya renyah dan rasanya gurih, cocok dinikmati kapan saja.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Fadin+Snack',
-                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Terbuat dari bahan-bahan pilihan tanpa pengawet buatan. Tersedia dalam berbagai varian rasa.',
-                    whatsapp: '6281336531898',
-                    category: 'Makanan Kering',
-                    stock: 'Berdasarkan Pesanan',
-                    keywords: ['snack', 'makanan kering', 'fadin', 'camilan', 'renyah', 'gurih'],
-                    address: 'Dusun Sumberjambe RT 35'
-                },
-                {
-                    id: 2,
-                    name: 'Fadin Gallery Kerajinan',
-                    description: 'Berbagai kerajinan tangan unik dari Fadin Gallery. Dibuat dengan detail dan kualitas tinggi, cocok untuk hiasan atau hadiah.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Fadin+Gallery',
-                    details: 'Produk kerajinan tangan. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Setiap produk dibuat secara manual dengan sentuhan artistik, mencerminkan budaya lokal.',
-                    whatsapp: '6281336531898',
-                    category: 'Kerajinan',
-                    stock: 'Berdasarkan Pesanan',
-                    keywords: ['kerajinan', 'fadin', 'gallery', 'hiasan', 'hadiah', 'seni'],
-                    address: 'Dusun Sumberjambe RT 35'
-                },
-                {
-                    id: 3,
-                    name: 'SALAD BUAH Vani Wijayanti',
-                    description: 'Salad buah segar dengan dressing creamy, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan dan higienis.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Salad+Buah',
-                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari. Menggunakan buah-buahan segar musiman dan dressing rahasia yang lezat.',
-                    whatsapp: '6282143167792',
-                    category: 'Makanan Basah',
-                    stock: 'Tersedia Setiap Hari',
-                    keywords: ['salad', 'buah', 'sehat', 'camilan', 'segar', 'dressing'],
-                    address: 'Sumberjambe RT 40 RW 06'
-                },
-                {
-                    id: 4,
-                    name: 'Pretty Donat',
-                    description: 'Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan, cocok untuk segala usia.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Pretty+Donat',
-                    details: 'Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan. Varian topping beragam, dari cokelat hingga keju.',
-                    whatsapp: '6282245943031',
-                    category: 'Makanan Kering',
-                    stock: 'Tersedia / Berdasarkan Pesanan',
-                    keywords: ['donat', 'pretty', 'roti', 'manis', 'topping', 'empuk'],
-                    address: 'Srigonco Watu Sigar RT 2'
-                },
-                {
-                    id: 5,
-                    name: 'Aneka Kue Dwi Purwati',
-                    description: 'Berbagai macam kue kering dan basah, cocok untuk acara atau camilan keluarga. Dibuat sesuai pesanan dengan resep tradisional.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Aneka+Kue',
-                    details: 'Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO). Tersedia kue nastar, kastengel, bolu, dan banyak lagi.',
-                    whatsapp: '6281217205508',
-                    category: 'Makanan',
-                    stock: 'Berdasarkan Pesanan',
-                    keywords: ['kue', 'kue kering', 'kue basah', 'camilan', 'tradisional', 'acara'],
-                    address: 'Watusigar RT 24/04, Desa Srigonco'
-                },
-                {
-                    id: 6,
-                    name: 'Makanan dan Aneka Minuman Muhamad Akbar',
-                    description: 'Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari, cocok untuk menemani aktivitas Anda.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Makanan+Minuman',
-                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari. Minuman tersedia dalam berbagai rasa buah, makanan ringan renyah dan gurih.',
-                    whatsapp: '6285815365961',
-                    category: 'Makanan & Minuman',
-                    stock: 'Tersedia Setiap Hari',
-                    keywords: ['makanan', 'minuman', 'snack', 'segar', 'camilan'],
-                    address: 'Srigonco RT 15'
-                },
-                {
-                    id: 7,
-                    name: 'Sosis Bakar & Corndog Khusnul Khatimah',
-                    description: 'Sosis bakar dan corndog lezat dengan saus pilihan, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan dengan bahan berkualitas.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Sosis+Corndog',
-                    details: 'Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Tersedia pilihan saus pedas dan manis, serta topping keju.',
-                    whatsapp: '6282232158608',
-                    category: 'Makanan Basah',
-                    stock: 'Berdasarkan Pesanan',
-                    keywords: ['sosis bakar', 'corndog', 'jajanan', 'makanan basah', 'saus', 'keju'],
-                    address: 'Dusun Sumberjambe RT 36'
-                },
-                {
-                    id: 8,
-                    name: 'Keripik Pangsit & Cireng Dewi Irawati',
-                    description: 'Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan, cocok untuk teman ngemil.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Keripik+Pangsit',
-                    details: 'Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan. Keripik pangsit dengan berbagai bumbu, cireng kenyal gurih.',
-                    whatsapp: '6281216659745',
-                    category: 'Makanan Kering',
-                    stock: 'Tersedia / Berdasarkan Pesanan',
-                    keywords: ['keripik pangsit', 'cireng', 'camilan', 'gurih', 'renyah', 'bumbu'],
-                    address: 'Desa Srigonco, Dusun Sumberjambe'
-                },
-                {
-                    id: 9,
-                    name: 'Snack & Minuman Silvia Puji Rahayu',
-                    description: 'Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan, cocok untuk berbagai acara.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Snack+Minuman',
-                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Snack renyah dan minuman dengan rasa buah alami.',
-                    whatsapp: '6281246787759',
-                    category: 'Makanan & Minuman',
-                    stock: 'Berdasarkan Pesanan',
-                    keywords: ['snack', 'minuman', 'camilan', 'segar', 'acara'],
-                    address: 'Dsn. Sumber Jambe, RT/RW tidak spesifik'
-                },
-                {
-                    id: 10,
-                    name: 'Minuman Alvia',
-                    description: 'Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari, cocok untuk melepas dahaga.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Minuman',
-                    details: 'Produk minuman. Pemasaran dalam desa. Produksi setiap hari. Tersedia es buah, es campur, dan berbagai jus segar.',
-                    whatsapp: '6285649796149',
-                    category: 'Minuman',
-                    stock: 'Tersedia Setiap Hari',
-                    keywords: ['minuman', 'segar', 'olahan', 'jus', 'es buah'],
-                    address: 'Sumberjambe RT 32'
-                },
-                {
-                    id: 11,
-                    name: 'Batik Tulis Lilis Setyowati',
-                    description: 'Kain batik tulis asli dengan motif khas Srigonco dari Lilis Setyowati. Cocok untuk pakaian atau koleksi, setiap helai adalah karya seni.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Batik+Tulis',
-                    details: 'Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari. Dibuat secara tradisional dengan pewarna alami, motif unik dan eksklusif.',
-                    whatsapp: '6281336809484',
-                    category: 'Kerajinan',
-                    stock: 'Tersedia Setiap Hari',
-                    keywords: ['batik', 'tulis', 'kain', 'kerajinan', 'tradisional', 'seni', 'motif'],
-                    address: 'Dusun Watusigar RT 2/RW tidak spesifik'
-                },
-                {
-                    id: 12,
-                    name: 'Stick Pepaya Pipit Meilandari',
-                    description: 'Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari, cocok untuk oleh-oleh.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Stick+Pepaya',
-                    details: 'Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari. Terbuat dari pepaya pilihan, diolah tanpa bahan pengawet.',
-                    whatsapp: '6285746346389',
-                    category: 'Makanan Kering',
-                    stock: 'Tersedia Setiap Hari',
-                    keywords: ['stick', 'pepaya', 'makanan kering', 'camilan', 'oleh-oleh'],
-                    address: 'RT 11 RW 2 Krajan Srigonco'
-                },
-                {
-                    id: 13,
-                    name: 'Keripik Pisang & Aneka Es Siti Nur Aini',
-                    description: 'Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan, cocok untuk camilan dan pelepas dahaga.',
-                    image: 'https://placehold.co/400x300/DAA520/FFFFFF?text=Keripik+Pisang+Es',
-                    details: 'Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan. Keripik pisang tersedia rasa original, cokelat, keju. Aneka es meliputi es campur dan es teler.',
-                    whatsapp: '6281231135846',
-                    category: 'Makanan & Minuman',
-                    stock: 'Tersedia / Berdasarkan Pesanan',
-                    keywords: ['keripik pisang', 'es', 'makanan kering', 'minuman', 'camilan', 'segar'],
-                    address: 'Sukorame RT 24 RW 04'
-                }
-            ];
-            // Dynamically generate product categories from the new products array
-            productCategories = ['Semua', ...new Set(products.map(p => p.category))];
+      // Initial render when the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        // Define products and gallery data here, inside DOMContentLoaded
+        products = [
+          {
+            id: 1,
+            name: "Fadin Snack",
+            description: "Aneka snack kering dari Fadin Gallery, cocok untuk camilan. Diproduksi sesuai pesanan. Teksturnya renyah dan rasanya gurih, cocok dinikmati kapan saja.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Fadin+Snack",
+            details: "Produk makanan kering. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Terbuat dari bahan-bahan pilihan tanpa pengawet buatan. Tersedia dalam berbagai varian rasa.",
+            whatsapp: "6281336531898",
+            category: "Makanan Kering",
+            stock: "Berdasarkan Pesanan",
+            keywords: ["snack", "makanan kering", "fadin", "camilan", "renyah", "gurih"],
+            address: "Dusun Sumberjambe RT 35",
+          },
+          {
+            id: 2,
+            name: "Fadin Gallery Kerajinan",
+            description: "Berbagai kerajinan tangan unik dari Fadin Gallery. Dibuat dengan detail dan kualitas tinggi, cocok untuk hiasan atau hadiah.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Fadin+Gallery",
+            details: "Produk kerajinan tangan. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Setiap produk dibuat secara manual dengan sentuhan artistik, mencerminkan budaya lokal.",
+            whatsapp: "6281336531898",
+            category: "Kerajinan",
+            stock: "Berdasarkan Pesanan",
+            keywords: ["kerajinan", "fadin", "gallery", "hiasan", "hadiah", "seni"],
+            address: "Dusun Sumberjambe RT 35",
+          },
+          {
+            id: 3,
+            name: "SALAD BUAH Vani Wijayanti",
+            description: "Salad buah segar dengan dressing creamy, cocok untuk camilan sehat setiap hari. Dibuat dengan buah pilihan dan higienis.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Salad+Buah",
+            details: "Produk makanan basah. Pemasaran dalam desa. Produksi setiap hari. Menggunakan buah-buahan segar musiman dan dressing rahasia yang lezat.",
+            whatsapp: "6282143167792",
+            category: "Makanan Basah",
+            stock: "Tersedia Setiap Hari",
+            keywords: ["salad", "buah", "sehat", "camilan", "segar", "dressing"],
+            address: "Sumberjambe RT 40 RW 06",
+          },
+          {
+            id: 4,
+            name: "Pretty Donat",
+            description: "Donat empuk dengan aneka topping menarik dari Pretty Ana. Tersedia setiap hari atau sesuai pesanan, cocok untuk segala usia.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Pretty+Donat",
+            details: "Produk makanan kering (donat). Pemasaran dalam desa. Produksi setiap hari atau sesuai pesanan. Varian topping beragam, dari cokelat hingga keju.",
+            whatsapp: "6282245943031",
+            category: "Makanan Kering",
+            stock: "Tersedia / Berdasarkan Pesanan",
+            keywords: ["donat", "pretty", "roti", "manis", "topping", "empuk"],
+            address: "Srigonco Watu Sigar RT 2",
+          },
+          {
+            id: 5,
+            name: "Aneka Kue Dwi Purwati",
+            description: "Berbagai macam kue kering dan basah, cocok untuk acara atau camilan keluarga. Dibuat sesuai pesanan dengan resep tradisional.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Aneka+Kue",
+            details: "Produk makanan kering dan basah. Pemasaran dalam dan luar desa. Produksi sesuai pesanan (PO). Tersedia kue nastar, kastengel, bolu, dan banyak lagi.",
+            whatsapp: "6281217205508",
+            category: "Makanan",
+            stock: "Berdasarkan Pesanan",
+            keywords: ["kue", "kue kering", "kue basah", "camilan", "tradisional", "acara"],
+            address: "Watusigar RT 24/04, Desa Srigonco",
+          },
+          {
+            id: 6,
+            name: "Makanan dan Aneka Minuman Muhamad Akbar",
+            description: "Berbagai pilihan makanan kering dan aneka minuman segar. Tersedia setiap hari, cocok untuk menemani aktivitas Anda.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Makanan+Minuman",
+            details: "Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari. Minuman tersedia dalam berbagai rasa buah, makanan ringan renyah dan gurih.",
+            whatsapp: "6285815365961",
+            category: "Makanan & Minuman",
+            stock: "Tersedia Setiap Hari",
+            keywords: ["makanan", "minuman", "snack", "segar", "camilan"],
+            address: "Srigonco RT 15",
+          },
+          {
+            id: 7,
+            name: "Sosis Bakar & Corndog Khusnul Khatimah",
+            description: "Sosis bakar dan corndog lezat dengan saus pilihan, cocok untuk camilan atau jajanan. Dibuat sesuai pesanan dengan bahan berkualitas.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Sosis+Corndog",
+            details: "Produk makanan basah. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Tersedia pilihan saus pedas dan manis, serta topping keju.",
+            whatsapp: "6282232158608",
+            category: "Makanan Basah",
+            stock: "Berdasarkan Pesanan",
+            keywords: ["sosis bakar", "corndog", "jajanan", "makanan basah", "saus", "keju"],
+            address: "Dusun Sumberjambe RT 36",
+          },
+          {
+            id: 8,
+            name: "Keripik Pangsit & Cireng Dewi Irawati",
+            description: "Keripik pangsit renyah dan cireng gurih, tersedia untuk dalam dan luar desa. Produksi setiap hari atau sesuai pesanan, cocok untuk teman ngemil.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Keripik+Pangsit",
+            details: "Produk makanan kering dan makanan basah. Pemasaran dalam desa, luar desa. Produksi setiap hari, sesuai pesanan. Keripik pangsit dengan berbagai bumbu, cireng kenyal gurih. Aneka es meliputi es campur dan es teler.",
+            whatsapp: "6281216659745",
+            category: "Makanan Kering",
+            stock: "Tersedia / Berdasarkan Pesanan",
+            keywords: ["keripik pangsit", "cireng", "camilan", "gurih", "renyah", "bumbu"],
+            address: "Desa Srigonco, Dusun Sumberjambe",
+          },
+          {
+            id: 9,
+            name: "Snack & Minuman Silvia Puji Rahayu",
+            description: "Berbagai pilihan snack kering dan minuman segar dari Silvia Puji Rahayu. Dibuat sesuai pesanan, cocok untuk berbagai acara.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Snack+Minuman",
+            details: "Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi sesuai pesanan (PO). Snack renyah dan minuman dengan rasa buah alami.",
+            whatsapp: "6281246787759",
+            category: "Makanan & Minuman",
+            stock: "Berdasarkan Pesanan",
+            keywords: ["snack", "minuman", "camilan", "segar", "acara"],
+            address: "Dsn. Sumber Jambe, RT/RW tidak spesifik",
+          },
+          {
+            id: 10,
+            name: "Minuman Alvia",
+            description: "Aneka minuman segar dan olahan minuman dari Alvia. Tersedia setiap hari, cocok untuk melepas dahaga.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Minuman",
+            details: "Produk minuman. Pemasaran dalam desa. Produksi setiap hari. Tersedia es buah, es campur, dan berbagai jus segar.",
+            whatsapp: "6285649796149",
+            category: "Minuman",
+            stock: "Tersedia Setiap Hari",
+            keywords: ["minuman", "segar", "olahan", "jus", "es buah"],
+            address: "Sumberjambe RT 32",
+          },
+          {
+            id: 11,
+            name: "Batik Tulis Lilis Setyowati",
+            description: "Kain batik tulis asli dengan motif khas Srigonco dari Lilis Setyowati. Cocok untuk pakaian atau koleksi, setiap helai adalah karya seni.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Batik+Tulis",
+            details: "Produk kerajinan batik. Pemasaran dalam dan luar desa. Produksi setiap hari. Dibuat secara tradisional dengan pewarna alami, motif unik dan eksklusif.",
+            whatsapp: "6281336809484",
+            category: "Kerajinan",
+            stock: "Tersedia Setiap Hari",
+            keywords: ["batik", "tulis", "kain", "kerajinan", "tradisional", "seni", "motif"],
+            address: "Dusun Watusigar RT 2/RW tidak spesifik",
+          },
+          {
+            id: 12,
+            name: "Stick Pepaya Pipit Meilandari",
+            description: "Stick pepaya renyah dan manis, camilan unik dari Pipit Meilandari. Tersedia setiap hari, cocok untuk oleh-oleh.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Stick+Pepaya",
+            details: "Produk makanan kering. Pemasaran dalam desa. Produksi setiap hari. Terbuat dari pepaya pilihan, diolah tanpa bahan pengawet.",
+            whatsapp: "6285746346389",
+            category: "Makanan Kering",
+            stock: "Tersedia Setiap Hari",
+            keywords: ["stick", "pepaya", "makanan kering", "camilan", "oleh-oleh"],
+            address: "RT 11 RW 2 Krajan Srigonco",
+          },
+          {
+            id: 13,
+            name: "Keripik Pisang & Aneka Es Siti Nur Aini",
+            description: "Keripik pisang aneka rasa dan berbagai pilihan es segar dari Siti Nur Aini. Tersedia setiap hari atau sesuai pesanan, cocok untuk camilan dan pelepas dahaga.",
+            image: "https://placehold.co/400x300/DAA520/FFFFFF?text=Keripik+Pisang+Es",
+            details: "Produk makanan kering dan minuman. Pemasaran dalam desa. Produksi setiap hari, sesuai pesanan. Keripik pisang dengan berbagai bumbu, cireng kenyal gurih. Aneka es meliputi es campur dan es teler.",
+            whatsapp: "6281231135846",
+            category: "Makanan & Minuman",
+            stock: "Tersedia / Berdasarkan Pesanan",
+            keywords: ["keripik pisang", "es", "makanan kering", "minuman", "camilan", "segar"],
+            address: "Sukorame RT 24 RW 04",
+          },
+        ];
+        // Dynamically generate product categories from the new products array
+        productCategories = ["Semua", ...new Set(products.map((p) => p.category))];
 
-            testimonials = [
-                {
-                    name: 'Budi Santoso',
-                    title: 'Pengusaha Kuliner',
-                    quote: 'Produk UMKM Desa Srigonco sangat berkualitas dan autentik. Saya sangat merekomendasikannya!',
-                    avatar: 'https://placehold.co/80x80/DAA520/FFFFFF?text=BS'
-                },
-                {
-                    name: 'Siti Aminah',
-                    title: 'Pecinta Kerajinan',
-                    quote: 'Kerajinan batiknya indah sekali, detailnya luar biasa. Bangga bisa mendukung produk lokal.',
-                    avatar: 'https://placehold.co/80x80/DAA520/FFFFFF?text=SA'
-                },
-                {
-                    name: 'Joko Susilo',
-                    title: 'Wisatawan',
-                    quote: 'Desa Srigonco asri dan produk makanannya lezat. Pengalaman belanja yang menyenangkan!',
-                    avatar: 'https://placehold.co/80x80/DAA520/FFFFFF?text=JS'
-                }
-            ];
+        testimonials = [
+          {
+            name: "Budi Santoso",
+            title: "Pengusaha Kuliner",
+            quote: "Produk UMKM Desa Srigonco sangat berkualitas dan autentik. Saya sangat merekomendasikannya!",
+            avatar: "https://placehold.co/80x80/DAA520/FFFFFF?text=BS",
+          },
+          {
+            name: "Siti Aminah",
+            title: "Pecinta Kerajinan",
+            quote: "Kerajinan batiknya indah sekali, detailnya luar biasa. Bangga bisa mendukung produk lokal.",
+            avatar: "https://placehold.co/80x80/DAA520/FFFFFF?text=SA",
+          },
+          {
+            name: "Joko Susilo",
+            title: "Wisatawan",
+            quote: "Desa Srigonco asri dan produk makanannya lezat. Pengalaman belanja yang menyenangkan!",
+            avatar: "https://placehold.co/80x80/DAA520/FFFFFF?text=JS",
+          },
+        ];
 
+        // Set current year in footer
+        // The year in the footer is now hardcoded to 2025 as per the user's request.
+        // document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Set current year in footer
-            document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Initial page render
+        navigateTo("home"); // Start on home page
 
-            // Initial page render
-            navigateTo('home'); // Start on home page
-
-            // Attach static event listeners
-            document.getElementById('mobile-menu-button').addEventListener('click', () => toggleMobileMenu(true));
-            document.getElementById('close-mobile-menu').addEventListener('click', () => toggleMobileMenu(false));
-            document.getElementById('back-to-top-button').addEventListener('click', scrollToTop);
-        });
+        // Attach static event listeners
+        document.getElementById("mobile-menu-button").addEventListener("click", () => toggleMobileMenu(true));
+        document.getElementById("close-mobile-menu").addEventListener("click", () => toggleMobileMenu(false));
+        document.getElementById("back-to-top-button").addEventListener("click", scrollToTop);
+      });
     </script>
-</body>
+  </body>
 </html>
